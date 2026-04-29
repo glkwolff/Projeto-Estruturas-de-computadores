@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: Hardware de Servidores vs Desktops</title>
+    <style>
+        :root {
+            --bg-base: #0f172a;
+            --bg-panel: #1e293b;
+            --bg-card: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-orange: #f59e0b;
+            --border: #475569;
+            --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Courier New', Courier, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            background-color: var(--bg-panel);
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+
+        header h1 {
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* LAYOUT */
+        .container {
+            display: flex;
+            flex: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* SIDEBAR / NAV */
+        nav {
+            width: 250px;
+            background-color: var(--bg-panel);
+            padding: 1.5rem 0;
+            border-right: 1px solid var(--border);
+        }
+
+        .nav-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+        }
+
+        .nav-btn.active {
+            background-color: var(--bg-card);
+            color: var(--accent-blue);
+            border-left-color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        /* MAIN CONTENT */
+        main {
+            flex: 1;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .module {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .module.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .module-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .module-header h2 {
+            font-size: 1.8rem;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .analogy {
+            background-color: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .curiosity {
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--accent-green);
+            padding: 1rem;
+            margin-top: 2rem;
+            border-radius: 8px;
+        }
+
+        .curiosity h4 {
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* MODULE 1: DESKTOP VS SERVER */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .comp-card {
+            background: var(--bg-panel);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .comp-card h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--accent-orange);
+            font-size: 1.4rem;
+        }
+
+        .comp-item {
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .comp-item:hover {
+            transform: scale(1.02);
+            border-color: var(--accent-blue);
+        }
+
+        .comp-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-base);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* MODULE 2: RAID */
+        .raid-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover, .btn.active {
+            background: var(--accent-blue);
+            color: var(--bg-base);
+            border-color: var(--accent-blue);
+        }
+
+        .raid-canvas {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            min-height: 300px;
+        }
+
+        .disk-array {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .disk {
+            width: 100px;
+            height: 140px;
+            background: linear-gradient(145deg, #334155, #1e293b);
+            border: 2px solid #475569;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .disk:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(56, 189, 248, 0.2);
+            border-color: var(--accent-blue);
+        }
+
+        .disk::before {
+            content: '';
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px dashed var(--text-muted);
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+
+        .disk .data-blocks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+        }
+
+        .data-block {
+            background: var(--accent-blue);
+            color: var(--bg-base);
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 2px 4px;
+            border-radius: 2px;
+            min-width: 24px;
+        }
+
+        .data-block.parity { background: var(--accent-orange); }
+
+        .disk.failed {
+            border-color: var(--accent-red);
+            background: linear-gradient(145deg, #451a1a, #2a0f0f);
+        }
+
+        .disk.failed::before {
+            border-color: var(--accent-red);
+            animation: spin 2s linear infinite;
+        }
+
+        .disk.failed .data-block { background: #7f1d1d; color: #fca5a5; }
+        .disk.failed::after {
+            content: 'FALHA';
+            position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg);
+            color: var(--accent-red); font-weight: bold; font-size: 1.2rem;
+            border: 2px solid var(--accent-red); padding: 2px 5px;
+            background: rgba(0,0,0,0.8);
+        }
+
+        .raid-status-bar {
+            margin-top: 2rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        .status-ok { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); border: 1px solid var(--accent-green); }
+        .status-warn { background: rgba(245, 158, 11, 0.2); color: var(--accent-orange); border: 1px solid var(--accent-orange); }
+        .status-fail { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); border: 1px solid var(--accent-red); }
+
+        /* MODULE 3: ECC MEMORY */
+        .ecc-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .ram-stick {
+            background: #0f3d24;
+            border: 2px solid #166534;
+            border-radius: 4px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .ram-stick::after {
+            content: ''; position: absolute; bottom: -10px; left: 10px; right: 10px; height: 10px;
+            background: repeating-linear-gradient(90deg, #d4af37, #d4af37 5px, transparent 5px, transparent 10px);
+        }
+
+        .chips {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .chip {
+            background: #1e293b;
+            border: 1px solid #475569;
+            width: 40px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            color: var(--accent-green);
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .chip.ecc-chip { border-color: var(--accent-orange); color: var(--accent-orange); }
+        
+        .chip.flipped {
+            background: var(--accent-red);
+            color: white;
+            animation: shake 0.5s;
+        }
+
+        .chip.corrected {
+            background: var(--accent-blue);
+            color: white;
+            transition: background 1s;
+        }
+
+        .ecc-controls { text-align: center; margin-top: 2rem; }
+        .btn-danger { background: var(--accent-red); color: white; border: none; font-size: 1.1rem; padding: 1rem 2rem; border-radius: 8px; }
+        .btn-danger:hover { background: #b91c1c; transform: scale(1.05); }
+
+        .system-status { margin-top: 1rem; padding: 1rem; text-align: center; font-weight: bold; border-radius: 4px; min-height: 50px;}
+
+        /* MODULE 4: HIERARCHY */
+        .pyramid-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            margin-top: 2rem;
+        }
+
+        .pyramid-layer {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+        }
+
+        .pyramid-layer:hover {
+            background: var(--accent-blue);
+            color: var(--bg-base);
+            transform: scale(1.02);
+        }
+
+        #layer-l1 { width: 30%; background: #ef4444; color: white; border:none; clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);}
+        #layer-ram { width: 50%; background: #f59e0b; color: #000; border:none; clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);}
+        #layer-ssd { width: 70%; background: #10b981; color: #000; border:none; clip-path: polygon(8% 0%, 92% 0%, 100% 100%, 0% 100%);}
+        #layer-hdd { width: 90%; background: #38bdf8; color: #000; border:none; clip-path: polygon(4% 0%, 96% 0%, 100% 100%, 0% 100%);}
+
+        .layer-info {
+            background: var(--bg-panel);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border-left: 4px solid var(--accent-blue);
+            display: none;
+        }
+
+        .numa-box {
+            display: flex;
+            justify-content: space-around;
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px dashed var(--accent-orange);
+        }
+        .cpu-node { text-align: center; }
+        .cpu-node div { padding: 10px; margin: 5px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 4px; }
+
+        /* MODULE 5: VIRTUALIZATION */
+        .virt-container {
+            background: var(--bg-panel);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .hw-layer { background: #334155; padding: 1rem; border-radius: 8px; text-align: center; margin-bottom: 10px; border-bottom: 4px solid var(--accent-blue);}
+        .hyp-layer { background: #475569; padding: 0.5rem; border-radius: 4px; text-align: center; margin-bottom: 20px; font-weight: bold; color: var(--accent-orange);}
+        
+        .resource-bar { width: 100%; height: 20px; background: var(--bg-base); border-radius: 10px; margin-top: 5px; overflow: hidden; display: flex;}
+        .resource-fill { height: 100%; background: var(--accent-green); transition: width 0.3s; }
+        
+        .vm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; min-height: 150px;}
+        .vm-card { background: var(--bg-base); border: 1px solid var(--accent-blue); padding: 1rem; border-radius: 8px; text-align: center; animation: popIn 0.3s;}
+        
+        @keyframes popIn { 0% {transform: scale(0.8); opacity:0;} 100% {transform: scale(1); opacity:1;} }
+        
+        .vm-card button { margin-top: 10px; background: var(--accent-red); color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;}
+        
+        /* FOOTER */
+        footer {
+            background-color: #0b1120;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .credits { color: var(--accent-blue); margin-bottom: 1rem; font-weight: bold;}
+        .biblio { color: var(--text-muted); text-align: left; max-width: 800px; margin: 0 auto;}
+        .biblio li { margin-bottom: 0.5rem; }
+
+        /* UTILS */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        /* RESPONSIVENESS */
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            nav { width: 100%; display: flex; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border); padding: 0.5rem;}
+            .nav-btn { text-align: center; border-left: none; border-bottom: 4px solid transparent; white-space: nowrap;}
+            .nav-btn.active { border-left: none; border-bottom-color: var(--accent-blue); }
+            .comparison-grid, .ecc-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Infográfico Interativo: Arquitetura de Servidores</h1>
+        <p>Projeto: Fundamentos de Estruturas de Computadores | Universidade Positivo</p>
+    </header>
+
+    <div class="container">
+        <!-- NAVEGAÇÃO LATERAL -->
+        <nav>
+            <!-- Passando 'this' como referência do botão clicado para evitar erros com event.target global -->
+            <button class="nav-btn active" onclick="showModule('mod1', this)">🖥️ Desktop vs Servidor</button>
+            <button class="nav-btn" onclick="showModule('mod2', this)">💽 Array RAID Interativo</button>
+            <button class="nav-btn" onclick="showModule('mod3', this)">🧠 Memória ECC</button>
+            <button class="nav-btn" onclick="showModule('mod4', this)">🔺 Hierarquia & NUMA</button>
+            <button class="nav-btn" onclick="showModule('mod5', this)">☁️ Virtualização</button>
+        </nav>
+
+        <!-- ÁREA DE CONTEÚDO PRINCIPAL -->
+        <main>
+            
+            <!-- MÓDULO 1: DESKTOP VS SERVIDOR -->
+            <section id="mod1" class="module active">
+                <div class="module-header">
+                    <h2>Desktop vs Servidor: Muito além do visual</h2>
+                    <p>Enquanto um desktop foca na experiência de um único usuário (gráficos, áudio, resposta rápida), o servidor foca em <strong>disponibilidade, redundância e processamento massivo</strong> para múltiplos usuários ou serviços simultâneos.</p>
+                </div>
+                
+                <div class="analogy">
+                    💡 <strong>Analogia:</strong> Um Desktop é como um carro esporte de luxo (rápido, confortável para o motorista). Um Servidor é como um caminhão de carga ou um trem (feito para carregar toneladas de dados 24/7 sem quebrar).
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="comp-card">
+                        <h3>Computador Pessoal (Desktop)</h3>
+                        <div class="comp-item"><div class="comp-icon">🔋</div> <span><strong>Fonte Única:</strong> Se queimar, o PC desliga imediatamente.</span></div>
+                        <div class="comp-item"><div class="comp-icon">🗼</div> <span><strong>Form Factor:</strong> Gabinetes Torre, focados em estética e silêncio.</span></div>
+                        <div class="comp-item"><div class="comp-icon">🌐</div> <span><strong>Rede:</strong> Geralmente 1GbE ou Wi-Fi. Foco no acesso básico.</span></div>
+                        <div class="comp-item"><div class="comp-icon">🔧</div> <span><strong>Gerenciamento:</strong> Local. Requer monitor, teclado e presença física.</span></div>
+                    </div>
+                    
+                    <div class="comp-card">
+                        <h3>Servidor Corporativo</h3>
+                        <div class="comp-item"><div class="comp-icon">🔋</div> <span><strong>Fontes Redundantes (Hot-Plug):</strong> Se uma falhar, a outra assume sem desligar.</span></div>
+                        <div class="comp-item"><div class="comp-icon">🗄️</div> <span><strong>Form Factor Rack:</strong> Padronizados (1U, 2U) para empilhamento em datacenters.</span></div>
+                        <div class="comp-item"><div class="comp-icon">🌐</div> <span><strong>Rede:</strong> Múltiplas portas 10GbE a 100GbE, via fibra óptica.</span></div>
+                        <div class="comp-item"><div class="comp-icon">📡</div> <span><strong>Gerenciamento Remoto (iDRAC/iLO):</strong> Chip dedicado para ligar/desligar remotamente, mesmo sem SO.</span></div>
+                    </div>
+                </div>
+
+                <div class="curiosity">
+                    <h4>Curiosidade Técnica 🕵️</h4>
+                    <p>Você sabe o que significa "1U" em servidores? Em racks padronizados de TI (padrão EIA-310), a altura é medida em Unidades de Rack (U). <strong>1U equivale a exatos 1.75 polegadas (44.45 mm)</strong>. Um rack inteiro costuma ter 42U de altura.</p>
+                </div>
+            </section>
+
+
+            <!-- MÓDULO 2: RAID INTERATIVO -->
+            <section id="mod2" class="module">
+                <div class="module-header">
+                    <h2>RAID: Tolerância a Falhas e Desempenho</h2>
+                    <p>RAID permite combinar múltiplos discos físicos em uma única unidade lógica. <strong>Clique em um disco abaixo para simular uma queima de hardware</strong> e veja o impacto nos dados!</p>
+                </div>
+
+                <div class="analogy">
+                    💡 <strong>Analogia:</strong> 
+                    <span id="raid-analogy">Selecione um nível RAID abaixo para ver a analogia.</span>
+                </div>
+
+                <div class="raid-controls">
+                    <!-- Passando 'this' como referência do botão -->
+                    <button class="btn active" onclick="setRaid(0, this)">RAID 0 (Striping)</button>
+                    <button class="btn" onclick="setRaid(1, this)">RAID 1 (Mirroring)</button>
+                    <button class="btn" onclick="setRaid(5, this)">RAID 5 (Paridade)</button>
+                    <button class="btn" onclick="setRaid(10, this)">RAID 10 (Striping + Mirroring)</button>
+                    <button class="btn" style="margin-left: auto; background: var(--border);" onclick="resetRaid()">🔄 Consertar Discos</button>
+                </div>
+
+                <div class="raid-canvas">
+                    <h3 id="raid-title" style="color:var(--accent-blue); margin-bottom: 10px;">RAID 0 - Foco em Velocidade</h3>
+                    <p id="raid-desc" style="color:var(--text-muted); font-size: 0.9rem;">Os dados são divididos entre os discos. Sem redundância.</p>
+                    
+                    <div class="disk-array" id="disk-container">
+                        <!-- Discos gerados via JS -->
+                    </div>
+
+                    <div id="raid-status" class="raid-status-bar status-ok">
+                        Status do Array: SAUDÁVEL
+                    </div>
+                </div>
+
+                <div class="curiosity">
+                    <h4>Curiosidade Técnica 🕵️</h4>
+                    <p>RAID significa <em>Redundant Array of Independent Disks</em>. Em servidores modernos, os discos são <strong>Hot-Swap</strong>. Isso significa que, se um disco falhar em um RAID 1, 5 ou 10, o técnico pode puxar o disco quebrado e inserir um novo com o servidor ligado! A controladora automaticamente começa o "Rebuild" (reconstrução dos dados).</p>
+                </div>
+            </section>
+
+
+            <!-- MÓDULO 3: MEMÓRIA ECC -->
+            <section id="mod3" class="module">
+                <div class="module-header">
+                    <h2>Memória ECC: Detecção e Correção de Erros</h2>
+                    <p>Em servidores rodando 24/7, partículas subatômicas (como raios cósmicos) podem atingir o chip de RAM e inverter um bit (de 0 para 1 ou vice-versa). A memória ECC (Error-Correcting Code) possui um chip extra para gerar um "bit de paridade" e consertar isso em tempo real.</p>
+                </div>
+
+                <div class="analogy">
+                    💡 <strong>Analogia:</strong> É como enviar uma caixa de maçãs com uma etiqueta dizendo "Aviso: Tem 8 maçãs aqui". Se no caminho uma maçã cair, quem recebe conta 7 maçãs, lê a etiqueta (8) e percebe o erro na hora.
+                </div>
+
+                <div class="ecc-controls">
+                    <button class="btn btn-danger" onclick="simulateCosmicRay()">⚡ Disparar Raio Cósmico (Bit Flip)</button>
+                </div>
+
+                <div class="ecc-container" style="margin-top: 2rem;">
+                    
+                    <!-- RAM COMUM -->
+                    <div>
+                        <h3 style="text-align: center; color: var(--accent-red); margin-bottom: 10px;">Memória RAM Comum (Desktop)</h3>
+                        <div class="ram-stick">
+                            <div class="chips" id="chips-normal">
+                                <div class="chip">0</div><div class="chip">1</div><div class="chip">1</div><div class="chip">0</div>
+                                <div class="chip">1</div><div class="chip">0</div><div class="chip">0</div><div class="chip">1</div>
+                            </div>
+                        </div>
+                        <div id="status-normal" class="system-status" style="background: var(--bg-card);">Status: Operando Normalmente</div>
+                    </div>
+
+                    <!-- RAM ECC -->
+                    <div>
+                        <h3 style="text-align: center; color: var(--accent-green); margin-bottom: 10px;">Memória ECC (Servidor)</h3>
+                        <div class="ram-stick">
+                            <div class="chips" id="chips-ecc">
+                                <div class="chip">0</div><div class="chip">1</div><div class="chip">1</div><div class="chip">0</div>
+                                <div class="chip">1</div><div class="chip">0</div><div class="chip">0</div><div class="chip">1</div>
+                                <div class="chip ecc-chip" title="Bit de Paridade">0</div>
+                            </div>
+                        </div>
+                        <div id="status-ecc" class="system-status" style="background: var(--bg-card);">Status: Operando Normalmente (Paridade Par: 4 bits '1')</div>
+                    </div>
+
+                </div>
+
+                <div class="curiosity">
+                    <h4>Curiosidade Técnica 🕵️</h4>
+                    <p>O Google realizou um estudo em sua frota de servidores e descobriu que ocorrem cerca de <strong>25.000 a 70.000 erros de memória por bilhão de horas de operação por Megabit</strong>. Sem memória ECC, os servidores de bancos, aviões e datacenters travariam (Kernel Panic/Blue Screen) constantemente devido a falhas invisíveis no hardware!</p>
+                </div>
+            </section>
+
+
+            <!-- MÓDULO 4: HIERARQUIA DE MEMÓRIA -->
+            <section id="mod4" class="module">
+                <div class="module-header">
+                    <h2>Hierarquia de Memória e NUMA</h2>
+                    <p>Nenhum armazenamento é rápido, grande e barato ao mesmo tempo. Sistemas computacionais usam uma hierarquia: memórias mais próximas à CPU são ultra rápidas, mas pequenas e caras. Conforme descemos, ganha-se capacidade e perde-se velocidade.</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    
+                    <!-- PIRÂMIDE -->
+                    <div>
+                        <h3 style="text-align: center; color: var(--text-muted);">Passe o mouse ou clique nas camadas</h3>
+                        <div class="pyramid-container">
+                            <div class="pyramid-layer" id="layer-l1" onmouseover="showLayerInfo('l1')">Registradores / Cache L1, L2, L3</div>
+                            <div class="pyramid-layer" id="layer-ram" onmouseover="showLayerInfo('ram')">Memória Principal (RAM ECC)</div>
+                            <div class="pyramid-layer" id="layer-ssd" onmouseover="showLayerInfo('ssd')">Armazenamento NVMe / SSD</div>
+                            <div class="pyramid-layer" id="layer-hdd" onmouseover="showLayerInfo('hdd')">Discos Mecânicos (HDD) / Fita Magnética</div>
+                        </div>
+                        <div style="display:flex; justify-content: space-between; font-size:0.8rem; margin-top:5px; color:var(--text-muted);">
+                            <span>↑ Mais Rápido / Mais Caro</span>
+                            <span>↓ Mais Lento / Mais Capacidade</span>
+                        </div>
+                    </div>
+
+                    <!-- INFOS -->
+                    <div class="layer-info" id="layer-info-panel" style="display: block;">
+                        <h3 id="info-title" style="color: var(--accent-blue); margin-bottom:10px;">Interaja com a Pirâmide</h3>
+                        <p id="info-desc">Explore os níveis para entender como a latência e o custo variam na arquitetura de computadores.</p>
+                        <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-muted);" id="info-stats"></ul>
+                    </div>
+                </div>
+
+                <!-- NUMA CONCEPT -->
+                <div style="margin-top: 3rem;">
+                    <h3 style="color: var(--accent-orange); margin-bottom: 10px;">O que é NUMA (Non-Uniform Memory Access)?</h3>
+                    <p>Servidores modernos possuem 2 ou 4 processadores (CPUs) físicos na mesma placa. Se todos acessassem a RAM por um único caminho, haveria gargalo. Com o NUMA, <strong>cada CPU possui seus próprios pentes de RAM locais</strong>. Ele pode acessar a RAM do "vizinho", mas será mais lento.</p>
+                    
+                    <div class="numa-box">
+                        <div class="cpu-node">
+                            <div style="border-color: #38bdf8; background: rgba(56, 189, 248, 0.1);">CPU 1 (Node 0)</div>
+                            <div>RAM Local 1<br><small>Acesso Rápido</small></div>
+                        </div>
+                        <div style="display:flex; align-items:center; color: var(--accent-orange); font-size: 2rem;">⟷<br><small style="font-size:0.8rem;">QPI/UPI Link</small></div>
+                        <div class="cpu-node">
+                            <div style="border-color: #10b981; background: rgba(16, 185, 129, 0.1);">CPU 2 (Node 1)</div>
+                            <div>RAM Local 2<br><small>Acesso Rápido</small></div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; font-size: 0.9rem; margin-top: 10px; color: var(--text-muted);">Se a CPU 1 precisar de um dado que está na RAM 2, o acesso é indireto (latência maior). O SO deve otimizar isso!</p>
+                </div>
+
+            </section>
+
+
+            <!-- MÓDULO 5: VIRTUALIZAÇÃO -->
+            <section id="mod5" class="module">
+                <div class="module-header">
+                    <h2>Virtualização de Hardware</h2>
+                    <p>Servidores físicos costumavam rodar 1 sistema operacional e ficar com 80% dos recursos ociosos. A virtualização utiliza um software chamado <strong>Hypervisor</strong> (ex: VMware ESXi, Proxmox, Hyper-V) para fatiar o servidor físico em dezenas de "Máquinas Virtuais" (VMs) independentes.</p>
+                </div>
+
+                <div class="virt-container">
+                    
+                    <div class="hw-layer">
+                        <h3 style="color: var(--accent-blue);">Servidor Físico (Host)</h3>
+                        <div style="display: flex; gap: 1rem; margin-top: 10px;">
+                            <div style="flex: 1; text-align: left;">
+                                <small>CPU (32 Cores)</small>
+                                <div class="resource-bar"><div id="res-cpu" class="resource-fill" style="width: 0%;"></div></div>
+                            </div>
+                            <div style="flex: 1; text-align: left;">
+                                <small>RAM (128 GB)</small>
+                                <div class="resource-bar"><div id="res-ram" class="resource-fill" style="width: 0%;"></div></div>
+                            </div>
+                        </div>
+                        <div id="host-status" style="margin-top: 10px; font-weight: bold; color: var(--text-muted);">Uso: 0%</div>
+                    </div>
+
+                    <div class="hyp-layer">Camada do Hypervisor (Abstração e Divisão de Recursos)</div>
+
+                    <div style="margin-bottom: 1rem;">
+                        <button class="btn" onclick="addVM('Web Server', 4, 8)">+ Criar Servidor Web (4 CPU, 8GB)</button>
+                        <button class="btn" onclick="addVM('Banco de Dados', 8, 32)">+ Criar Banco de Dados (8 CPU, 32GB)</button>
+                        <button class="btn" onclick="addVM('Firewall', 2, 4)">+ Criar Firewall (2 CPU, 4GB)</button>
+                        <span id="vm-error" style="color: var(--accent-red); margin-left: 10px; font-weight: bold;"></span>
+                    </div>
+
+                    <div class="vm-grid" id="vm-container">
+                        <!-- VMs injectadas aqui -->
+                        <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); align-self: center;" id="empty-vm-msg">Nenhuma VM criada. O servidor físico está ocioso.</div>
+                    </div>
+
+                </div>
+
+                <div class="curiosity">
+                    <h4>Curiosidade Técnica 🕵️</h4>
+                    <p>Existem dois tipos de Hypervisores. O <strong>Type 2</strong> é o que você usa no desktop (VirtualBox), que roda <em>em cima</em> do Windows. Em servidores reais usamos o <strong>Type 1 (Bare Metal)</strong>, onde o hypervisor é o próprio sistema operacional raiz instalado direto no hardware, garantindo muito mais performance e acesso direto à CPU (sem intermediários).</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        <div class="credits">
+            Projeto Desenvolvido por: Gabriel Wolff, Vitor Camillo, João Victor Alvarez, Lucas Ashikaga e Wellington Fonseca. <br>
+            Instituição: Universidade Positivo | Curso: Fundamentos de Estruturas de Computadores
+        </div>
+        <div class="biblio">
+            <strong>Referências Bibliográficas:</strong>
+            <ul>
+                <li>MORIMOTO, Carlos E. Hardware II: o guia definitivo. Sul Editores, 2013.</li>
+                <li>TORRES, Gabriel. Montagem de Micros. Novaterra, 2013.</li>
+                <li>STALLINGS, William. Arquitetura e organização de computadores. 8. ed. Pearson Prentice Hall, 2010.</li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- SCRIPT PRINCIPAL (LÓGICA) -->
+    <script>
+        /* ====== DECLARAÇÕES DE ESTADO E DADOS (Movidos para o topo) ====== */
+        
+        // Dados da Pirâmide (Módulo 4)
+        const layerData = {
+            'l1': { title: "Registradores & Cache L1/L2/L3", desc: "Memória dentro ou grudada no processador. Trabalha na mesma velocidade da CPU.", stats: ["Latência: ~1 a 15 nanossegundos", "Capacidade: KBs a poucos MBs", "Custo/GB: Exorbitante"] },
+            'ram': { title: "Memória RAM (ECC em Servidores)", desc: "Memória de trabalho principal do sistema operacional. Perde os dados quando desliga.", stats: ["Latência: ~50 a 100 nanossegundos", "Capacidade: 16GB a vários Terabytes (em servidores)", "Custo/GB: Médio"] },
+            'ssd': { title: "Armazenamento NVMe / SSD Corporativo", desc: "Armazenamento flash em estado sólido. Mantém os dados sem energia. Conectado via barramento PCIe.", stats: ["Latência: ~10 a 100 microssegundos", "Capacidade: Até 30 TBs por unidade", "Custo/GB: Baixo"] },
+            'hdd': { title: "Discos Mecânicos (HDD) / Fitas", desc: "Discos magnéticos giratórios. Muito mais lentos, mas imbatíveis para arquivamento de longa duração (Cold Storage).", stats: ["Latência: ~5 a 10 milissegundos", "Capacidade: 20+ Terabytes por unidade", "Custo/GB: Muito Baixo"] }
+        };
+
+        // Dados do RAID (Módulo 2)
+        const raidConfigs = {
+            0: { name: "RAID 0 (Striping)", desc: "Dados divididos. 2 Discos Mínimo. Ganho de velocidade, ZERO tolerância a falhas.", disks: 2, analogy: "Como duas pessoas escrevendo metades diferentes de um documento ao mesmo tempo. Muito rápido, mas se uma pessoa sumir, o documento perde o sentido." },
+            1: { name: "RAID 1 (Mirroring)", desc: "Espelhamento total. 2 Discos Mínimo. Metade da capacidade utilizável, mas sobrevive a quebra de 1 disco.", disks: 2, analogy: "Como tirar uma cópia Xerox exata de um documento e guardar no cofre. Se o original molhar, você tem a cópia intacta." },
+            5: { name: "RAID 5 (Paridade)", desc: "Dados espalhados com cálculo matemático de paridade. 3 Discos Mínimo. Sobrevive a 1 quebra com perda de performance.", disks: 3, analogy: "Como uma equação: 2 + 3 = X (5). Se você perder o número 3, pode descobrir qual era usando o resultado: 2 + X = 5. O sistema recalcula os dados perdidos." },
+            10: { name: "RAID 10 (Striping + Mirroring)", desc: "Criação de espelhos, e união deles. 4 Discos Mínimo. Alta performance e alta redundância.", disks: 4, analogy: "Combina o melhor dos dois mundos: tem a cópia de segurança do RAID 1 e a velocidade dividida do RAID 0." }
+        };
+
+        let currentRaid = 0;
+        let raidState = [];
+
+        // Dados do ECC (Módulo 3)
+        let baseBits = [0, 1, 1, 0, 1, 0, 0, 1]; 
+        let currentBitsNormal = [...baseBits];
+        let currentBitsEcc = [...baseBits];
+        let eccIsFlipped = false;
+
+        function getParityBit(bits) {
+            let countOnes = bits.filter(b => b === 1).length;
+            return countOnes % 2 === 0 ? 0 : 1; 
+        }
+        let eccParity = getParityBit(currentBitsEcc);
+
+        // Dados da Virtualização (Módulo 5)
+        const hostMaxCpu = 32;
+        const hostMaxRam = 128;
+        let hostUsedCpu = 0;
+        let hostUsedRam = 0;
+        let vmCount = 0;
+
+
+        /* ====== NAVEGAÇÃO ====== */
+        function showModule(modId, element) {
+            document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(modId).classList.add('active');
+            
+            // Adiciona a classe active no botão que foi clicado com verificação de segurança
+            if (element) {
+                element.classList.add('active');
+            }
+        }
+
+        /* ====== MÓDULO 2: RAID ====== */
+        function setRaid(level, element) {
+            currentRaid = level;
+            document.querySelectorAll('.raid-controls .btn').forEach(b => b.classList.remove('active'));
+            
+            if (element) {
+                element.classList.add('active');
+            } else {
+                // Prevenção para a chamada inicial vazia
+                const firstButton = document.querySelector('.raid-controls .btn');
+                if(firstButton) firstButton.classList.add('active');
+            }
+            
+            document.getElementById('raid-title').innerText = raidConfigs[level].name;
+            document.getElementById('raid-desc').innerText = raidConfigs[level].desc;
+            document.getElementById('raid-analogy').innerText = raidConfigs[level].analogy;
+
+            resetRaid();
+        }
+
+        function resetRaid() {
+            const container = document.getElementById('disk-container');
+            container.innerHTML = '';
+            raidState = [];
+
+            const numDisks = raidConfigs[currentRaid].disks;
+            for(let i=0; i<numDisks; i++) {
+                raidState.push({ id: i, failed: false });
+                
+                // Gerar blocos visuais dependendo do RAID
+                let blocksHTML = '';
+                if(currentRaid == 0) blocksHTML = `<div class="data-block">A${i+1}</div><div class="data-block">B${i+1}</div>`;
+                if(currentRaid == 1) blocksHTML = `<div class="data-block">A1</div><div class="data-block">B1</div>`;
+                if(currentRaid == 5) {
+                    if(i === 2) blocksHTML = `<div class="data-block parity">P1</div><div class="data-block parity">P2</div>`;
+                    else blocksHTML = `<div class="data-block">A${i+1}</div><div class="data-block">B${i+1}</div>`;
+                }
+                if(currentRaid == 10) {
+                    let letter = i < 2 ? 'A' : 'B';
+                    blocksHTML = `<div class="data-block">${letter}1</div><div class="data-block">${letter}2</div>`;
+                }
+
+                const diskHtml = `
+                    <div class="disk" id="disk-${i}" onclick="breakDisk(${i})">
+                        <small style="color:var(--text-muted); margin-bottom:5px;">Disco ${i+1}</small>
+                        <div class="data-blocks">${blocksHTML}</div>
+                    </div>
+                `;
+                container.innerHTML += diskHtml;
+            }
+            updateRaidStatus();
+        }
+
+        function breakDisk(id) {
+            if(raidState[id].failed) return; // já quebrado
+            raidState[id].failed = true;
+            document.getElementById(`disk-${id}`).classList.add('failed');
+            updateRaidStatus();
+        }
+
+        function updateRaidStatus() {
+            const statusBar = document.getElementById('raid-status');
+            const failedCount = raidState.filter(d => d.failed).length;
+            
+            statusBar.className = 'raid-status-bar'; // reset
+            
+            if (failedCount === 0) {
+                statusBar.classList.add('status-ok');
+                statusBar.innerHTML = 'Status do Array: 🟢 SAUDÁVEL (Todos os dados online)';
+                return;
+            }
+
+            let statusStr = '';
+            let statusClass = '';
+
+            switch(currentRaid) {
+                case 0:
+                    statusClass = 'status-fail';
+                    statusStr = '🔴 PERDA TOTAL DE DADOS! O RAID 0 não possui tolerância a falhas.';
+                    break;
+                case 1:
+                    if(failedCount === 1) { statusClass = 'status-warn'; statusStr = '🟡 DEGRADADO! Rodando apenas pelo espelho. Troque o disco urgente!'; }
+                    else { statusClass = 'status-fail'; statusStr = '🔴 FALHA CRÍTICA! Ambos os espelhos foram perdidos.'; }
+                    break;
+                case 5:
+                    if(failedCount === 1) { statusClass = 'status-warn'; statusStr = '🟡 DEGRADADO! Paridade recalculando dados em tempo real (performance reduzida).'; }
+                    else { statusClass = 'status-fail'; statusStr = '🔴 FALHA CRÍTICA! RAID 5 sobrevive a apenas 1 disco quebrado.'; }
+                    break;
+                case 10:
+                    if(failedCount === 1) { statusClass = 'status-warn'; statusStr = '🟡 DEGRADADO! Sub-array comprometido, mas dados seguros no espelho.'; }
+                    else {
+                        // Lógica simplificada: Se quebrar o 0 e 1 (mesmo espelho) falha. 
+                        let m1Failed = raidState[0].failed && raidState[1].failed;
+                        let m2Failed = raidState[2].failed && raidState[3].failed;
+                        if(m1Failed || m2Failed) { statusClass = 'status-fail'; statusStr = '🔴 PERDA DE DADOS! Um espelho inteiro foi perdido.'; }
+                        else { statusClass = 'status-warn'; statusStr = '🟡 DEGRADADO PERIGOSO! Discos perdidos em espelhos diferentes. Sorte!'; }
+                    }
+                    break;
+            }
+
+            statusBar.classList.add(statusClass);
+            statusBar.innerHTML = statusStr;
+        }
+
+        // Init RAID (sem passar elemento, por isso tratar no setRaid)
+        setRaid(0);
+
+
+        /* ====== MÓDULO 3: MEMÓRIA ECC ====== */
+        function simulateCosmicRay() {
+            if(eccIsFlipped) return; // Impede spam
+            eccIsFlipped = true;
+
+            const targetIndex = Math.floor(Math.random() * 8);
+            
+            // UI Normal
+            const chipsNormal = document.getElementById('chips-normal').children;
+            const chipsEcc = document.getElementById('chips-ecc').children;
+            
+            // Flip bits logicamente
+            currentBitsNormal[targetIndex] = currentBitsNormal[targetIndex] === 1 ? 0 : 1;
+            currentBitsEcc[targetIndex] = currentBitsEcc[targetIndex] === 1 ? 0 : 1;
+
+            // Visual Normal (Quebra tudo)
+            chipsNormal[targetIndex].innerText = currentBitsNormal[targetIndex];
+            chipsNormal[targetIndex].classList.add('flipped');
+            const statusNorm = document.getElementById('status-normal');
+            statusNorm.innerHTML = "🔴 KERNEL PANIC! Erro de hardware detectado no endereço de memória. Sistema Congelado.";
+            statusNorm.style.background = "var(--accent-red)";
+            statusNorm.style.color = "white";
+
+            // Visual ECC (Detecta e corrige)
+            chipsEcc[targetIndex].innerText = currentBitsEcc[targetIndex];
+            chipsEcc[targetIndex].classList.add('flipped');
+            const statusEcc = document.getElementById('status-ecc');
+            statusEcc.innerHTML = "🟡 ALERTA: Inconsistência de Paridade Detectada! Calculando correção...";
+            statusEcc.style.background = "var(--accent-orange)";
+            statusEcc.style.color = "black";
+
+            // Animação de correção após 2 segundos
+            setTimeout(() => {
+                // Reverte bit no ECC
+                currentBitsEcc[targetIndex] = currentBitsEcc[targetIndex] === 1 ? 0 : 1;
+                chipsEcc[targetIndex].innerText = currentBitsEcc[targetIndex];
+                
+                chipsEcc[targetIndex].classList.remove('flipped');
+                chipsEcc[targetIndex].classList.add('corrected');
+                
+                statusEcc.innerHTML = "🟢 CORRIGIDO: O chip ECC restaurou o bit alterado. O servidor continua operando sem downtime.";
+                statusEcc.style.background = "var(--bg-card)";
+                statusEcc.style.color = "var(--accent-green)";
+                
+                setTimeout(() => {
+                    chipsEcc[targetIndex].classList.remove('corrected');
+                    eccIsFlipped = false; // libera pra próxima
+                }, 2000);
+            }, 2500);
+        }
+
+
+        /* ====== MÓDULO 4: HIERARQUIA ====== */
+        function showLayerInfo(layerId) {
+            const panel = document.getElementById('layer-info-panel');
+            const data = layerData[layerId];
+            
+            if(!data) return; // Segurança extra
+
+            document.getElementById('info-title').innerText = data.title;
+            document.getElementById('info-desc').innerText = data.desc;
+            
+            let statsHtml = '';
+            data.stats.forEach(s => { statsHtml += `<li>${s}</li>`; });
+            document.getElementById('info-stats').innerHTML = statsHtml;
+            
+            panel.style.borderColor = getComputedStyle(document.getElementById('layer-' + layerId)).backgroundColor;
+        }
+
+
+        /* ====== MÓDULO 5: VIRTUALIZAÇÃO ====== */
+        function addVM(name, cpu, ram) {
+            const errorMsg = document.getElementById('vm-error');
+            errorMsg.innerText = "";
+
+            if (hostUsedCpu + cpu > hostMaxCpu || hostUsedRam + ram > hostMaxRam) {
+                errorMsg.innerText = "❌ Recursos Físicos Insuficientes!";
+                return;
+            }
+
+            // Remove mensagem empty
+            const emptyMsg = document.getElementById('empty-vm-msg');
+            if(emptyMsg) emptyMsg.style.display = 'none';
+
+            vmCount++;
+            const id = `vm-${vmCount}`;
+            
+            // Atualiza Lógica
+            hostUsedCpu += cpu;
+            hostUsedRam += ram;
+
+            // Renderiza VM
+            const container = document.getElementById('vm-container');
+            const vmHtml = `
+                <div class="vm-card" id="${id}">
+                    <div style="font-weight:bold; color:var(--accent-blue); margin-bottom:5px;">${name}</div>
+                    <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:10px;">${cpu} vCPU | ${ram}GB RAM</div>
+                    <button onclick="removeVM('${id}', ${cpu}, ${ram})">Desligar (Excluir)</button>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', vmHtml);
+
+            updateHostBars();
+        }
+
+        function removeVM(id, cpu, ram) {
+            hostUsedCpu -= cpu;
+            hostUsedRam -= ram;
+            
+            const vm = document.getElementById(id);
+            if(vm) vm.remove();
+            
+            updateHostBars();
+
+            // Verifica se esvaziou
+            const container = document.getElementById('vm-container');
+            if (container.querySelectorAll('.vm-card').length === 0) {
+                document.getElementById('empty-vm-msg').style.display = 'block';
+            }
+        }
+
+        function updateHostBars() {
+            const cpuPct = (hostUsedCpu / hostMaxCpu) * 100;
+            const ramPct = (hostUsedRam / hostMaxRam) * 100;
+
+            document.getElementById('res-cpu').style.width = cpuPct + '%';
+            document.getElementById('res-ram').style.width = ramPct + '%';
+
+            // Altera cores se passar de 80%
+            document.getElementById('res-cpu').style.background = cpuPct > 80 ? 'var(--accent-red)' : 'var(--accent-green)';
+            document.getElementById('res-ram').style.background = ramPct > 80 ? 'var(--accent-red)' : 'var(--accent-green)';
+
+            document.getElementById('host-status').innerText = `Uso Físico: CPU ${hostUsedCpu}/${hostMaxCpu} | RAM ${hostUsedRam}/${hostMaxRam} GB`;
+        }
+    </script>
+</body>
+</html>
