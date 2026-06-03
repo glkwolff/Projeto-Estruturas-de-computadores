@@ -100,8 +100,11 @@
         /* MAIN CONTENT */
         main {
             flex: 1;
-            padding: 2rem;
+            padding: 2.5rem 3rem;
             position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         .module {
@@ -119,14 +122,58 @@
         }
 
         .module-header {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border);
         }
 
         .module-header h2 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--accent-blue);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
+            line-height: 1.2;
         }
+        .module-header p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 80ch;
+            font-size: 0.98rem;
+        }
+
+        /* Sub-abas dentro do módulo (chips) */
+        .module-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+        .mod-tab {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid transparent;
+            padding: 0.55rem 1rem;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            font-size: 0.92rem;
+            font-family: var(--font-main);
+            transition: all 0.2s;
+            position: relative;
+            top: 2px;
+            border-bottom: 2px solid transparent;
+        }
+        .mod-tab:hover { color: var(--text-main); background: rgba(56, 189, 248, 0.06);}
+        .mod-tab.active {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
+            font-weight: 600;
+        }
+        .mod-panel {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .mod-panel.active { display: block; }
 
         .analogy {
             background-color: rgba(56, 189, 248, 0.1);
@@ -397,14 +444,17 @@
         .pyramid-layer {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            height: 60px;
+            height: 64px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+            clip-path: polygon(8% 0%, 92% 0%, 100% 100%, 0% 100%);
+            text-align: center;
+            padding: 0 0.5rem;
+            font-size: 0.9rem;
         }
 
         .pyramid-layer:hover {
@@ -413,10 +463,11 @@
             transform: scale(1.02);
         }
 
-        #layer-l1 { width: 30%; background: #ef4444; color: white; border:none; clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);}
-        #layer-ram { width: 50%; background: #f59e0b; color: #000; border:none; clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);}
-        #layer-ssd { width: 70%; background: #10b981; color: #000; border:none; clip-path: polygon(8% 0%, 92% 0%, 100% 100%, 0% 100%);}
-        #layer-hdd { width: 90%; background: #38bdf8; color: #000; border:none; clip-path: polygon(4% 0%, 96% 0%, 100% 100%, 0% 100%);}
+        /* Cada camada herda o clip-path base — sem clip excessivo no topo */
+        #layer-l1  { width: 55%; background: #ef4444; color: white; border:none;}
+        #layer-ram { width: 70%; background: #f59e0b; color: #000;  border:none;}
+        #layer-ssd { width: 85%; background: #10b981; color: #000;  border:none;}
+        #layer-hdd { width: 95%; background: #38bdf8; color: #000;  border:none;}
 
         .layer-info {
             background: var(--bg-panel);
@@ -473,6 +524,417 @@
         .biblio { color: var(--text-muted); text-align: left; max-width: 800px; margin: 0 auto;}
         .biblio li { margin-bottom: 0.5rem; }
 
+        /* ============ COMPONENTES DE PROFUNDIDADE TÉCNICA ============ */
+
+        /* Tabelas de dados */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.88rem;
+            background: var(--bg-panel);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .data-table th, .data-table td {
+            padding: 0.7rem 0.9rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .data-table th {
+            background: #0b1120;
+            color: var(--accent-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+        }
+        .data-table tbody tr:hover { background: rgba(56, 189, 248, 0.06); }
+        .data-table td.num { font-family: var(--font-mono); color: var(--accent-green); }
+        .data-table td.highlight { color: var(--accent-orange); font-weight: bold; }
+
+        /* Caixa de fórmula */
+        .formula {
+            background: #0b1120;
+            border: 1px solid var(--accent-orange);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: var(--font-mono);
+            text-align: center;
+            font-size: 1.05rem;
+            color: var(--accent-orange);
+            overflow-x: auto;
+        }
+        .formula small { display: block; color: var(--text-muted); margin-top: 6px; font-family: var(--font-main); font-size: 0.8rem;}
+
+        /* Subseções dentro de módulos */
+        .subsection {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .subsection > h3 {
+            color: var(--accent-orange);
+            margin-bottom: 0.8rem;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .subsection > p { margin-bottom: 1rem; line-height: 1.6;}
+
+        /* Citação inline (referência bibliográfica numerada) */
+        .cite {
+            color: var(--accent-orange);
+            font-size: 0.7rem;
+            vertical-align: super;
+            cursor: pointer;
+            text-decoration: none;
+            padding: 0 2px;
+            font-weight: bold;
+            border-radius: 2px;
+            transition: background 0.15s;
+        }
+        .cite:hover { background: rgba(245, 158, 11, 0.25); }
+
+        /* Módulo Referências */
+        .ref-list {
+            list-style: none;
+            counter-reset: ref-counter;
+        }
+        .ref-item {
+            background: var(--bg-panel);
+            border-left: 4px solid var(--border);
+            padding: 1rem 1.2rem;
+            margin-bottom: 0.8rem;
+            border-radius: 0 6px 6px 0;
+            display: flex;
+            gap: 1rem;
+            transition: all 0.3s;
+            scroll-margin-top: 80px;
+        }
+        .ref-item:target,
+        .ref-item.highlight {
+            border-left-color: var(--accent-orange);
+            background: rgba(245, 158, 11, 0.08);
+            box-shadow: 0 0 0 1px var(--accent-orange);
+        }
+        .ref-number {
+            color: var(--accent-orange);
+            font-weight: bold;
+            font-family: var(--font-mono);
+            min-width: 36px;
+            font-size: 1rem;
+        }
+        .ref-body { flex: 1; line-height: 1.5; font-size: 0.92rem; }
+        .ref-body .ref-type {
+            display: inline-block;
+            font-size: 0.7rem;
+            background: var(--bg-card);
+            color: var(--accent-blue);
+            padding: 1px 6px;
+            border-radius: 3px;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Diagrama Multi-Socket */
+        .dual-socket {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--bg-panel);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .socket-box {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-blue);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 160px;
+        }
+        .socket-box small { color: var(--text-muted); display: block; margin-top: 4px;}
+        .qpi-link {
+            text-align: center;
+            color: var(--accent-orange);
+            padding: 0 0.5rem;
+        }
+        .qpi-link .arrow { font-size: 2.2rem; line-height: 1;}
+        .qpi-link small { display: block; font-size: 0.7rem; margin-top: 4px;}
+
+        /* Cards de servidores de IA */
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .ai-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+        .ai-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
+        }
+        .ai-card h4 { color: var(--accent-blue); margin-bottom: 6px; font-size: 1rem;}
+        .ai-card .specs { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;}
+
+        /* Calculadora RAID (módulo 2) */
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            background: var(--bg-panel);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        .calc-inputs h4 { color: var(--accent-blue); margin-bottom: 0.8rem;}
+        .calc-input {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+        }
+        .calc-input label { flex: 1; color: var(--text-muted);}
+        .calc-input input, .calc-input select {
+            background: var(--bg-base);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 0.35rem 0.6rem;
+            border-radius: 4px;
+            width: 110px;
+            font-family: var(--font-mono);
+        }
+        .calc-result {
+            background: var(--bg-base);
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--accent-green);
+        }
+        .calc-result h4 { color: var(--accent-green); margin-bottom: 0.5rem;}
+        .calc-result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            border-bottom: 1px dashed var(--border);
+            font-size: 0.9rem;
+        }
+        .calc-result-row:last-child { border-bottom: none;}
+        .calc-result-row strong {
+            color: var(--accent-blue);
+            font-family: var(--font-mono);
+        }
+
+        /* Hamming SECDED (módulo 3) */
+        .hamming-row {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 6px;
+            margin: 1rem 0;
+        }
+        .hbit {
+            background: var(--bg-card);
+            text-align: center;
+            padding: 0.6rem 0.3rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-weight: bold;
+            border: 1px solid var(--border);
+            position: relative;
+            font-size: 1rem;
+        }
+        .hbit.parity {
+            background: rgba(245, 158, 11, 0.15);
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
+        }
+        .hbit.flipped {
+            background: var(--accent-red);
+            color: white;
+            animation: shake 0.5s;
+        }
+        .hbit.corrected {
+            background: var(--accent-green);
+            color: white;
+        }
+        .hbit-label {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 2px;
+        }
+
+        /* Cache hierarchy (módulo 4) */
+        .cache-trace {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 1rem 0;
+        }
+        .cache-level {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--bg-card);
+            padding: 0.8rem 1.2rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--accent-blue);
+            transition: all 0.3s;
+        }
+        .cache-level.hit {
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.12);
+        }
+        .cache-level.miss {
+            border-color: var(--accent-red);
+            opacity: 0.5;
+        }
+        .cache-level .cl-name {
+            font-weight: bold;
+            width: 130px;
+            color: var(--accent-blue);
+        }
+        .cache-level.hit .cl-name { color: var(--accent-green);}
+        .cache-level .cl-stats { flex: 1; font-size: 0.85rem; color: var(--text-muted);}
+        .cache-level .cl-verdict {
+            font-family: var(--font-mono);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Stack diagram (módulo 6) */
+        .stack-container {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 1.5rem;
+        }
+        @media (max-width: 768px) { .stack-container { grid-template-columns: 1fr; } }
+        .stack-tower {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .stack-layer {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            padding: 0.9rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s;
+            position: relative;
+        }
+        .stack-layer:hover {
+            border-color: var(--accent-blue);
+            background: rgba(56, 189, 248, 0.08);
+            transform: translateX(6px);
+        }
+        .stack-layer.active {
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.12);
+        }
+        .stack-layer h4 {
+            color: var(--accent-blue);
+            margin-bottom: 2px;
+            font-size: 0.98rem;
+        }
+        .stack-layer.active h4 { color: var(--accent-green);}
+        .stack-layer small { color: var(--text-muted); font-size: 0.78rem;}
+        .stack-detail {
+            background: var(--bg-panel);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+        .stack-detail h3 {
+            color: var(--accent-blue);
+            margin-bottom: 0.6rem;
+        }
+        .stack-detail ul { margin-left: 1.2rem; margin-top: 0.5rem;}
+        .stack-detail li { margin-bottom: 0.4rem; line-height: 1.4;}
+
+        /* Scheduler tree (módulo 5) */
+        .rb-tree {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            background: var(--bg-panel);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .rb-row { display: flex; gap: 1rem; justify-content: center;}
+        .rb-node {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            padding: 0.4rem 0.8rem;
+            border-radius: 50%;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            min-width: 56px;
+            text-align: center;
+        }
+        .rb-node.red { background: rgba(239, 68, 68, 0.2); border-color: var(--accent-red); color: var(--accent-red);}
+        .rb-node.black { background: var(--bg-base); border-color: var(--text-muted);}
+        .rb-node.current { box-shadow: 0 0 14px var(--accent-green); border-color: var(--accent-green);}
+
+        /* Bloco de código curto */
+        .code-block {
+            background: #0b1120;
+            border: 1px solid var(--border);
+            padding: 1rem 1.2rem;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            color: var(--text-main);
+            overflow-x: auto;
+            margin: 1rem 0;
+            line-height: 1.5;
+        }
+        .code-block .com { color: var(--text-muted); }
+        .code-block .kw { color: var(--accent-orange); }
+        .code-block .st { color: var(--accent-green); }
+
+        /* Anéis de proteção */
+        .rings {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 1.5rem 0;
+            height: 280px;
+        }
+        .ring {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 8px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            border: 2px solid var(--border);
+        }
+        .ring-3 { width: 280px; height: 280px; background: rgba(56, 189, 248, 0.05); border-color: var(--accent-blue); color: var(--accent-blue);}
+        .ring-2 { width: 220px; height: 220px; background: rgba(56, 189, 248, 0.10);}
+        .ring-1 { width: 160px; height: 160px; background: rgba(56, 189, 248, 0.15);}
+        .ring-0 { width: 100px; height: 100px; background: rgba(245, 158, 11, 0.25); border-color: var(--accent-orange); color: var(--accent-orange);}
+        .ring-neg { width: 40px; height: 40px; background: var(--accent-red); border-color: var(--accent-red); color: white; padding-bottom: 0; align-items: center;}
+
         /* UTILS */
         @keyframes shake {
             0% { transform: translateX(0); }
@@ -483,20 +945,36 @@
         }
 
         /* RESPONSIVENESS */
+        @media (max-width: 900px) {
+            main { padding: 1.5rem 1.2rem; }
+            .module-header h2 { font-size: 1.5rem; }
+            .calc-grid { grid-template-columns: 1fr; }
+            #p4a > div[style*="grid-template-columns"] { display: block !important; }
+            .data-table { font-size: 0.78rem; }
+            .data-table th, .data-table td { padding: 0.45rem 0.55rem; }
+        }
         @media (max-width: 768px) {
             .container { flex-direction: column; }
             nav { width: 100%; display: flex; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border); padding: 0.5rem;}
             .nav-btn { text-align: center; border-left: none; border-bottom: 4px solid transparent; white-space: nowrap;}
             .nav-btn.active { border-left: none; border-bottom-color: var(--accent-blue); }
             .comparison-grid, .ecc-container { grid-template-columns: 1fr; }
+            .module-tabs { gap: 0.25rem; }
+            .mod-tab { padding: 0.45rem 0.7rem; font-size: 0.82rem; }
+            .hamming-row { grid-template-columns: repeat(6, 1fr); }
+            .ai-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .ai-grid { grid-template-columns: 1fr; }
+            .hamming-row { grid-template-columns: repeat(4, 1fr); }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Infográfico Interativo: Arquitetura de Servidores</h1>
-        <p>Projeto: Fundamentos de Estruturas de Computadores | Universidade Positivo</p>
+        <h1>Arquitetura de Servidores — Infográfico Interativo</h1>
+        <p>Fundamentos de Estruturas de Computadores · Prof. Rubem Koide · Universidade Positivo · 2026.1</p>
     </header>
 
     <div class="container">
@@ -508,6 +986,8 @@
             <button class="nav-btn" onclick="showModule('mod3', this)">🧠 Memória ECC</button>
             <button class="nav-btn" onclick="showModule('mod4', this)">🔺 Hierarquia & NUMA</button>
             <button class="nav-btn" onclick="showModule('mod5', this)">☁️ Virtualização</button>
+            <button class="nav-btn" onclick="showModule('mod6', this)">🧩 Stack Completo</button>
+            <button class="nav-btn" onclick="showModule('modRef', this)">📚 Referências</button>
         </nav>
 
         <!-- ÁREA DE CONTEÚDO PRINCIPAL -->
@@ -516,35 +996,128 @@
             <!-- MÓDULO 1: DESKTOP VS SERVIDOR -->
             <section id="mod1" class="module active">
                 <div class="module-header">
-                    <h2>Desktop vs Servidor: Muito além do visual</h2>
-                    <p>Enquanto um desktop foca na experiência de um único usuário (gráficos, áudio, resposta rápida), o servidor foca em <strong>disponibilidade, redundância e processamento massivo</strong> para múltiplos usuários ou serviços simultâneos.</p>
-                </div>
-                
-                <div class="analogy">
-                    💡 <strong>Analogia:</strong> Um Desktop é como um carro esporte de luxo (rápido, confortável para o motorista). Um Servidor é como um caminhão de carga ou um trem (feito para carregar toneladas de dados 24/7 sem quebrar).
+                    <h2>Desktop vs Servidor</h2>
+                    <p>Desktop e servidor compartilham o modelo de Von Neumann<a class="cite" onclick="goToRef(1)" title="STALLINGS, 2017">[1]</a>, mas divergem em quase todos os subsistemas físicos: alimentação, interconexão de CPUs, E/S e gerenciamento. O servidor é projetado para SLA de 99,99% (≈ 4,38 min de downtime por mês).</p>
                 </div>
 
-                <div class="comparison-grid">
-                    <div class="comp-card">
-                        <h3>Computador Pessoal (Desktop)</h3>
-                        <div class="comp-item"><div class="comp-icon">🔋</div> <span><strong>Fonte Única:</strong> Se queimar, o PC desliga imediatamente.</span></div>
-                        <div class="comp-item"><div class="comp-icon">🗼</div> <span><strong>Form Factor:</strong> Gabinetes Torre, focados em estética e silêncio.</span></div>
-                        <div class="comp-item"><div class="comp-icon">🌐</div> <span><strong>Rede:</strong> Geralmente 1GbE ou Wi-Fi. Foco no acesso básico.</span></div>
-                        <div class="comp-item"><div class="comp-icon">🔧</div> <span><strong>Gerenciamento:</strong> Local. Requer monitor, teclado e presença física.</span></div>
+                <div class="module-tabs">
+                    <button class="mod-tab active" onclick="showPanel('mod1','p1a',this)">Visão Geral</button>
+                    <button class="mod-tab" onclick="showPanel('mod1','p1b',this)">Interconexão CPU</button>
+                    <button class="mod-tab" onclick="showPanel('mod1','p1c',this)">Barramentos de E/S</button>
+                    <button class="mod-tab" onclick="showPanel('mod1','p1d',this)">IA & HPC</button>
+                </div>
+
+                <!-- PAINEL A: VISÃO GERAL -->
+                <div class="mod-panel active" id="p1a">
+                    <div class="analogy">
+                        💡 <strong>Analogia:</strong> Desktop é um carro esporte (rápido para um motorista). Servidor é um trem de carga: feito para mover toneladas de dados 24/7, com sistemas redundantes e manutenção em movimento.
                     </div>
-                    
-                    <div class="comp-card">
-                        <h3>Servidor Corporativo</h3>
-                        <div class="comp-item"><div class="comp-icon">🔋</div> <span><strong>Fontes Redundantes (Hot-Plug):</strong> Se uma falhar, a outra assume sem desligar.</span></div>
-                        <div class="comp-item"><div class="comp-icon">🗄️</div> <span><strong>Form Factor Rack:</strong> Padronizados (1U, 2U) para empilhamento em datacenters.</span></div>
-                        <div class="comp-item"><div class="comp-icon">🌐</div> <span><strong>Rede:</strong> Múltiplas portas 10GbE a 100GbE, via fibra óptica.</span></div>
-                        <div class="comp-item"><div class="comp-icon">📡</div> <span><strong>Gerenciamento Remoto (iDRAC/iLO):</strong> Chip dedicado para ligar/desligar remotamente, mesmo sem SO.</span></div>
+
+                    <div class="comparison-grid">
+                        <div class="comp-card">
+                            <h3>Desktop</h3>
+                            <div class="comp-item"><div class="comp-icon">🔋</div> <span><strong>Fonte única.</strong> 500–850 W. Falha = desliga.</span></div>
+                            <div class="comp-item"><div class="comp-icon">🧠</div> <span><strong>1 socket.</strong> 4–16 núcleos, 16–64 GB RAM não-ECC.</span></div>
+                            <div class="comp-item"><div class="comp-icon">🌐</div> <span><strong>1 GbE / Wi-Fi.</strong> 125 MB/s teóricos.</span></div>
+                            <div class="comp-item"><div class="comp-icon">🔧</div> <span><strong>Gerência local.</strong> Monitor + teclado físicos.</span></div>
+                        </div>
+                        <div class="comp-card">
+                            <h3>Servidor</h3>
+                            <div class="comp-item"><div class="comp-icon">🔋</div> <span><strong>PSUs N+1 hot-plug.</strong> 80 PLUS Platinum/Titanium.</span></div>
+                            <div class="comp-item"><div class="comp-icon">🧠</div> <span><strong>2–8 sockets.</strong> 16–128 cores/socket, até 6 TB RAM ECC.</span></div>
+                            <div class="comp-item"><div class="comp-icon">🌐</div> <span><strong>10/25/100 GbE</strong> + fibra + bonding LACP.</span></div>
+                            <div class="comp-item"><div class="comp-icon">📡</div> <span><strong>BMC (iDRAC/iLO/IPMI).</strong> Acesso remoto mesmo sem SO.</span></div>
+                        </div>
+                    </div>
+
+                    <div class="curiosity">
+                        <h4>Curiosidade Técnica 🕵️</h4>
+                        <p>O padrão EIA-310 define <strong>1U = 1,75 in (44,45 mm)</strong> — herança dos racks da Bell System dos anos 1950. Um rack 42U tem 1.867 mm úteis. Hyperscalers (AWS, Meta) adotam o padrão OCP, com 21" e barramento de 48 V DC distribuído pelo rack inteiro.</p>
                     </div>
                 </div>
 
-                <div class="curiosity">
-                    <h4>Curiosidade Técnica 🕵️</h4>
-                    <p>Você sabe o que significa "1U" em servidores? Em racks padronizados de TI (padrão EIA-310), a altura é medida em Unidades de Rack (U). <strong>1U equivale a exatos 1.75 polegadas (44.45 mm)</strong>. Um rack inteiro costuma ter 42U de altura.</p>
+                <!-- PAINEL B: INTERCONEXÃO CPU -->
+                <div class="mod-panel" id="p1b">
+                    <p>Em desktops single-socket não há o problema. Em servidores com 2, 4 ou 8 CPUs físicas, o caminho entre processadores vira gargalo crítico. A evolução foi do barramento compartilhado (FSB) para links ponto-a-ponto coerentes<a class="cite" onclick="goToRef(13)" title="Intel QPI White Paper, 2009">[13]</a>.</p>
+
+                    <div class="dual-socket">
+                        <div class="socket-box">
+                            <strong style="color: var(--accent-blue)">CPU 0</strong>
+                            <small>NUMA Node 0</small>
+                            <small>RAM local: 256 GB</small>
+                        </div>
+                        <div class="qpi-link">
+                            <div class="arrow">↔</div>
+                            <small>UPI 41,6 GB/s</small>
+                            <small>~100 ns</small>
+                        </div>
+                        <div class="socket-box">
+                            <strong style="color: var(--accent-green)">CPU 1</strong>
+                            <small>NUMA Node 1</small>
+                            <small>RAM local: 256 GB</small>
+                        </div>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Tecnologia</th><th>Fabricante</th><th>Banda</th><th>Coerência</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>FSB</td><td>Intel até 2008</td><td class="num">~10,6 GB/s</td><td>Snooping no chipset</td></tr>
+                            <tr><td>QPI</td><td>Intel 2008–2017</td><td class="num">25,6 GB/s</td><td>MESIF (4 camadas)</td></tr>
+                            <tr><td>UPI</td><td>Intel Skylake+</td><td class="num">41,6 GB/s</td><td>MESIF + diretório</td></tr>
+                            <tr><td>Infinity Fabric</td><td>AMD</td><td class="num">~204 GB/s</td><td>MOESI</td></tr>
+                            <tr><td>NVLink 4.0</td><td>NVIDIA</td><td class="num">900 GB/s</td><td>GPU coherency</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p style="margin-top: 1rem;">O QPI tem 4 camadas (espelhando OSI): <strong>Física</strong> (sinalização diferencial, 20 lanes), <strong>Ligação</strong> (flits de 80 bits + CRC), <strong>Roteamento</strong> (entrega multi-socket) e <strong>Protocolo</strong> (MESIF — Modified/Exclusive/Shared/Invalid/Forward)<a class="cite" onclick="goToRef(17)" title="KOIDE, Aula 6">[17]</a>.</p>
+                </div>
+
+                <!-- PAINEL C: BARRAMENTOS -->
+                <div class="mod-panel" id="p1c">
+                    <p>A diferença "desktop vs servidor" também aparece em quantidade e velocidade dos barramentos: um Xeon expõe ~80 lanes PCIe; um Core i7 desktop, ~20<a class="cite" onclick="goToRef(7)" title="MORIMOTO, 2013">[7]</a>.</p>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Barramento</th><th>Largura</th><th>Throughput</th><th>Uso típico</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>PCIe 3.0 x16</td><td class="num">16 lanes</td><td class="num">15,75 GB/s</td><td>GPU consumer</td></tr>
+                            <tr><td>PCIe 4.0 x16</td><td class="num">16 lanes</td><td class="num">31,5 GB/s</td><td>NVMe enterprise</td></tr>
+                            <tr><td>PCIe 5.0 x16</td><td class="num">16 lanes</td><td class="num">63 GB/s</td><td>HBA, GPUs IA, CXL</td></tr>
+                            <tr><td>NVMe (PCIe 4.0 x4)</td><td class="num">4 lanes</td><td class="num">7,88 GB/s</td><td>SSD U.2/U.3</td></tr>
+                            <tr><td>SATA III</td><td>—</td><td class="num">600 MB/s</td><td>HDD/SSD legado</td></tr>
+                            <tr><td>1 GbE</td><td>—</td><td class="num">125 MB/s</td><td>Desktop, gerência</td></tr>
+                            <tr><td>10 GbE</td><td>—</td><td class="num">1,25 GB/s</td><td>Servidor padrão</td></tr>
+                            <tr><td>100 GbE</td><td>—</td><td class="num">12,5 GB/s</td><td>Backbone DC</td></tr>
+                            <tr><td>InfiniBand NDR</td><td>—</td><td class="num">50 GB/s</td><td>HPC / clusters IA</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PAINEL D: IA & HPC -->
+                <div class="mod-panel" id="p1d">
+                    <p>LLMs e treinamento neural redefiniram o "servidor": aceleradores (GPU/TPU/NPU) dominam a planta, e a interconexão CPU↔acelerador (NVLink, CXL) supera o PCIe<a class="cite" onclick="goToRef(14)" title="NVIDIA Grace Hopper Whitepaper">[14]</a>.</p>
+
+                    <div class="ai-grid">
+                        <div class="ai-card">
+                            <h4>NVIDIA Grace Hopper GH200</h4>
+                            <div class="specs">ARM Neoverse V2 (72 cores) + GPU H100. NVLink-C2C 900 GB/s. 480 GB LPDDR5X + 96 GB HBM3.</div>
+                        </div>
+                        <div class="ai-card">
+                            <h4>AMD Instinct MI300X</h4>
+                            <div class="specs">APU CDNA3, 192 GB HBM3 a 5,3 TB/s. Treino de LLMs &gt; 70 B parâmetros em GPU única.</div>
+                        </div>
+                        <div class="ai-card">
+                            <h4>Google TPU v5p</h4>
+                            <div class="specs">ASIC dedicado, 459 TFLOPs BF16. 8.960 TPUs por pod via ICI 4,8 Tbps.</div>
+                        </div>
+                        <div class="ai-card">
+                            <h4>Frontier — exaescala</h4>
+                            <div class="specs">1,194 ExaFLOPs. 9.408 nós EPYC + 4× MI250X cada. HPE Cray EX, Oak Ridge.</div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -553,39 +1126,193 @@
             <section id="mod2" class="module">
                 <div class="module-header">
                     <h2>RAID: Tolerância a Falhas e Desempenho</h2>
-                    <p>RAID permite combinar múltiplos discos físicos em uma única unidade lógica. <strong>Clique em um disco abaixo para simular uma queima de hardware</strong> e veja o impacto nos dados!</p>
+                    <p>Originalmente proposto por Patterson, Gibson e Katz em 1988<a class="cite" onclick="goToRef(12)" title="PATTERSON; GIBSON; KATZ, 1988">[12]</a>, RAID (<em>Redundant Array of Independent Disks</em>) combina N discos físicos numa unidade lógica única para ganhar velocidade, redundância ou ambos.</p>
                 </div>
 
-                <div class="analogy">
-                    💡 <strong>Analogia:</strong> 
-                    <span id="raid-analogy">Selecione um nível RAID abaixo para ver a analogia.</span>
+                <div class="module-tabs">
+                    <button class="mod-tab active" onclick="showPanel('mod2','p2a',this)">Simulador</button>
+                    <button class="mod-tab" onclick="showPanel('mod2','p2b',this)">Níveis Comparados</button>
+                    <button class="mod-tab" onclick="showPanel('mod2','p2c',this)">Calculadora</button>
+                    <button class="mod-tab" onclick="showPanel('mod2','p2d',this)">Lei de Amdahl</button>
                 </div>
 
-                <div class="raid-controls">
-                    <!-- Passando 'this' como referência do botão -->
-                    <button class="btn active" onclick="setRaid(0, this)">RAID 0 (Striping)</button>
-                    <button class="btn" onclick="setRaid(1, this)">RAID 1 (Mirroring)</button>
-                    <button class="btn" onclick="setRaid(5, this)">RAID 5 (Paridade)</button>
-                    <button class="btn" onclick="setRaid(10, this)">RAID 10 (Striping + Mirroring)</button>
-                    <button class="btn" style="margin-left: auto; background: var(--border);" onclick="resetRaid()">🔄 Consertar Discos</button>
-                </div>
-
-                <div class="raid-canvas">
-                    <h3 id="raid-title" style="color:var(--accent-blue); margin-bottom: 10px;">RAID 0 - Foco em Velocidade</h3>
-                    <p id="raid-desc" style="color:var(--text-muted); font-size: 0.9rem;">Os dados são divididos entre os discos. Sem redundância.</p>
-                    
-                    <div class="disk-array" id="disk-container">
-                        <!-- Discos gerados via JS -->
+                <!-- PAINEL A: SIMULADOR -->
+                <div class="mod-panel active" id="p2a">
+                    <div class="analogy">
+                        💡 <strong>Analogia:</strong> <span id="raid-analogy">Selecione um nível RAID abaixo para ver a analogia.</span>
                     </div>
 
-                    <div id="raid-status" class="raid-status-bar status-ok">
-                        Status do Array: SAUDÁVEL
+                    <div class="raid-controls">
+                        <button class="btn active" onclick="setRaid(0, this)">RAID 0 (Striping)</button>
+                        <button class="btn" onclick="setRaid(1, this)">RAID 1 (Mirroring)</button>
+                        <button class="btn" onclick="setRaid(5, this)">RAID 5 (Paridade)</button>
+                        <button class="btn" onclick="setRaid(10, this)">RAID 10</button>
+                        <button class="btn" style="margin-left: auto; background: var(--border);" onclick="resetRaid()">🔄 Reset</button>
+                    </div>
+
+                    <div class="raid-canvas">
+                        <h3 id="raid-title" style="color:var(--accent-blue); margin-bottom: 10px;">RAID 0 — Foco em Velocidade</h3>
+                        <p id="raid-desc" style="color:var(--text-muted); font-size: 0.9rem;">Os dados são divididos entre os discos. Sem redundância.</p>
+
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">↓ Clique em um disco para simular falha de hardware.</p>
+
+                        <div class="disk-array" id="disk-container"></div>
+
+                        <div id="raid-status" class="raid-status-bar status-ok">Status do Array: SAUDÁVEL</div>
+                    </div>
+
+                    <div class="curiosity">
+                        <h4>Hot-swap & Rebuild 🕵️</h4>
+                        <p>Em servidores, os discos são <strong>hot-swap</strong>: se um falhar em RAID 1, 5 ou 10, o técnico troca-o com o servidor ligado e a controladora inicia o <em>rebuild</em>. Durante o rebuild há janela de risco — perder um segundo disco no RAID 5 nesse momento = perda total.</p>
                     </div>
                 </div>
 
-                <div class="curiosity">
-                    <h4>Curiosidade Técnica 🕵️</h4>
-                    <p>RAID significa <em>Redundant Array of Independent Disks</em>. Em servidores modernos, os discos são <strong>Hot-Swap</strong>. Isso significa que, se um disco falhar em um RAID 1, 5 ou 10, o técnico pode puxar o disco quebrado e inserir um novo com o servidor ligado! A controladora automaticamente começa o "Rebuild" (reconstrução dos dados).</p>
+                <!-- PAINEL B: NÍVEIS COMPARADOS -->
+                <div class="mod-panel" id="p2b">
+                    <p>A tabela abaixo resume os trade-offs. <em>D</em> = capacidade de 1 disco; <em>N</em> = nº de discos.</p>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nível</th><th>Discos mín.</th><th>Capacidade útil</th>
+                                <th>Tolerância</th><th>Penalidade de escrita</th><th>Uso típico</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="highlight">RAID 0</td><td class="num">2</td><td class="num">N × D (100%)</td>
+                                <td>0 discos</td><td>1× (sem)</td><td>Cache, scratch, vídeo</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">RAID 1</td><td class="num">2</td><td class="num">D (50%)</td>
+                                <td>1 disco</td><td>2× (mirror)</td><td>SO, log, boot</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">RAID 5</td><td class="num">3</td><td class="num">(N−1) × D</td>
+                                <td>1 disco</td><td>4× (read-modify-write)</td><td>Arquivo geral</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">RAID 6</td><td class="num">4</td><td class="num">(N−2) × D</td>
+                                <td>2 discos</td><td>6× (P+Q parity)</td><td>Storage massivo (&gt; 1 PB)</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">RAID 10</td><td class="num">4</td><td class="num">N/2 × D</td>
+                                <td>1 por espelho</td><td>2×</td><td>Banco de dados OLTP</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">RAID 50</td><td class="num">6</td><td class="num">(N − stripes) × D</td>
+                                <td>1 por sub-array</td><td>4×</td><td>BI, ERP, vídeo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="subsection" style="margin-top: 1.5rem;">
+                        <h3>Como o RAID 5 reconstrói dados</h3>
+                        <p>A paridade é um XOR bit-a-bit entre os blocos de dados. Se A, B, C são blocos e P é a paridade:</p>
+                        <div class="formula">
+                            P = A ⊕ B ⊕ C
+                            <small>Se C for perdido: C = A ⊕ B ⊕ P (recalculado em tempo real durante leitura)</small>
+                        </div>
+                        <p>É por isso que o RAID 5 tem boa leitura mas escrita pesada: cada gravação exige ler o bloco antigo, ler a paridade antiga, calcular a nova paridade e gravar os dois — o famoso <em>RAID 5 write penalty</em>.</p>
+                    </div>
+                </div>
+
+                <!-- PAINEL C: CALCULADORA -->
+                <div class="mod-panel" id="p2c">
+                    <p>Configure os parâmetros do array e veja capacidade útil, tolerância a falhas e IOPS estimados<a class="cite" onclick="goToRef(7)" title="MORIMOTO, 2013">[7]</a>.</p>
+
+                    <div class="calc-grid">
+                        <div class="calc-inputs">
+                            <h4>Parâmetros</h4>
+                            <div class="calc-input">
+                                <label for="rc-level">Nível RAID</label>
+                                <select id="rc-level" onchange="calcRaid()">
+                                    <option value="0">RAID 0</option>
+                                    <option value="1">RAID 1</option>
+                                    <option value="5" selected>RAID 5</option>
+                                    <option value="6">RAID 6</option>
+                                    <option value="10">RAID 10</option>
+                                </select>
+                            </div>
+                            <div class="calc-input">
+                                <label for="rc-disks">Nº de discos</label>
+                                <input type="number" id="rc-disks" value="6" min="2" max="48" onchange="calcRaid()">
+                            </div>
+                            <div class="calc-input">
+                                <label for="rc-cap">Capacidade por disco (TB)</label>
+                                <input type="number" id="rc-cap" value="4" min="0.5" step="0.5" onchange="calcRaid()">
+                            </div>
+                            <div class="calc-input">
+                                <label for="rc-iops">IOPS por disco</label>
+                                <input type="number" id="rc-iops" value="180" min="50" step="10" onchange="calcRaid()">
+                                <small style="color: var(--text-muted); font-size: 0.7rem;">HDD 7,2k ≈ 100; 10k ≈ 180; SSD &gt; 50.000</small>
+                            </div>
+                        </div>
+
+                        <div class="calc-result">
+                            <h4>Resultado</h4>
+                            <div class="calc-result-row"><span>Capacidade útil</span><strong id="rc-out-cap">—</strong></div>
+                            <div class="calc-result-row"><span>Eficiência de espaço</span><strong id="rc-out-eff">—</strong></div>
+                            <div class="calc-result-row"><span>Discos toleráveis</span><strong id="rc-out-tol">—</strong></div>
+                            <div class="calc-result-row"><span>IOPS de leitura</span><strong id="rc-out-iopsr">—</strong></div>
+                            <div class="calc-result-row"><span>IOPS de escrita</span><strong id="rc-out-iopsw">—</strong></div>
+                        </div>
+                    </div>
+
+                    <div class="curiosity" style="margin-top: 2rem;">
+                        <h4>Por que IOPS de escrita despenca em RAID 5/6?</h4>
+                        <p>Cada escrita lógica em RAID 5 gera <strong>4 operações físicas</strong> (read-modify-write): lê dado antigo, lê paridade antiga, escreve dado novo, escreve paridade nova. Em RAID 6 são 6 (P + Q). Por isso bancos de dados OLTP de alta concorrência preferem RAID 10, que tem penalidade de apenas 2×.</p>
+                    </div>
+                </div>
+
+                <!-- PAINEL D: AMDAHL -->
+                <div class="mod-panel" id="p2d">
+                    <p>A Lei de Amdahl<a class="cite" onclick="goToRef(10)" title="AMDAHL, 1967">[10]</a> impõe um limite teórico ao ganho de paralelizar discos. Se uma fração <em>P</em> do tempo é paralelizável e <em>N</em> é o nº de discos:</p>
+
+                    <div class="formula">
+                        Speedup(N) = 1 / [ (1 − P) + P/N ]
+                        <small>Quando N → ∞, Speedup → 1/(1−P). A parte serial é o teto absoluto.</small>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>📄 Exemplo: servidor WWW da Aula 9</h3>
+                        <p>O Prof. Koide cita em aula<a class="cite" onclick="goToRef(17)" title="KOIDE, Aula 9">[17]</a> um servidor servindo páginas de 8 KB, com disco 10.000 rpm (seek 8 ms) e taxa de transferência de 10 MB/s. Cerca de <strong>99,3% do tempo de resposta é latência rotacional + seek</strong> (i.e., serial por disco) e apenas 0,7% é transferência paralelizável.</p>
+
+                        <p>Se <em>P</em> = 0,007 (só 0,7% é paralelizável entre discos), mesmo um RAID com <strong>infinitos</strong> discos teria speedup máximo:</p>
+                        <div class="formula" style="font-size: 1.1rem;">
+                            Speedup máx. = 1 / (1 − 0,007) ≈ <strong>1,007×</strong>
+                        </div>
+                        <p>Conclusão: para essa carga, paralelizar discos não ajuda. <strong>Trocar HDD por SSD (que ataca a parte serial)</strong> ou aumentar cache de RAM resolve. Esse é o ensinamento da lei: otimize a fração dominante, não a paralelizável.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>🧮 Simulador interativo</h3>
+                        <p>Ajuste a fração paralelizável e o número de discos:</p>
+
+                        <div class="calc-grid">
+                            <div class="calc-inputs">
+                                <h4>Parâmetros</h4>
+                                <div class="calc-input">
+                                    <label for="am-p">Fração paralelizável <em>P</em></label>
+                                    <input type="range" id="am-p" min="0" max="1" step="0.01" value="0.7" oninput="updateAmdahl()" style="width: 110px;">
+                                </div>
+                                <div class="calc-input">
+                                    <label>Valor atual</label>
+                                    <strong id="am-p-val" style="font-family: var(--font-mono); color: var(--accent-blue);">0,70</strong>
+                                </div>
+                                <div class="calc-input">
+                                    <label for="am-n">Nº de discos <em>N</em></label>
+                                    <input type="number" id="am-n" value="8" min="1" max="64" onchange="updateAmdahl()">
+                                </div>
+                            </div>
+                            <div class="calc-result">
+                                <h4>Resultado</h4>
+                                <div class="calc-result-row"><span>Speedup observado</span><strong id="am-out-speedup">—</strong></div>
+                                <div class="calc-result-row"><span>Speedup teto (N → ∞)</span><strong id="am-out-cap">—</strong></div>
+                                <div class="calc-result-row"><span>Aproveitamento</span><strong id="am-out-util">—</strong></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -594,49 +1321,154 @@
             <section id="mod3" class="module">
                 <div class="module-header">
                     <h2>Memória ECC: Detecção e Correção de Erros</h2>
-                    <p>Em servidores rodando 24/7, partículas subatômicas (como raios cósmicos) podem atingir o chip de RAM e inverter um bit (de 0 para 1 ou vice-versa). A memória ECC (Error-Correcting Code) possui um chip extra para gerar um "bit de paridade" e consertar isso em tempo real.</p>
+                    <p>Partículas subatômicas (raios cósmicos secundários, contaminação alfa de solda) podem inverter um bit de DRAM <em>sem aviso</em> — o famoso <em>soft error</em>. Em servidor 24/7, isso é estatisticamente certo<a class="cite" onclick="goToRef(11)" title="SCHROEDER et al., 2009">[11]</a>. ECC detecta e corrige em tempo real.</p>
                 </div>
 
-                <div class="analogy">
-                    💡 <strong>Analogia:</strong> É como enviar uma caixa de maçãs com uma etiqueta dizendo "Aviso: Tem 8 maçãs aqui". Se no caminho uma maçã cair, quem recebe conta 7 maçãs, lê a etiqueta (8) e percebe o erro na hora.
+                <div class="module-tabs">
+                    <button class="mod-tab active" onclick="showPanel('mod3','p3a',this)">Simulador</button>
+                    <button class="mod-tab" onclick="showPanel('mod3','p3b',this)">Como funciona (Hamming)</button>
+                    <button class="mod-tab" onclick="showPanel('mod3','p3c',this)">Soft errors no mundo real</button>
+                    <button class="mod-tab" onclick="showPanel('mod3','p3d',this)">Modalidades de proteção</button>
                 </div>
 
-                <div class="ecc-controls">
-                    <button class="btn btn-danger" onclick="simulateCosmicRay()">⚡ Disparar Raio Cósmico (Bit Flip)</button>
-                </div>
-
-                <div class="ecc-container" style="margin-top: 2rem;">
-                    
-                    <!-- RAM COMUM -->
-                    <div>
-                        <h3 style="text-align: center; color: var(--accent-red); margin-bottom: 10px;">Memória RAM Comum (Desktop)</h3>
-                        <div class="ram-stick">
-                            <div class="chips" id="chips-normal">
-                                <div class="chip">0</div><div class="chip">1</div><div class="chip">1</div><div class="chip">0</div>
-                                <div class="chip">1</div><div class="chip">0</div><div class="chip">0</div><div class="chip">1</div>
-                            </div>
-                        </div>
-                        <div id="status-normal" class="system-status" style="background: var(--bg-card);">Status: Operando Normalmente</div>
+                <!-- PAINEL A: SIMULADOR -->
+                <div class="mod-panel active" id="p3a">
+                    <div class="analogy">
+                        💡 <strong>Analogia:</strong> Enviar uma caixa de 8 maçãs com etiqueta "8 maçãs aqui". Se uma cair, quem recebe conta 7, lê a etiqueta (8) e detecta o erro. Hamming vai além: a etiqueta diz <em>qual</em> maçã caiu.
                     </div>
 
-                    <!-- RAM ECC -->
-                    <div>
-                        <h3 style="text-align: center; color: var(--accent-green); margin-bottom: 10px;">Memória ECC (Servidor)</h3>
-                        <div class="ram-stick">
-                            <div class="chips" id="chips-ecc">
-                                <div class="chip">0</div><div class="chip">1</div><div class="chip">1</div><div class="chip">0</div>
-                                <div class="chip">1</div><div class="chip">0</div><div class="chip">0</div><div class="chip">1</div>
-                                <div class="chip ecc-chip" title="Bit de Paridade">0</div>
-                            </div>
-                        </div>
-                        <div id="status-ecc" class="system-status" style="background: var(--bg-card);">Status: Operando Normalmente (Paridade Par: 4 bits '1')</div>
+                    <div class="ecc-controls">
+                        <button class="btn btn-danger" onclick="simulateCosmicRay()">⚡ Disparar Raio Cósmico (Bit Flip)</button>
                     </div>
 
+                    <div class="ecc-container" style="margin-top: 2rem;">
+                        <div>
+                            <h3 style="text-align: center; color: var(--accent-red); margin-bottom: 10px;">RAM Comum (Desktop)</h3>
+                            <div class="ram-stick">
+                                <div class="chips" id="chips-normal">
+                                    <div class="chip">0</div><div class="chip">1</div><div class="chip">1</div><div class="chip">0</div>
+                                    <div class="chip">1</div><div class="chip">0</div><div class="chip">0</div><div class="chip">1</div>
+                                </div>
+                            </div>
+                            <div id="status-normal" class="system-status" style="background: var(--bg-card);">Status: Operando normalmente</div>
+                        </div>
+
+                        <div>
+                            <h3 style="text-align: center; color: var(--accent-green); margin-bottom: 10px;">RAM ECC (Servidor)</h3>
+                            <div class="ram-stick">
+                                <div class="chips" id="chips-ecc">
+                                    <div class="chip">0</div><div class="chip">1</div><div class="chip">1</div><div class="chip">0</div>
+                                    <div class="chip">1</div><div class="chip">0</div><div class="chip">0</div><div class="chip">1</div>
+                                    <div class="chip ecc-chip" title="Bit de Paridade">0</div>
+                                </div>
+                            </div>
+                            <div id="status-ecc" class="system-status" style="background: var(--bg-card);">Status: Operando normalmente</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="curiosity">
-                    <h4>Curiosidade Técnica 🕵️</h4>
-                    <p>O Google realizou um estudo em sua frota de servidores e descobriu que ocorrem cerca de <strong>25.000 a 70.000 erros de memória por bilhão de horas de operação por Megabit</strong>. Sem memória ECC, os servidores de bancos, aviões e datacenters travariam (Kernel Panic/Blue Screen) constantemente devido a falhas invisíveis no hardware!</p>
+                <!-- PAINEL B: HAMMING -->
+                <div class="mod-panel" id="p3b">
+                    <p>A maioria das memórias ECC implementa <strong>SECDED</strong> (<em>Single Error Correction, Double Error Detection</em>), variação do código de Hamming<a class="cite" onclick="goToRef(9)" title="HAMMING, 1950">[9]</a>. Para 8 bits de dado adicionam-se <strong>4 bits de paridade</strong> nas posições de potência de 2, mais 1 bit extra para detecção dupla.</p>
+
+                    <h3 style="color: var(--accent-orange); margin-top: 1.5rem;">Layout dos 12 bits (Hamming(12,8))</h3>
+                    <div class="hamming-row">
+                        <div><div class="hbit parity">P1</div><div class="hbit-label">pos 1</div></div>
+                        <div><div class="hbit parity">P2</div><div class="hbit-label">pos 2</div></div>
+                        <div><div class="hbit">D1</div><div class="hbit-label">pos 3</div></div>
+                        <div><div class="hbit parity">P4</div><div class="hbit-label">pos 4</div></div>
+                        <div><div class="hbit">D2</div><div class="hbit-label">pos 5</div></div>
+                        <div><div class="hbit">D3</div><div class="hbit-label">pos 6</div></div>
+                        <div><div class="hbit">D4</div><div class="hbit-label">pos 7</div></div>
+                        <div><div class="hbit parity">P8</div><div class="hbit-label">pos 8</div></div>
+                        <div><div class="hbit">D5</div><div class="hbit-label">pos 9</div></div>
+                        <div><div class="hbit">D6</div><div class="hbit-label">pos 10</div></div>
+                        <div><div class="hbit">D7</div><div class="hbit-label">pos 11</div></div>
+                        <div><div class="hbit">D8</div><div class="hbit-label">pos 12</div></div>
+                    </div>
+
+                    <p>Cada bit de paridade <em>cobre</em> um subconjunto de bits, definido pelo bit correspondente na posição binária:</p>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Paridade</th><th>Cobre as posições</th><th>Em binário, cobre quando…</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="highlight">P1</td><td class="num">1, 3, 5, 7, 9, 11</td><td>bit 0 da posição = 1</td></tr>
+                            <tr><td class="highlight">P2</td><td class="num">2, 3, 6, 7, 10, 11</td><td>bit 1 da posição = 1</td></tr>
+                            <tr><td class="highlight">P4</td><td class="num">4, 5, 6, 7, 12</td><td>bit 2 da posição = 1</td></tr>
+                            <tr><td class="highlight">P8</td><td class="num">8, 9, 10, 11, 12</td><td>bit 3 da posição = 1</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="subsection">
+                        <h3>🔍 Como o circuito sabe <em>qual</em> bit virou?</h3>
+                        <p>Na leitura, recalculam-se as 4 paridades. Cada paridade discordante "vota" em um bit do <em>síndrome</em> (s3 s2 s1 s0). O valor decimal do síndrome <strong>é exatamente a posição do bit corrompido</strong>. Síndrome = 0 ⇒ sem erro.</p>
+                        <div class="formula">
+                            Ex.: síndromes = (0,1,0,1) ⇒ posição binária 0101 = 5 ⇒ <strong>D2 está corrompido</strong>
+                            <small>O hardware inverte o bit da posição 5 e entrega o dado correto à CPU.</small>
+                        </div>
+                        <p>Com o bit extra global, detecta-se ainda <strong>2 erros simultâneos</strong> (DED) — embora não consiga corrigir, ao menos a falha é sinalizada (MCE — Machine Check Exception) em vez de causar corrupção silenciosa.</p>
+                    </div>
+                </div>
+
+                <!-- PAINEL C: SOFT ERRORS NO MUNDO REAL -->
+                <div class="mod-panel" id="p3c">
+                    <p>O estudo seminal do Google em sua frota<a class="cite" onclick="goToRef(11)" title="SCHROEDER; PINHEIRO; WEBER, 2009">[11]</a> analisou bilhões de DIMMs durante 2,5 anos. Resultados que mudaram a forma de pensar memória de servidor:</p>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Métrica</th><th>Valor observado</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Erros corrigíveis (CE) por DIMM/ano</td><td class="num">~25.000 a 70.000</td></tr>
+                            <tr><td>% de DIMMs com ≥ 1 erro corrigível por ano</td><td class="num">~8%</td></tr>
+                            <tr><td>% de DIMMs com erro <em>incorrigível</em> (UE) por ano</td><td class="num">~1,3%</td></tr>
+                            <tr><td>Probabilidade UE → reboot/crash sem ECC</td><td class="num">≈ 100%</td></tr>
+                            <tr><td>Erro permanente (hard) vs transitório (soft)</td><td>~70% dos casos vinha de defeito de hardware, não raio cósmico</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="subsection">
+                        <h3>Onde os erros vêm?</h3>
+                        <ul style="margin-left: 1.5rem; line-height: 1.7;">
+                            <li><strong>Raios cósmicos secundários:</strong> nêutrons atravessam a atmosfera e ionizam o silício. Mais frequentes em altitude (servidores em Denver têm taxa &gt; nível do mar).</li>
+                            <li><strong>Contaminação alfa:</strong> traços de urânio/tório na solda emitem partículas α que invertem bits adjacentes.</li>
+                            <li><strong>Rowhammer:</strong> ataque deliberado — acessos repetidos a uma linha de DRAM induzem bit-flips em linhas vizinhas (CVE-2015-0565).</li>
+                            <li><strong>Desgaste:</strong> envelhecimento de células, especialmente em DDR4/DDR5 com densidades crescentes.</li>
+                        </ul>
+                    </div>
+
+                    <div class="curiosity">
+                        <h4>O caso "supereleitor" da Bélgica</h4>
+                        <p>Eleições municipais de Schaerbeek, 2003: o candidato Maria Vindevoghel recebeu <strong>4.096 votos extras</strong>. Investigação concluiu: um único bit flipou no bit de posição 13 (2¹² = 4096) do contador, provavelmente por raio cósmico. O sistema não tinha ECC. É um dos casos publicamente confirmados de soft error com impacto real.</p>
+                    </div>
+                </div>
+
+                <!-- PAINEL D: MODALIDADES -->
+                <div class="mod-panel" id="p3d">
+                    <p>Nem toda "memória de servidor" tem a mesma proteção. Da mais fraca à mais robusta:</p>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Tecnologia</th><th>Corrige</th><th>Detecta</th><th>Custo extra</th><th>Onde usa</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Sem proteção</td><td>—</td><td>—</td><td class="num">0%</td><td>Desktop, laptop</td></tr>
+                            <tr><td>Paridade simples</td><td>—</td><td>1 bit</td><td class="num">12,5%</td><td>Servidores antigos</td></tr>
+                            <tr><td>ECC SECDED (Hamming)</td><td>1 bit</td><td>2 bits</td><td class="num">12,5%</td><td>Servidor mainstream</td></tr>
+                            <tr><td>Chipkill / SDDC</td><td>Chip DRAM inteiro</td><td>2 chips</td><td class="num">~25%</td><td>Mainframe, HPC</td></tr>
+                            <tr><td>DDR5 On-Die ECC</td><td>1 bit interno</td><td>—</td><td class="num">0% (built-in)</td><td>DDR5 desktop/server (obrigatório)<a class="cite" onclick="goToRef(16)" title="JEDEC JESD79-5C">[16]</a></td></tr>
+                            <tr><td>DDR5 ECC + On-Die</td><td>Camada dupla</td><td>Dupla</td><td class="num">~12,5%</td><td>Servidores DDR5 modernos</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p style="margin-top: 1rem;"><strong>Atenção:</strong> DDR5 desktop tem "on-die ECC", mas <em>não é ECC verdadeiro</em>. Ele corrige falhas internas da célula antes de expor o dado, mas não protege contra erros no caminho DIMM → CPU. Só o <strong>DIMM ECC registrado (RDIMM)</strong> de servidor cobre todo o datapath.</p>
+
+                    <div class="subsection">
+                        <h3>📍 Onde a ECC fica fisicamente</h3>
+                        <p>O bit extra de paridade ocupa um chip a mais no PCB do DIMM (8 chips de dado + 1 ECC = 9 visíveis). O cálculo Hamming é feito pelo <strong>controlador de memória integrado (IMC)</strong> dentro da CPU — não pelo DIMM. Para o SO, o erro corrigido aparece como evento no <code>/var/log/mcelog</code> (Linux) ou <em>WHEA log</em> (Windows). É possível monitorar a tendência: muitos CEs num DIMM = sinal para troca preventiva antes que vire UE.</p>
+                    </div>
                 </div>
             </section>
 
@@ -644,54 +1476,157 @@
             <!-- MÓDULO 4: HIERARQUIA DE MEMÓRIA -->
             <section id="mod4" class="module">
                 <div class="module-header">
-                    <h2>Hierarquia de Memória e NUMA</h2>
-                    <p>Nenhum armazenamento é rápido, grande e barato ao mesmo tempo. Sistemas computacionais usam uma hierarquia: memórias mais próximas à CPU são ultra rápidas, mas pequenas e caras. Conforme descemos, ganha-se capacidade e perde-se velocidade.</p>
+                    <h2>Hierarquia de Memória, Cache e NUMA</h2>
+                    <p>Nenhuma memória é rápida, grande e barata ao mesmo tempo<a class="cite" onclick="goToRef(3)" title="PATTERSON; HENNESSY, 2017">[3]</a>. A arquitetura mistura camadas: registradores (1 ciclo), cache (até centenas), RAM (milhares), SSD/HDD (milhões). Otimizar essa pilha é metade do trabalho de performance em servidor.</p>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                    
-                    <!-- PIRÂMIDE -->
-                    <div>
-                        <h3 style="text-align: center; color: var(--text-muted);">Passe o mouse ou clique nas camadas</h3>
-                        <div class="pyramid-container">
-                            <div class="pyramid-layer" id="layer-l1" onmouseover="showLayerInfo('l1')">Registradores / Cache L1, L2, L3</div>
-                            <div class="pyramid-layer" id="layer-ram" onmouseover="showLayerInfo('ram')">Memória Principal (RAM ECC)</div>
-                            <div class="pyramid-layer" id="layer-ssd" onmouseover="showLayerInfo('ssd')">Armazenamento NVMe / SSD</div>
-                            <div class="pyramid-layer" id="layer-hdd" onmouseover="showLayerInfo('hdd')">Discos Mecânicos (HDD) / Fita Magnética</div>
+                <div class="module-tabs">
+                    <button class="mod-tab active" onclick="showPanel('mod4','p4a',this)">Pirâmide & Latências</button>
+                    <button class="mod-tab" onclick="showPanel('mod4','p4b',this)">Cache na prática</button>
+                    <button class="mod-tab" onclick="showPanel('mod4','p4c',this)">NUMA & Coerência</button>
+                    <button class="mod-tab" onclick="showPanel('mod4','p4d',this)">Paginação & TLB</button>
+                </div>
+
+                <!-- PAINEL A: PIRÂMIDE -->
+                <div class="mod-panel active" id="p4a">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div>
+                            <p style="text-align: center; color: var(--text-muted); margin-bottom: 1rem; font-size: 0.85rem;">Passe o mouse nas camadas</p>
+                            <div class="pyramid-container">
+                                <div class="pyramid-layer" id="layer-l1" onmouseover="showLayerInfo('l1')">Registradores + Cache L1/L2/L3</div>
+                                <div class="pyramid-layer" id="layer-ram" onmouseover="showLayerInfo('ram')">RAM Principal (ECC em servidor)</div>
+                                <div class="pyramid-layer" id="layer-ssd" onmouseover="showLayerInfo('ssd')">SSD NVMe / SATA</div>
+                                <div class="pyramid-layer" id="layer-hdd" onmouseover="showLayerInfo('hdd')">HDD mecânico / Fita magnética</div>
+                            </div>
+                            <div style="display:flex; justify-content: space-between; font-size:0.78rem; margin-top:8px; color:var(--text-muted);">
+                                <span>↑ Mais rápido / caro</span>
+                                <span>↓ Mais lento / capacidade</span>
+                            </div>
                         </div>
-                        <div style="display:flex; justify-content: space-between; font-size:0.8rem; margin-top:5px; color:var(--text-muted);">
-                            <span>↑ Mais Rápido / Mais Caro</span>
-                            <span>↓ Mais Lento / Mais Capacidade</span>
+
+                        <div class="layer-info" id="layer-info-panel" style="display: block;">
+                            <h3 id="info-title" style="color: var(--accent-blue); margin-bottom:10px;">Interaja com a Pirâmide</h3>
+                            <p id="info-desc">Explore os níveis para entender como latência e custo variam.</p>
+                            <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-muted);" id="info-stats"></ul>
                         </div>
                     </div>
 
-                    <!-- INFOS -->
-                    <div class="layer-info" id="layer-info-panel" style="display: block;">
-                        <h3 id="info-title" style="color: var(--accent-blue); margin-bottom:10px;">Interaja com a Pirâmide</h3>
-                        <p id="info-desc">Explore os níveis para entender como a latência e o custo variam na arquitetura de computadores.</p>
-                        <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-muted);" id="info-stats"></ul>
+                    <div class="subsection">
+                        <h3>⏱️ Latências em escala humana</h3>
+                        <p>Se 1 ciclo de CPU (~0,3 ns @ 3 GHz) fosse 1 segundo, as outras latências seriam:</p>
+                        <table class="data-table">
+                            <thead><tr><th>Operação</th><th>Latência real</th><th>Escala humana</th></tr></thead>
+                            <tbody>
+                                <tr><td>Registrador</td><td class="num">0,3 ns</td><td>1 segundo</td></tr>
+                                <tr><td>Cache L1</td><td class="num">~1 ns</td><td>3 segundos</td></tr>
+                                <tr><td>Cache L2</td><td class="num">~4 ns</td><td>13 segundos</td></tr>
+                                <tr><td>Cache L3</td><td class="num">~12 ns</td><td>40 segundos</td></tr>
+                                <tr><td>RAM (local)</td><td class="num">~80 ns</td><td>~4 minutos</td></tr>
+                                <tr><td>RAM (NUMA remoto)</td><td class="num">~140 ns</td><td>~8 minutos</td></tr>
+                                <tr><td>SSD NVMe</td><td class="num">~50 µs</td><td>~2 dias</td></tr>
+                                <tr><td>HDD 7,2k</td><td class="num">~10 ms</td><td>~1 ano</td></tr>
+                                <tr><td>Rede WAN (BR↔EUA)</td><td class="num">~150 ms</td><td>~15 anos</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
-                <!-- NUMA CONCEPT -->
-                <div style="margin-top: 3rem;">
-                    <h3 style="color: var(--accent-orange); margin-bottom: 10px;">O que é NUMA (Non-Uniform Memory Access)?</h3>
-                    <p>Servidores modernos possuem 2 ou 4 processadores (CPUs) físicos na mesma placa. Se todos acessassem a RAM por um único caminho, haveria gargalo. Com o NUMA, <strong>cada CPU possui seus próprios pentes de RAM locais</strong>. Ele pode acessar a RAM do "vizinho", mas será mais lento.</p>
-                    
+                <!-- PAINEL B: CACHE NA PRÁTICA -->
+                <div class="mod-panel" id="p4b">
+                    <p>Caches modernos são <strong>set-associativos</strong>: a memória é dividida em conjuntos (<em>sets</em>) e cada endereço pode ocupar qualquer "caminho" (<em>way</em>) dentro de seu set. Exemplo de um Intel Core i7-5960X (Haswell-E, 8 cores)<a class="cite" onclick="goToRef(17)" title="KOIDE, Aula 10">[17]</a>:</p>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Nível</th><th>Tamanho</th><th>Associatividade</th><th>Linha</th><th>Latência</th><th>Escopo</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="highlight">L1 (dados)</td><td class="num">32 KB</td><td>8-way</td><td>64 B</td><td class="num">4 ciclos</td><td>Por core</td></tr>
+                            <tr><td class="highlight">L1 (instr.)</td><td class="num">32 KB</td><td>8-way</td><td>64 B</td><td class="num">4 ciclos</td><td>Por core</td></tr>
+                            <tr><td class="highlight">L2</td><td class="num">256 KB</td><td>8-way</td><td>64 B</td><td class="num">12 ciclos</td><td>Por core</td></tr>
+                            <tr><td class="highlight">L3 (LLC)</td><td class="num">20 MB</td><td>20-way</td><td>64 B</td><td class="num">38 ciclos</td><td>Compartilhado entre 8 cores</td></tr>
+                        </tbody>
+                    </table>
+
+                    <p style="margin-top: 1rem;">A linha de cache de <strong>64 bytes</strong> é a unidade indivisível. Ler 1 byte traz 64 ao redor (<em>spatial locality</em>). Reusar o mesmo dado em seguida (<em>temporal locality</em>) é o que mantém L1 com hit-rate &gt; 95% em programas típicos.</p>
+
+                    <div class="subsection">
+                        <h3>🎯 Simulador de acesso</h3>
+                        <p>Simule um acesso à memória — a cadeia hit/miss reflete uma distribuição típica (L1: 92%, L2: 6%, L3: 1,5%, RAM: 0,5%).</p>
+                        <button class="btn" onclick="simulateCacheAccess()" style="margin-bottom: 1rem;">▶ Simular acesso</button>
+
+                        <div class="cache-trace" id="cache-trace">
+                            <div class="cache-level" data-cl="l1"><div class="cl-name">L1 (4 ciclos)</div><div class="cl-stats">Mais quente; 32 KB por core</div><div class="cl-verdict">—</div></div>
+                            <div class="cache-level" data-cl="l2"><div class="cl-name">L2 (12 ciclos)</div><div class="cl-stats">256 KB por core</div><div class="cl-verdict">—</div></div>
+                            <div class="cache-level" data-cl="l3"><div class="cl-name">L3 (38 ciclos)</div><div class="cl-stats">20 MB compartilhada</div><div class="cl-verdict">—</div></div>
+                            <div class="cache-level" data-cl="ram"><div class="cl-name">RAM (~250 ciclos)</div><div class="cl-stats">Centenas de GB</div><div class="cl-verdict">—</div></div>
+                        </div>
+
+                        <div id="cache-summary" style="text-align: center; margin-top: 0.8rem; color: var(--text-muted); font-size: 0.9rem;">Clique em "Simular" para ver onde o dado foi encontrado.</div>
+                    </div>
+                </div>
+
+                <!-- PAINEL C: NUMA -->
+                <div class="mod-panel" id="p4c">
+                    <p>Servidores multi-socket têm RAM <em>local</em> a cada CPU. Acessar a RAM do socket vizinho passa pelo link UPI/Infinity Fabric — sempre mais caro. É o NUMA (<em>Non-Uniform Memory Access</em>)<a class="cite" onclick="goToRef(1)" title="STALLINGS, 2017">[1]</a>.</p>
+
                     <div class="numa-box">
                         <div class="cpu-node">
-                            <div style="border-color: #38bdf8; background: rgba(56, 189, 248, 0.1);">CPU 1 (Node 0)</div>
-                            <div>RAM Local 1<br><small>Acesso Rápido</small></div>
+                            <div style="border-color: #38bdf8; background: rgba(56, 189, 248, 0.1);">CPU 0 (Node 0)</div>
+                            <div>RAM 0<br><small>local: ~80 ns</small></div>
                         </div>
-                        <div style="display:flex; align-items:center; color: var(--accent-orange); font-size: 2rem;">⟷<br><small style="font-size:0.8rem;">QPI/UPI Link</small></div>
+                        <div style="display:flex; align-items:center; color: var(--accent-orange); font-size: 2rem;">⟷<br><small style="font-size:0.75rem;">UPI / Infinity Fabric<br>~60 ns extra</small></div>
                         <div class="cpu-node">
-                            <div style="border-color: #10b981; background: rgba(16, 185, 129, 0.1);">CPU 2 (Node 1)</div>
-                            <div>RAM Local 2<br><small>Acesso Rápido</small></div>
+                            <div style="border-color: #10b981; background: rgba(16, 185, 129, 0.1);">CPU 1 (Node 1)</div>
+                            <div>RAM 1<br><small>remoto: ~140 ns</small></div>
                         </div>
                     </div>
-                    <p style="text-align: center; font-size: 0.9rem; margin-top: 10px; color: var(--text-muted);">Se a CPU 1 precisar de um dado que está na RAM 2, o acesso é indireto (latência maior). O SO deve otimizar isso!</p>
+                    <p style="text-align: center; font-size: 0.85rem; margin-top: 0.5rem; color: var(--text-muted);">Diferença de ~75% na latência ⇒ scheduler/SO deve manter threads próximas à RAM que tocam (<em>NUMA affinity</em>).</p>
+
+                    <div class="subsection">
+                        <h3>🔄 Coerência de cache: o protocolo MESI</h3>
+                        <p>Quando 8 cores compartilham a L3 e 2 sockets compartilham a RAM, é preciso garantir que todos vejam a <em>mesma</em> versão de cada linha. O protocolo MESI define 4 estados por linha de cache:</p>
+                        <table class="data-table">
+                            <thead><tr><th>Estado</th><th>Significado</th><th>Pode ler?</th><th>Pode escrever?</th></tr></thead>
+                            <tbody>
+                                <tr><td class="highlight">M — Modified</td><td>Linha alterada, só este core tem</td><td>Sim</td><td>Sim, sem invalidar</td></tr>
+                                <tr><td class="highlight">E — Exclusive</td><td>Limpa, só este core tem</td><td>Sim</td><td>Sim, vira M</td></tr>
+                                <tr><td class="highlight">S — Shared</td><td>Limpa, vários cores têm</td><td>Sim</td><td>Não — precisa invalidar os outros</td></tr>
+                                <tr><td class="highlight">I — Invalid</td><td>Linha não vale (foi invalidada)</td><td>Não — gera miss</td><td>Não</td></tr>
+                            </tbody>
+                        </table>
+                        <p style="margin-top: 0.8rem;">Intel acrescenta o estado <strong>F (Forward)</strong> em MESIF: numa linha Shared, um único core fica responsável por servir cópias aos outros, reduzindo tráfego no barramento. AMD usa <strong>MOESI</strong>, adicionando <em>Owned</em> para suportar escritas sem write-back imediato à RAM.</p>
+                    </div>
                 </div>
 
+                <!-- PAINEL D: PAGINAÇÃO E TLB -->
+                <div class="mod-panel" id="p4d">
+                    <p>O SO entrega à aplicação um espaço de endereços <em>virtual</em>. A MMU traduz cada acesso para o endereço <em>físico</em> via tabelas de página — operação cara, então cacheada na <strong>TLB</strong> (Translation Lookaside Buffer)<a class="cite" onclick="goToRef(4)" title="SILBERSCHATZ, 2015">[4]</a>.</p>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Granularidade</th><th>Tamanho</th><th>Vantagem</th><th>Desvantagem</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="highlight">Página padrão</td><td class="num">4 KB</td><td>Granularidade fina, baixo desperdício</td><td>Tabela de página enorme, TLB satura</td></tr>
+                            <tr><td class="highlight">Huge page</td><td class="num">2 MB</td><td>1 entrada TLB cobre 512× mais memória</td><td>Fragmentação interna</td></tr>
+                            <tr><td class="highlight">Gigante page</td><td class="num">1 GB</td><td>Datacenters in-memory (Redis, SAP HANA)</td><td>Inflexível, exige reserva no boot</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="subsection">
+                        <h3>📐 Custo de um miss na TLB</h3>
+                        <p>x86-64 usa paginação em <strong>4 níveis</strong> (PML4 → PDPT → PD → PT). Cada miss na TLB exige até 4 acessos à RAM para fazer a tradução — o famoso <em>page walk</em>. Por isso aplicações HPC e bancos de dados configuram <em>transparent huge pages</em> (THP) ou <em>libhugetlbfs</em>.</p>
+                        <div class="formula">
+                            t_acesso = t_TLB + (taxa_miss × t_pagewalk)
+                            <small>Com THP, taxa_miss cai &gt; 90% em workloads de grande footprint.</small>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>🔗 TLB + Cache + NUMA juntos</h3>
+                        <p>O hardware acessa TLB e L1 em paralelo (VIPT — Virtually Indexed, Physically Tagged) para esconder a latência da tradução. Em servidor NUMA, a TLB também rastreia qual <em>nó</em> hospeda cada página — alocação errada (página em RAM remota) custa &gt; 60 ns por acesso e quase nenhum scheduler genérico corrige isso sem hinting do aplicativo (<code>numactl --membind</code>, <code>libnuma</code>).</p>
+                    </div>
+                </div>
             </section>
 
 
@@ -699,46 +1634,356 @@
             <section id="mod5" class="module">
                 <div class="module-header">
                     <h2>Virtualização de Hardware</h2>
-                    <p>Servidores físicos costumavam rodar 1 sistema operacional e ficar com 80% dos recursos ociosos. A virtualização utiliza um software chamado <strong>Hypervisor</strong> (ex: VMware ESXi, Proxmox, Hyper-V) para fatiar o servidor físico em dezenas de "Máquinas Virtuais" (VMs) independentes.</p>
+                    <p>O critério de Popek-Goldberg<a class="cite" onclick="goToRef(15)" title="POPEK; GOLDBERG, 1974">[15]</a> define formalmente o que é "virtualizar": cada instrução sensível deve ser <em>privilegiada</em>. Servidores físicos antes ficavam 80% ociosos rodando 1 SO. Hoje um host fatia-se em dezenas de VMs ou centenas de contêineres<a class="cite" onclick="goToRef(4)" title="SILBERSCHATZ, 2015">[4]</a>.</p>
                 </div>
 
-                <div class="virt-container">
-                    
-                    <div class="hw-layer">
-                        <h3 style="color: var(--accent-blue);">Servidor Físico (Host)</h3>
-                        <div style="display: flex; gap: 1rem; margin-top: 10px;">
-                            <div style="flex: 1; text-align: left;">
-                                <small>CPU (32 Cores)</small>
-                                <div class="resource-bar"><div id="res-cpu" class="resource-fill" style="width: 0%;"></div></div>
+                <div class="module-tabs">
+                    <button class="mod-tab active" onclick="showPanel('mod5','p5a',this)">Simulador</button>
+                    <button class="mod-tab" onclick="showPanel('mod5','p5b',this)">Tipo 1 vs Tipo 2</button>
+                    <button class="mod-tab" onclick="showPanel('mod5','p5c',this)">VM vs Contêiner</button>
+                    <button class="mod-tab" onclick="showPanel('mod5','p5d',this)">Kernels & Escalonador</button>
+                </div>
+
+                <!-- PAINEL A: SIMULADOR -->
+                <div class="mod-panel active" id="p5a">
+                    <div class="virt-container">
+                        <div class="hw-layer">
+                            <h3 style="color: var(--accent-blue);">Servidor Físico (Host)</h3>
+                            <div style="display: flex; gap: 1rem; margin-top: 10px;">
+                                <div style="flex: 1; text-align: left;">
+                                    <small>CPU (32 cores físicos)</small>
+                                    <div class="resource-bar"><div id="res-cpu" class="resource-fill" style="width: 0%;"></div></div>
+                                </div>
+                                <div style="flex: 1; text-align: left;">
+                                    <small>RAM (128 GB ECC)</small>
+                                    <div class="resource-bar"><div id="res-ram" class="resource-fill" style="width: 0%;"></div></div>
+                                </div>
                             </div>
-                            <div style="flex: 1; text-align: left;">
-                                <small>RAM (128 GB)</small>
-                                <div class="resource-bar"><div id="res-ram" class="resource-fill" style="width: 0%;"></div></div>
+                            <div id="host-status" style="margin-top: 10px; font-weight: bold; color: var(--text-muted);">Uso: 0%</div>
+                        </div>
+
+                        <div class="hyp-layer">Camada do Hypervisor (abstração de CPU, memória, E/S)</div>
+
+                        <div style="margin-bottom: 1rem;">
+                            <button class="btn" onclick="addVM('Web Server', 4, 8)">+ Web Server (4/8)</button>
+                            <button class="btn" onclick="addVM('Banco de Dados', 8, 32)">+ Banco de Dados (8/32)</button>
+                            <button class="btn" onclick="addVM('Firewall', 2, 4)">+ Firewall (2/4)</button>
+                            <span id="vm-error" style="color: var(--accent-red); margin-left: 10px; font-weight: bold;"></span>
+                        </div>
+
+                        <div class="vm-grid" id="vm-container">
+                            <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); align-self: center;" id="empty-vm-msg">Nenhuma VM criada. O servidor físico está ocioso.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAINEL B: TIPO 1 VS TIPO 2 -->
+                <div class="mod-panel" id="p5b">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Característica</th><th>Tipo 1 — Bare Metal</th><th>Tipo 2 — Hosted</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Roda sobre</td><td class="highlight">Hardware direto (é o SO)</td><td class="highlight">SO hospedeiro (Win/Linux/macOS)</td></tr>
+                            <tr><td>Performance</td><td>Quase nativa (~98%)</td><td>~80–90% com overhead do host</td></tr>
+                            <tr><td>Caso de uso</td><td>Datacenter, produção</td><td>Desenvolvimento, lab</td></tr>
+                            <tr><td>Exemplos</td><td>VMware ESXi, Proxmox VE, KVM, Hyper-V Server, Citrix XenServer</td><td>VirtualBox<a class="cite" onclick="goToRef(17)" title="KOIDE, Aula 12">[17]</a>, VMware Workstation, Parallels</td></tr>
+                            <tr><td>Acesso ao Ring 0</td><td>Direto</td><td>Via SO hospedeiro</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="subsection">
+                        <h3>🛡️ Anéis de Proteção e o "Ring -1"</h3>
+                        <p>x86 define 4 anéis de privilégio. SOs usam o Ring 0 (kernel) e Ring 3 (usuário). Ring 1 e 2 ficaram historicamente sem uso. O problema: como o hypervisor roda <em>acima</em> do SO da VM, precisaria de um anel "mais interno" que o Ring 0 — daí Intel VT-x e AMD-V introduziram o <strong>Ring −1</strong> (também chamado <em>VMX root mode</em>)<a class="cite" onclick="goToRef(5)" title="RUSSINOVICH, 2017">[5]</a>.</p>
+
+                        <div class="rings">
+                            <div class="ring ring-3">Ring 3 — Aplicações</div>
+                            <div class="ring ring-2"></div>
+                            <div class="ring ring-1"></div>
+                            <div class="ring ring-0">Ring 0 — Kernel</div>
+                            <div class="ring ring-neg">−1</div>
+                        </div>
+
+                        <p>Sem VT-x/AMD-V, técnicas de <em>binary translation</em> (VMware até 2006) ou <em>paravirtualização</em> (Xen) eram necessárias. Hoje qualquer CPU de servidor traz extensões em hardware: VMCS (Intel) ou VMCB (AMD), tradução de endereços por EPT/NPT, e instruções como <code>VMENTER</code>/<code>VMEXIT</code> para chavear contexto.</p>
+                    </div>
+
+                    <div class="curiosity">
+                        <h4>WSL 2 — virtualização "leve"</h4>
+                        <p>O Windows Subsystem for Linux 2 não é tradução de syscalls (como WSL 1 era); é um <strong>kernel Linux real</strong> rodando em uma VM utility leve gerenciada pelo Hyper-V<a class="cite" onclick="goToRef(17)" title="KOIDE, Aula 12">[17]</a>. Boot quase instantâneo, integração com o sistema de arquivos do Windows via 9P, e desempenho próximo do nativo — virtualização Tipo 1 invisível ao usuário.</p>
+                    </div>
+                </div>
+
+                <!-- PAINEL C: VM vs CONTÊINER -->
+                <div class="mod-panel" id="p5c">
+                    <p>Contêineres usam recursos do <em>próprio kernel</em> Linux (<strong>namespaces</strong> isolam processo/rede/PID; <strong>cgroups</strong> limitam CPU/RAM/IO). Não há kernel virtualizado, então um contêiner é tão leve quanto um processo<a class="cite" onclick="goToRef(6)" title="BOVET; CESATI, 2005">[6]</a>.</p>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Atributo</th><th>Máquina Virtual (VM)</th><th>Contêiner</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Granularidade</td><td>SO inteiro (kernel + userspace)</td><td>Processo + dependências</td></tr>
+                            <tr><td>Boot time</td><td class="num">~30–60 s</td><td class="num">~50–200 ms</td></tr>
+                            <tr><td>Footprint</td><td class="num">GBs (imagem + kernel)</td><td class="num">MBs (só userland)</td></tr>
+                            <tr><td>Densidade típica</td><td>~10–50 por host</td><td>~500–2.000 por host</td></tr>
+                            <tr><td>Isolamento</td><td>Forte (hardware-assisted)</td><td>Moderado (mesmo kernel)</td></tr>
+                            <tr><td>Kernels diferentes?</td><td>Sim (Win + Linux + BSD)</td><td>Não (só mesma família que o host)</td></tr>
+                            <tr><td>Ecossistema</td><td>VMware, KVM, Hyper-V</td><td>Docker, Podman, containerd, Kubernetes</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="subsection">
+                        <h3>🧬 Anatomia de um contêiner</h3>
+                        <p>Um <em>container</em> é um conjunto de namespaces + cgroups + visão de filesystem (overlay) aplicados a um processo. Não há "container" como entidade do kernel — é apenas <strong>composição</strong> desses recursos:</p>
+                        <div class="code-block">
+<span class="com"># Linux: criar um "container" manualmente sem Docker</span>
+<span class="kw">unshare</span> --pid --net --mount --uts --ipc \
+        --fork --mount-proc /bin/bash
+<span class="com"># 6 namespaces ativos. Adicione cgroup para limitar CPU/RAM:</span>
+<span class="kw">echo</span> <span class="st">"50000 100000"</span> &gt; /sys/fs/cgroup/meu_cg/cpu.max
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAINEL D: KERNELS E ESCALONADOR -->
+                <div class="mod-panel" id="p5d">
+                    <p>O kernel é o coração do servidor. Duas filosofias dominam o mercado<a class="cite" onclick="goToRef(5)" title="RUSSINOVICH, 2017">[5]</a><a class="cite" onclick="goToRef(6)" title="BOVET; CESATI, 2005">[6]</a>:</p>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Aspecto</th><th>Windows NT (Híbrido)</th><th>Linux (Monolítico Modular)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Arquitetura</td><td>Microkernel-like + Executive em Ring 0</td><td>Monolítico, mas com módulos carregáveis (LKM)</td></tr>
+                            <tr><td>Componentes-chave</td><td>HAL, ntoskrnl.exe, Object Manager, IRP</td><td>VFS, scheduler, mm/, drivers em /lib/modules</td></tr>
+                            <tr><td>Escalonador</td><td>MLFQ baseado em Quantum + prioridades 0–31</td><td>CFS — Completely Fair Scheduler (árvore rubro-negra)</td></tr>
+                            <tr><td>Threads/Processos</td><td>EPROCESS / ETHREAD</td><td><code>task_struct</code> via <code>clone()</code> (LWP)</td></tr>
+                            <tr><td>Memória</td><td>Pagefile.sys, Working Set</td><td>Buddy System + Slab Allocator, 4 KB pages</td></tr>
+                            <tr><td>Filesystem</td><td>NTFS via I/O Manager + IRPs</td><td>VFS abstrai ext4, XFS, Btrfs, ZFS</td></tr>
+                            <tr><td>Mercado de servidor</td><td>~25% (AD, Exchange, MSSQL)</td><td>~75% (web, cloud, HPC, container)</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="subsection">
+                        <h3>🌳 CFS — o escalonador do Linux</h3>
+                        <p>O CFS mantém todas as tarefas em uma <strong>árvore rubro-negra</strong> ordenada por <code>vruntime</code> (tempo virtual acumulado pesado pela prioridade <em>nice</em>). A cada decisão de scheduling, escolhe a tarefa <em>mais à esquerda</em> da árvore — quem rodou menos<a class="cite" onclick="goToRef(6)" title="BOVET; CESATI, 2005">[6]</a>.</p>
+
+                        <div class="rb-tree">
+                            <div class="rb-row"><div class="rb-node black current">12 ms ⭐</div></div>
+                            <div class="rb-row">
+                                <div class="rb-node red">15 ms</div>
+                                <div class="rb-node red">28 ms</div>
+                            </div>
+                            <div class="rb-row">
+                                <div class="rb-node black">20 ms</div>
+                                <div class="rb-node black">31 ms</div>
+                                <div class="rb-node black">45 ms</div>
+                                <div class="rb-node black">50 ms</div>
                             </div>
                         </div>
-                        <div id="host-status" style="margin-top: 10px; font-weight: bold; color: var(--text-muted);">Uso: 0%</div>
+                        <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">vruntime de cada tarefa. CFS pega o menor (12 ms) — esse vai rodar próximo.</p>
+
+                        <p>Complexidade do CFS: <code>O(log n)</code> para inserção e remoção, contra <code>O(1)</code> do escalonador anterior — mas com latência mais previsível e melhor justiça em servidores multi-core. O parâmetro <code>nice</code> (-20 a +19) ajusta o "peso" no cálculo do vruntime.</p>
                     </div>
+                </div>
+            </section>
 
-                    <div class="hyp-layer">Camada do Hypervisor (Abstração e Divisão de Recursos)</div>
 
-                    <div style="margin-bottom: 1rem;">
-                        <button class="btn" onclick="addVM('Web Server', 4, 8)">+ Criar Servidor Web (4 CPU, 8GB)</button>
-                        <button class="btn" onclick="addVM('Banco de Dados', 8, 32)">+ Criar Banco de Dados (8 CPU, 32GB)</button>
-                        <button class="btn" onclick="addVM('Firewall', 2, 4)">+ Criar Firewall (2 CPU, 4GB)</button>
-                        <span id="vm-error" style="color: var(--accent-red); margin-left: 10px; font-weight: bold;"></span>
-                    </div>
-
-                    <div class="vm-grid" id="vm-container">
-                        <!-- VMs injectadas aqui -->
-                        <div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); align-self: center;" id="empty-vm-msg">Nenhuma VM criada. O servidor físico está ocioso.</div>
-                    </div>
-
+            <!-- MÓDULO 6: STACK COMPLETO -->
+            <section id="mod6" class="module">
+                <div class="module-header">
+                    <h2>Stack Completo do Servidor</h2>
+                    <p>Os cinco módulos anteriores não são pilares isolados — são <em>camadas</em>. Esta visão integra tudo: do gabinete físico até a aplicação web servindo o usuário final. Clique em cada camada para explorar.</p>
                 </div>
 
-                <div class="curiosity">
-                    <h4>Curiosidade Técnica 🕵️</h4>
-                    <p>Existem dois tipos de Hypervisores. O <strong>Type 2</strong> é o que você usa no desktop (VirtualBox), que roda <em>em cima</em> do Windows. Em servidores reais usamos o <strong>Type 1 (Bare Metal)</strong>, onde o hypervisor é o próprio sistema operacional raiz instalado direto no hardware, garantindo muito mais performance e acesso direto à CPU (sem intermediários).</p>
+                <div class="stack-container">
+                    <div class="stack-tower">
+                        <div class="stack-layer active" onclick="showStackDetail('app', this)">
+                            <h4>① Aplicação</h4>
+                            <small>Nginx, PostgreSQL, microsserviços, jobs cron</small>
+                        </div>
+                        <div class="stack-layer" onclick="showStackDetail('runtime', this)">
+                            <h4>② Runtime / Contêiner</h4>
+                            <small>Docker, containerd, Kubernetes (pods)</small>
+                        </div>
+                        <div class="stack-layer" onclick="showStackDetail('vm', this)">
+                            <h4>③ Máquina Virtual</h4>
+                            <small>SO convidado: Ubuntu / RHEL / Win Server</small>
+                        </div>
+                        <div class="stack-layer" onclick="showStackDetail('hyp', this)">
+                            <h4>④ Hypervisor (Tipo 1)</h4>
+                            <small>VMware ESXi, KVM, Proxmox VE, Hyper-V</small>
+                        </div>
+                        <div class="stack-layer" onclick="showStackDetail('cpu', this)">
+                            <h4>⑤ CPU (Multi-Socket, NUMA)</h4>
+                            <small>Xeon / EPYC, UPI / Infinity Fabric, MESIF</small>
+                        </div>
+                        <div class="stack-layer" onclick="showStackDetail('mem', this)">
+                            <h4>⑥ Memória ECC (NUMA-aware)</h4>
+                            <small>DDR5 RDIMM, Hamming SECDED, on-die ECC</small>
+                        </div>
+                        <div class="stack-layer" onclick="showStackDetail('stor', this)">
+                            <h4>⑦ Storage (RAID + hot-swap)</h4>
+                            <small>NVMe U.3 + HBA, RAID 10/6, replica off-site</small>
+                        </div>
+                        <div class="stack-layer" onclick="showStackDetail('net', this)">
+                            <h4>⑧ Rede (10/100 GbE)</h4>
+                            <small>NICs redundantes, fibra LC, LACP, SR-IOV</small>
+                        </div>
+                        <div class="stack-layer" onclick="showStackDetail('phy', this)">
+                            <h4>⑨ Infraestrutura física</h4>
+                            <small>Rack 42U, PSU N+1, BMC iDRAC/iLO, refrigeração</small>
+                        </div>
+                    </div>
+
+                    <div class="stack-detail" id="stack-detail">
+                        <h3>① Aplicação</h3>
+                        <p>O topo da pilha — o que entrega valor ao usuário final. Tipicamente um conjunto de processos:</p>
+                        <ul>
+                            <li><strong>Servidor web:</strong> Nginx, Apache, IIS — responde HTTP.</li>
+                            <li><strong>Aplicação:</strong> Node, Java, .NET, Python — lógica de negócio.</li>
+                            <li><strong>Banco de dados:</strong> PostgreSQL, MySQL, MongoDB, Redis.</li>
+                            <li><strong>Mensageria/cache:</strong> Kafka, RabbitMQ, Memcached.</li>
+                        </ul>
+                        <p>Para cada requisição, esse processo aciona <em>todas</em> as camadas abaixo: lê dados do disco (⑦), aloca buffers em RAM (⑥), executa em vCPUs (⑤), passa pelo hypervisor (④), entrega via rede (⑧). Otimizar performance significa entender essa cadeia inteira.</p>
+                    </div>
                 </div>
+
+                <div class="curiosity" style="margin-top: 2rem;">
+                    <h4>O efeito cascata de uma só requisição HTTP</h4>
+                    <p>Uma única requisição "GET /produto/123" num e-commerce moderno típico atravessa: load balancer (⑧) → ingress controller no pod K8s (②) → container app (②) → query SQL no DB pod (②) → driver NUMA-aware (⑥) → leitura de página em SSD NVMe via RAID controller (⑦) → ECC valida o byte que voltou (⑥) → resposta JSON volta toda a pilha em ~10 ms. <strong>Cada camada custou microsegundos.</strong></p>
+                </div>
+            </section>
+
+
+            <!-- MÓDULO REFERÊNCIAS -->
+            <section id="modRef" class="module">
+                <div class="module-header">
+                    <h2>📚 Referências Bibliográficas</h2>
+                    <p>Citações conforme <strong>ABNT NBR 6023:2018</strong>. As referências combinam livros-texto da disciplina, artigos seminais (Hamming, Amdahl), white-papers da indústria (Intel, NVIDIA) e o material de aula do Prof. Rubem Koide. Clique em qualquer <a class="cite" style="vertical-align: baseline; font-size: 0.85rem;">[n]</a> ao longo do infográfico para ser trazido até a entrada correspondente.</p>
+                </div>
+
+                <ol class="ref-list">
+                    <li class="ref-item" id="ref-1">
+                        <div class="ref-number">[1]</div>
+                        <div class="ref-body">
+                            STALLINGS, William. <strong>Arquitetura e organização de computadores</strong>. 10. ed. São Paulo: Pearson, 2017.
+                            <span class="ref-type">Livro</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-2">
+                        <div class="ref-number">[2]</div>
+                        <div class="ref-body">
+                            TANENBAUM, Andrew S.; AUSTIN, Todd. <strong>Organização estruturada de computadores</strong>. 6. ed. São Paulo: Pearson, 2013.
+                            <span class="ref-type">Livro</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-3">
+                        <div class="ref-number">[3]</div>
+                        <div class="ref-body">
+                            PATTERSON, David A.; HENNESSY, John L. <strong>Organização e projeto de computadores: a interface hardware/software</strong>. 5. ed. Rio de Janeiro: Elsevier, 2017.
+                            <span class="ref-type">Livro</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-4">
+                        <div class="ref-number">[4]</div>
+                        <div class="ref-body">
+                            SILBERSCHATZ, Abraham; GALVIN, Peter B.; GAGNE, Greg. <strong>Fundamentos de sistemas operacionais</strong>. 9. ed. Rio de Janeiro: LTC, 2015.
+                            <span class="ref-type">Livro</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-5">
+                        <div class="ref-number">[5]</div>
+                        <div class="ref-body">
+                            RUSSINOVICH, Mark E.; SOLOMON, David A.; IONESCU, Alex. <strong>Windows Internals, Part 1</strong>. 7. ed. Redmond: Microsoft Press, 2017.
+                            <span class="ref-type">Livro</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-6">
+                        <div class="ref-number">[6]</div>
+                        <div class="ref-body">
+                            BOVET, Daniel P.; CESATI, Marco. <strong>Understanding the Linux Kernel</strong>. 3. ed. Sebastopol: O'Reilly, 2005.
+                            <span class="ref-type">Livro</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-7">
+                        <div class="ref-number">[7]</div>
+                        <div class="ref-body">
+                            MORIMOTO, Carlos E. <strong>Hardware II: o guia definitivo</strong>. Florianópolis: Sul Editores, 2013.
+                            <span class="ref-type">Livro</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-8">
+                        <div class="ref-number">[8]</div>
+                        <div class="ref-body">
+                            TORRES, Gabriel. <strong>Montagem de micros</strong>. 2. ed. Rio de Janeiro: Novaterra, 2013.
+                            <span class="ref-type">Livro</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-9">
+                        <div class="ref-number">[9]</div>
+                        <div class="ref-body">
+                            HAMMING, Richard W. Error detecting and error correcting codes. <strong>Bell System Technical Journal</strong>, v. 29, n. 2, p. 147–160, abr. 1950. DOI: 10.1002/j.1538-7305.1950.tb00463.x.
+                            <span class="ref-type">Artigo</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-10">
+                        <div class="ref-number">[10]</div>
+                        <div class="ref-body">
+                            AMDAHL, Gene M. Validity of the single processor approach to achieving large scale computing capabilities. In: <strong>AFIPS Conference Proceedings</strong>, v. 30, p. 483–485, 1967.
+                            <span class="ref-type">Artigo</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-11">
+                        <div class="ref-number">[11]</div>
+                        <div class="ref-body">
+                            SCHROEDER, Bianca; PINHEIRO, Eduardo; WEBER, Wolf-Dietrich. DRAM errors in the wild: a large-scale field study. <strong>ACM SIGMETRICS Performance Evaluation Review</strong>, v. 37, n. 1, p. 193–204, 2009.
+                            <span class="ref-type">Artigo</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-12">
+                        <div class="ref-number">[12]</div>
+                        <div class="ref-body">
+                            PATTERSON, David A.; GIBSON, Garth; KATZ, Randy H. A case for redundant arrays of inexpensive disks (RAID). In: <strong>Proceedings of the 1988 ACM SIGMOD International Conference on Management of Data</strong>, p. 109–116. New York: ACM, 1988.
+                            <span class="ref-type">Artigo</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-13">
+                        <div class="ref-number">[13]</div>
+                        <div class="ref-body">
+                            INTEL CORPORATION. <strong>An Introduction to the Intel® QuickPath Interconnect</strong>. White Paper, doc. 320412-001US. Santa Clara: Intel, jan. 2009.
+                            <span class="ref-type">White-paper</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-14">
+                        <div class="ref-number">[14]</div>
+                        <div class="ref-body">
+                            NVIDIA CORPORATION. <strong>NVIDIA Grace Hopper Superchip Architecture Whitepaper</strong>. Santa Clara: NVIDIA, 2023. Disponível em: https://resources.nvidia.com/en-us-grace-cpu/grace-hopper-superchip. Acesso em: 03 jun. 2026.
+                            <span class="ref-type">White-paper</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-15">
+                        <div class="ref-number">[15]</div>
+                        <div class="ref-body">
+                            POPEK, Gerald J.; GOLDBERG, Robert P. Formal requirements for virtualizable third generation architectures. <strong>Communications of the ACM</strong>, v. 17, n. 7, p. 412–421, jul. 1974.
+                            <span class="ref-type">Artigo</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-16">
+                        <div class="ref-number">[16]</div>
+                        <div class="ref-body">
+                            JEDEC SOLID STATE TECHNOLOGY ASSOCIATION. <strong>DDR5 SDRAM Standard — JESD79-5C</strong>. Arlington: JEDEC, 2024.
+                            <span class="ref-type">Norma</span>
+                        </div>
+                    </li>
+                    <li class="ref-item" id="ref-17">
+                        <div class="ref-number">[17]</div>
+                        <div class="ref-body">
+                            KOIDE, Rubem. <strong>Fundamentos de Estruturas de Computadores</strong>: material das aulas 5–12. Curitiba: Universidade Positivo, 2026.1.
+                            <span class="ref-type">Aula</span>
+                        </div>
+                    </li>
+                </ol>
             </section>
 
         </main>
@@ -746,16 +1991,13 @@
 
     <footer>
         <div class="credits">
-            Projeto Desenvolvido por: Gabriel Wolff, Vitor Camillo, João Victor Alvarez, Lucas Ashikaga e Wellington Fonseca. <br>
-            Instituição: Universidade Positivo | Curso: Fundamentos de Estruturas de Computadores
+            Gabriel Wolff · Vitor Camillo · João Victor Alvarez · Lucas Ashikaga · Wellington Fonseca<br>
+            Universidade Positivo · Fundamentos de Estruturas de Computadores · 2026.1
         </div>
         <div class="biblio">
-            <strong>Referências Bibliográficas:</strong>
-            <ul>
-                <li>MORIMOTO, Carlos E. Hardware II: o guia definitivo. Sul Editores, 2013.</li>
-                <li>TORRES, Gabriel. Montagem de Micros. Novaterra, 2013.</li>
-                <li>STALLINGS, William. Arquitetura e organização de computadores. 8. ed. Pearson Prentice Hall, 2010.</li>
-            </ul>
+            Bibliografia completa (NBR 6023) disponível no módulo
+            <a class="cite" style="vertical-align: baseline; font-size: 0.85rem;" onclick="showModule('modRef', null)">📚 Referências</a>.
+            Desenvolvido em HTML5, CSS3 e JavaScript ES6+ sem dependências externas.
         </div>
     </footer>
 
@@ -763,12 +2005,52 @@
     <script>
         /* ====== DECLARAÇÕES DE ESTADO E DADOS (Movidos para o topo) ====== */
         
-        // Dados da Pirâmide (Módulo 4)
+        // Dados da Pirâmide (Módulo 4) — números reais (Intel Core i7-5960X / Xeon E5)
         const layerData = {
-            'l1': { title: "Registradores & Cache L1/L2/L3", desc: "Memória dentro ou grudada no processador. Trabalha na mesma velocidade da CPU.", stats: ["Latência: ~1 a 15 nanossegundos", "Capacidade: KBs a poucos MBs", "Custo/GB: Exorbitante"] },
-            'ram': { title: "Memória RAM (ECC em Servidores)", desc: "Memória de trabalho principal do sistema operacional. Perde os dados quando desliga.", stats: ["Latência: ~50 a 100 nanossegundos", "Capacidade: 16GB a vários Terabytes (em servidores)", "Custo/GB: Médio"] },
-            'ssd': { title: "Armazenamento NVMe / SSD Corporativo", desc: "Armazenamento flash em estado sólido. Mantém os dados sem energia. Conectado via barramento PCIe.", stats: ["Latência: ~10 a 100 microssegundos", "Capacidade: Até 30 TBs por unidade", "Custo/GB: Baixo"] },
-            'hdd': { title: "Discos Mecânicos (HDD) / Fitas", desc: "Discos magnéticos giratórios. Muito mais lentos, mas imbatíveis para arquivamento de longa duração (Cold Storage).", stats: ["Latência: ~5 a 10 milissegundos", "Capacidade: 20+ Terabytes por unidade", "Custo/GB: Muito Baixo"] }
+            'l1': {
+                title: "Registradores + Cache L1/L2/L3",
+                desc: "Memória dentro do die do processador. Acesso na escala do clock da CPU. L1 é separada em dados e instruções; L3 é unificada e compartilhada entre cores.",
+                stats: [
+                    "L1: 32 KB dados + 32 KB instr., 4 ciclos, 8-way (por core)",
+                    "L2: 256 KB, 12 ciclos, 8-way (por core)",
+                    "L3 (LLC): 20 MB, 38 ciclos, 20-way (compartilhada 8 cores)",
+                    "Linha de cache: 64 bytes (sempre)",
+                    "Custo/GB: > US$ 5.000 — limitado a poucos MB por chip"
+                ]
+            },
+            'ram': {
+                title: "RAM Principal (DDR4/DDR5 ECC em servidor)",
+                desc: "Memória de trabalho volátil do SO. Servidor usa DIMMs ECC registrados (RDIMM/LRDIMM); desktop usa DIMMs não-buffered. Latência triplica quando o acesso é NUMA remoto.",
+                stats: [
+                    "Latência local: ~80 ns | remota (NUMA): ~140 ns",
+                    "Largura de banda DDR5-5600: ~44,8 GB/s por canal",
+                    "Capacidade servidor: até 6 TB (2 sockets, DDR5 RDIMM)",
+                    "Custo/GB: ~US$ 3 a 8 (ECC RDIMM)",
+                    "Perde tudo ao desligar (volátil)"
+                ]
+            },
+            'ssd': {
+                title: "SSD NVMe / SATA",
+                desc: "Flash NAND não-volátil. NVMe usa PCIe direto, eliminando a tradução SATA. Em datacenter usam-se SSDs U.2/U.3 hot-swap, com firmware enterprise (power-loss protection, alta DWPD).",
+                stats: [
+                    "NVMe latência: 10–100 µs | SATA SSD: 50–150 µs",
+                    "NVMe IOPS: 500k–1M | SATA SSD: 80k–100k",
+                    "Capacidade: até 30 TB por unidade enterprise",
+                    "Custo/GB: ~US$ 0,10 a 0,30",
+                    "Endurance medida em DWPD (Drive Writes Per Day)"
+                ]
+            },
+            'hdd': {
+                title: "HDD mecânico / Fita magnética (LTO)",
+                desc: "Disco rígido com pratos giratórios (5,4k–15k rpm). Caro só nas baias, barato no terabyte. Fita LTO é o último degrau: lentíssima, mas custa centavos por GB e dura 30 anos.",
+                stats: [
+                    "HDD 7,2k rpm: seek 8 ms, ~150 MB/s, ~100 IOPS",
+                    "HDD enterprise 10k–15k: ~180–250 IOPS",
+                    "Capacidade HDD: até 30 TB (helium-filled, SMR)",
+                    "Fita LTO-9: 18 TB / 45 TB comprimida",
+                    "Custo/GB HDD: ~US$ 0,01 a 0,03 | LTO: < US$ 0,005"
+                ]
+            }
         };
 
         // Dados do RAID (Módulo 2)
@@ -807,11 +2089,39 @@
             document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(modId).classList.add('active');
-            
-            // Adiciona a classe active no botão que foi clicado com verificação de segurança
+
             if (element) {
                 element.classList.add('active');
+            } else {
+                // Sincroniza o botão correspondente quando a navegação foi disparada via citação
+                const navButton = document.querySelector(`.nav-btn[onclick*="${modId}"]`);
+                if (navButton) navButton.classList.add('active');
             }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* ====== SUB-ABAS DENTRO DO MÓDULO ====== */
+        function showPanel(modId, panelId, element) {
+            const root = document.getElementById(modId);
+            if (!root) return;
+            root.querySelectorAll('.mod-panel').forEach(p => p.classList.remove('active'));
+            root.querySelectorAll('.mod-tab').forEach(t => t.classList.remove('active'));
+            const panel = document.getElementById(panelId);
+            if (panel) panel.classList.add('active');
+            if (element) element.classList.add('active');
+        }
+
+        /* ====== CITAÇÕES — pular para a referência correspondente ====== */
+        function goToRef(n) {
+            showModule('modRef', null);
+            // Pequeno delay para o fadeIn da seção antes do scroll
+            setTimeout(() => {
+                const target = document.getElementById('ref-' + n);
+                if (!target) return;
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                target.classList.add('highlight');
+                setTimeout(() => target.classList.remove('highlight'), 2500);
+            }, 200);
         }
 
         /* ====== MÓDULO 2: RAID ====== */
@@ -922,6 +2232,61 @@
         setRaid(0);
 
 
+        /* ====== MÓDULO 2 — CALCULADORA RAID ====== */
+        function calcRaid() {
+            const level = parseInt(document.getElementById('rc-level').value);
+            let n = parseInt(document.getElementById('rc-disks').value);
+            const cap = parseFloat(document.getElementById('rc-cap').value);
+            const iops = parseInt(document.getElementById('rc-iops').value);
+
+            // Mínimos por nível
+            const mins = { 0: 2, 1: 2, 5: 3, 6: 4, 10: 4 };
+            if (n < mins[level]) n = mins[level];
+            if (level === 10 && n % 2 !== 0) n -= 1; // RAID 10 precisa par
+            document.getElementById('rc-disks').value = n;
+
+            let useful, tolerable, iopsR, iopsW, penalty;
+
+            switch (level) {
+                case 0: useful = n * cap; tolerable = 0; penalty = 1; break;
+                case 1: useful = cap;     tolerable = n - 1; penalty = 2; break;
+                case 5: useful = (n - 1) * cap; tolerable = 1; penalty = 4; break;
+                case 6: useful = (n - 2) * cap; tolerable = 2; penalty = 6; break;
+                case 10: useful = (n / 2) * cap; tolerable = n / 2; penalty = 2; break;
+            }
+
+            iopsR = n * iops; // leituras paralelas
+            iopsW = Math.round((n * iops) / penalty);
+            const eff = ((useful / (n * cap)) * 100).toFixed(0);
+
+            document.getElementById('rc-out-cap').innerText = useful.toFixed(2) + ' TB';
+            document.getElementById('rc-out-eff').innerText = eff + '%';
+            document.getElementById('rc-out-tol').innerText = tolerable === 0 ? 'Nenhum'
+                : tolerable + (level === 10 ? ' (1 por espelho)' : tolerable === 1 ? ' disco' : ' discos');
+            document.getElementById('rc-out-iopsr').innerText = iopsR.toLocaleString('pt-BR');
+            document.getElementById('rc-out-iopsw').innerText = iopsW.toLocaleString('pt-BR') + ' (÷' + penalty + ')';
+        }
+        // Inicializa a calculadora se os campos existirem (defensivo se o módulo ainda não estiver no DOM)
+        if (document.getElementById('rc-level')) calcRaid();
+
+
+        /* ====== MÓDULO 2 — SIMULADOR DE AMDAHL ====== */
+        function updateAmdahl() {
+            const P = parseFloat(document.getElementById('am-p').value);
+            const N = parseInt(document.getElementById('am-n').value);
+            document.getElementById('am-p-val').innerText = P.toFixed(2).replace('.', ',');
+
+            const speedup = 1 / ((1 - P) + (P / N));
+            const ceiling = P === 1 ? Infinity : 1 / (1 - P);
+            const util = ceiling === Infinity ? '—' : ((speedup / ceiling) * 100).toFixed(0) + '%';
+
+            document.getElementById('am-out-speedup').innerText = speedup.toFixed(2) + '×';
+            document.getElementById('am-out-cap').innerText = ceiling === Infinity ? '∞ (P=1)' : ceiling.toFixed(2) + '×';
+            document.getElementById('am-out-util').innerText = util;
+        }
+        if (document.getElementById('am-p')) updateAmdahl();
+
+
         /* ====== MÓDULO 3: MEMÓRIA ECC ====== */
         function simulateCosmicRay() {
             if(eccIsFlipped) return; // Impede spam
@@ -971,6 +2336,135 @@
                     eccIsFlipped = false; // libera pra próxima
                 }, 2000);
             }, 2500);
+        }
+
+
+        /* ====== MÓDULO 6 — STACK DRILL-DOWN ====== */
+        const stackData = {
+            app: {
+                title: "① Aplicação",
+                body: "<p>O topo da pilha — o que entrega valor ao usuário final. Tipicamente um conjunto de processos:</p>" +
+                    "<ul><li><strong>Servidor web:</strong> Nginx, Apache, IIS — responde HTTP.</li>" +
+                    "<li><strong>Aplicação:</strong> Node, Java, .NET, Python — lógica de negócio.</li>" +
+                    "<li><strong>Banco de dados:</strong> PostgreSQL, MySQL, MongoDB, Redis.</li>" +
+                    "<li><strong>Mensageria/cache:</strong> Kafka, RabbitMQ, Memcached.</li></ul>" +
+                    "<p>Para cada requisição, esse processo aciona todas as camadas abaixo: lê dados do disco (⑦), aloca buffers em RAM (⑥), executa em vCPUs (⑤), passa pelo hypervisor (④), entrega via rede (⑧).</p>"
+            },
+            runtime: {
+                title: "② Runtime / Contêiner",
+                body: "<p>Empacotamento do binário + dependências em uma unidade portável e isolada via <strong>namespaces</strong> (PID/net/mount) e <strong>cgroups</strong> (limites de CPU/RAM/IO) do kernel Linux.</p>" +
+                    "<ul><li>Docker / containerd / CRI-O — runtimes</li>" +
+                    "<li>Kubernetes — orquestra milhares de pods em clusters</li>" +
+                    "<li>Boot &lt; 200 ms, footprint MBs, densidade ~2.000 por host</li></ul>" +
+                    "<p>Diferente de VM, o contêiner compartilha o kernel do host — isolamento mais fraco, overhead quase zero. Ver módulo de Virtualização para a comparação completa.</p>"
+            },
+            vm: {
+                title: "③ Máquina Virtual",
+                body: "<p>Um SO completo (kernel + userspace) isolado por hardware via VT-x / AMD-V. Cada VM enxerga seus próprios vCPUs, RAM e discos virtuais.</p>" +
+                    "<ul><li>Boot ~30–60 s, GBs de imagem</li>" +
+                    "<li>Suporta kernels diferentes do host (Win em host Linux)</li>" +
+                    "<li>Isolamento forte — ideal para multi-tenant cloud</li></ul>" +
+                    "<p>Ferramentas de gerência: vCenter (VMware), Cockpit (KVM), SCVMM (Hyper-V), Proxmox.</p>"
+            },
+            hyp: {
+                title: "④ Hypervisor (Tipo 1)",
+                body: "<p>O hypervisor bare-metal <strong>é o SO raiz</strong> — sem Windows/Linux entre ele e o hardware. Acessa diretamente Ring 0 e usa Ring −1 (VMX root) para escapar do SO das VMs.</p>" +
+                    "<ul><li>VMware ESXi: padrão de mercado enterprise</li>" +
+                    "<li>KVM (kernel do Linux + QEMU): open-source dominante</li>" +
+                    "<li>Proxmox VE: distribuição KVM+LXC com UI</li>" +
+                    "<li>Hyper-V Server: solução Microsoft</li></ul>" +
+                    "<p>Recursos típicos: vMotion (migração ao vivo), HA (failover automático), DRS (rebalanceamento de carga entre hosts).</p>"
+            },
+            cpu: {
+                title: "⑤ CPU (Multi-Socket, NUMA)",
+                body: "<p>Em servidor, 2–8 sockets físicos compartilham a memória via UPI (Intel) ou Infinity Fabric (AMD), com protocolo MESIF/MOESI para coerência.</p>" +
+                    "<ul><li>Xeon Scalable / EPYC: 16–128 cores por socket</li>" +
+                    "<li>Hyperthreading: 2 threads lógicos por core físico</li>" +
+                    "<li>NUMA-aware: scheduler deve manter threads próximas à RAM que tocam</li>" +
+                    "<li>Cache L3 compartilhada por todos os cores do socket (20+ MB)</li></ul>"
+            },
+            mem: {
+                title: "⑥ Memória ECC (NUMA-aware)",
+                body: "<p>DIMMs ECC registrados (RDIMM/LRDIMM) protegem cada palavra com Hamming SECDED — corrige 1 bit, detecta 2. DDR5 adiciona on-die ECC interno como camada extra.</p>" +
+                    "<ul><li>Densidade: até 6 TB por servidor 2-socket</li>" +
+                    "<li>Latência local: ~80 ns | remoto NUMA: ~140 ns</li>" +
+                    "<li>Soft errors monitorados via mcelog / WHEA</li>" +
+                    "<li>Estudo Google: ~8% dos DIMMs têm ≥ 1 erro corrigível/ano</li></ul>"
+            },
+            stor: {
+                title: "⑦ Storage (RAID + hot-swap)",
+                body: "<p>Array de discos hot-swap controlado por HBA dedicada. RAID via firmware (controladora) ou via software (mdadm, ZFS, Storage Spaces).</p>" +
+                    "<ul><li>NVMe U.2/U.3: ~1 M IOPS por SSD enterprise</li>" +
+                    "<li>RAID 10 para bancos OLTP; RAID 6 para storage massivo</li>" +
+                    "<li>Hot-swap permite rebuild com servidor ligado</li>" +
+                    "<li>Tier-out para nuvem (S3 Glacier, Azure Archive) em camada fria</li></ul>"
+            },
+            net: {
+                title: "⑧ Rede (10/100 GbE)",
+                body: "<p>NICs redundantes (bonding LACP) com transceivers SFP+ (10G) ou QSFP28 (100G). Fibra óptica para distâncias acima de 30 m.</p>" +
+                    "<ul><li>SR-IOV: divisão da NIC em VFs dedicadas a cada VM (bypass do hypervisor)</li>" +
+                    "<li>RDMA over Converged Ethernet (RoCE): latência ~1 µs entre nós</li>" +
+                    "<li>InfiniBand HDR/NDR: 200–400 Gbps em HPC e clusters de IA</li></ul>"
+            },
+            phy: {
+                title: "⑨ Infraestrutura física",
+                body: "<p>O chassis chassis 1U/2U/4U montado em rack EIA-310 de 42U. Tudo redundante, monitorado e gerenciável remotamente.</p>" +
+                    "<ul><li>PSUs N+1 hot-plug, 80 PLUS Platinum/Titanium</li>" +
+                    "<li>BMC dedicada (iDRAC Dell, iLO HPE, IPMI genérico) com IP próprio</li>" +
+                    "<li>Refrigeração: hot/cold aisle, contenção, chillers</li>" +
+                    "<li>UPS + grupo gerador para autonomia &gt; 48 h</li>" +
+                    "<li>PUE alvo: 1,1–1,2 em hyperscalers</li></ul>"
+            }
+        };
+
+        function showStackDetail(key, el) {
+            document.querySelectorAll('.stack-layer').forEach(l => l.classList.remove('active'));
+            if (el) el.classList.add('active');
+            const d = stackData[key];
+            if (!d) return;
+            const target = document.getElementById('stack-detail');
+            target.innerHTML = '<h3>' + d.title + '</h3>' + d.body;
+        }
+
+
+        /* ====== MÓDULO 4 — SIMULADOR DE CACHE ====== */
+        function simulateCacheAccess() {
+            // Reset visual
+            document.querySelectorAll('#cache-trace .cache-level').forEach(cl => {
+                cl.classList.remove('hit', 'miss');
+                cl.querySelector('.cl-verdict').innerText = '—';
+            });
+
+            const r = Math.random();
+            // Distribuição típica
+            let hitAt, cycles;
+            if (r < 0.92)         { hitAt = 'l1';  cycles = 4;  }
+            else if (r < 0.98)    { hitAt = 'l2';  cycles = 12; }
+            else if (r < 0.995)   { hitAt = 'l3';  cycles = 38; }
+            else                  { hitAt = 'ram'; cycles = 250;}
+
+            const order = ['l1', 'l2', 'l3', 'ram'];
+            const hitIndex = order.indexOf(hitAt);
+
+            // Anima sequência: misses em cima, hit no nível alvo (com pequeno stagger)
+            order.forEach((lvl, i) => {
+                setTimeout(() => {
+                    const el = document.querySelector(`#cache-trace .cache-level[data-cl="${lvl}"]`);
+                    if (!el) return;
+                    if (i < hitIndex) {
+                        el.classList.add('miss');
+                        el.querySelector('.cl-verdict').innerText = 'MISS';
+                    } else if (i === hitIndex) {
+                        el.classList.add('hit');
+                        el.querySelector('.cl-verdict').innerText = 'HIT ✓';
+                    }
+                }, i * 250);
+            });
+
+            setTimeout(() => {
+                document.getElementById('cache-summary').innerHTML =
+                    `Acesso resolvido em <strong style="color: var(--accent-green); font-family: var(--font-mono);">${hitAt.toUpperCase()}</strong> — custo ≈ <strong style="color: var(--accent-blue); font-family: var(--font-mono);">${cycles} ciclos</strong>.`;
+            }, (hitIndex + 1) * 250);
         }
 
 

@@ -1,0 +1,164 @@
+% ===========================================================================
+% Arquitetura de Servidores — Infográfico Interativo
+% Relatório Final — Fundamentos de Estruturas de Computadores
+% Prof. Rubem Koide · Universidade Positivo · 2026.1
+%
+% Compilação (Overleaf ou TeX Live local):
+%   pdflatex main
+%   bibtex   main
+%   pdflatex main
+%   pdflatex main
+% ===========================================================================
+
+\documentclass[
+    12pt,
+    openright,
+    oneside,
+    a4paper,
+    chapter=TITLE,
+    section=TITLE,
+    brazil
+]{abntex2}
+
+% ---------------------------------------------------------------------------
+% PACOTES
+% ---------------------------------------------------------------------------
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{nomencl}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage[brazilian,hyperpageref]{backref}
+\usepackage[alf]{abntex2cite}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{tabularx}
+\usepackage{hyperref}
+
+\hypersetup{
+    pdftitle={Arquitetura de Servidores — Infográfico Interativo},
+    pdfauthor={Gabriel Wolff, Vitor Camillo, João Victor Alvarez, Lucas Ashikaga, Wellington Fonseca},
+    pdfsubject={Fundamentos de Estruturas de Computadores},
+    pdfkeywords={servidor, RAID, ECC, NUMA, virtualização, hipervisor},
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=blue,
+    urlcolor=blue,
+    bookmarksdepth=4
+}
+
+% ---------------------------------------------------------------------------
+% LISTINGS — código embutido
+% ---------------------------------------------------------------------------
+\definecolor{codegray}{rgb}{0.95,0.95,0.95}
+\definecolor{codekw}{rgb}{0.0,0.0,0.6}
+\definecolor{codecom}{rgb}{0.0,0.5,0.0}
+\definecolor{codestr}{rgb}{0.58,0.0,0.83}
+
+\lstdefinestyle{snippet}{
+    backgroundcolor=\color{codegray},
+    commentstyle=\color{codecom}\itshape,
+    keywordstyle=\color{codekw}\bfseries,
+    stringstyle=\color{codestr},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray}
+}
+\lstset{style=snippet}
+
+% ---------------------------------------------------------------------------
+% DADOS DA EQUIPE E DO TRABALHO
+% ---------------------------------------------------------------------------
+\titulo{Arquitetura de Servidores: Infográfico Interativo \\
+        \large como projeto didático para Fundamentos de Estruturas de Computadores}
+\autor{Gabriel Wolff \\
+       Vitor Camillo \\
+       João Victor Alvarez \\
+       Lucas Ashikaga \\
+       Wellington Fonseca}
+\local{Curitiba}
+\data{Junho de 2026}
+\instituicao{Universidade Positivo \par
+             Escola Politécnica \par
+             Disciplina de Fundamentos de Estruturas de Computadores}
+\tipotrabalho{Trabalho acadêmico}
+\preambulo{Trabalho final apresentado à disciplina de
+           Fundamentos de Estruturas de Computadores,
+           ministrada pelo Prof.\ Rubem Koide,
+           Universidade Positivo, semestre 2026.1, como
+           requisito parcial de avaliação.}
+\orientador{Prof.\ Rubem Koide}
+
+% ---------------------------------------------------------------------------
+% INÍCIO DO DOCUMENTO
+% ---------------------------------------------------------------------------
+\begin{document}
+\selectlanguage{brazil}
+\frenchspacing
+
+% ==================== ELEMENTOS PRÉ-TEXTUAIS ====================
+\pretextual
+\imprimircapa
+\imprimirfolhaderosto
+
+% ---------- RESUMO ----------
+\begin{resumo}
+Este trabalho apresenta o desenvolvimento de um \textbf{infográfico interativo} sobre
+arquitetura de servidores como projeto didático da disciplina de Fundamentos de
+Estruturas de Computadores. O artefato, escrito em HTML5, CSS3 e JavaScript ES6+
+sem dependências externas, organiza-se em seis módulos navegáveis que cobrem:
+(i) comparação Desktop \textit{vs.}\ Servidor com tabelas de barramentos e
+interconexão multi-socket; (ii) RAID com simulador interativo de falhas,
+calculadora de IOPS e aplicação da Lei de Amdahl; (iii) memória ECC e código
+de Hamming \textsc{secded}; (iv) hierarquia de memória, cache associativa,
+NUMA e protocolo MESI; (v) virtualização, anéis de proteção, contêineres
+\textit{vs.}\ VMs e escalonadores; e (vi) síntese integrando todas as camadas
+do \emph{stack} de um servidor de produção. O projeto materializa a teoria das
+aulas 6 a 12 do semestre em demonstrações executáveis, com referencial
+bibliográfico fundamentado em Stallings, Patterson \& Hennessy, Tanenbaum,
+Silberschatz e Russinovich.
+
+\textbf{Palavras-chave}: arquitetura de computadores; servidores; RAID;
+memória ECC; NUMA; virtualização; hipervisor; infográfico interativo.
+\end{resumo}
+
+% ---------- SUMÁRIO ----------
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% ==================== ELEMENTOS TEXTUAIS ====================
+\textual
+
+\include{capitulos/01-introducao}
+\include{capitulos/02-referencial}
+\include{capitulos/03-materiais-metodos}
+\include{capitulos/04-desenvolvimento}
+\include{capitulos/05-conclusao}
+
+% ==================== ELEMENTOS PÓS-TEXTUAIS ====================
+\postextual
+
+\bibliography{references}
+
+\begin{anexosenv}
+\partanexos
+\include{capitulos/anexo-a-codigo}
+\end{anexosenv}
+
+\end{document}
