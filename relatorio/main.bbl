@@ -1,0 +1,110 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.7 }
+
+\bibitem[AMDAHL 1967]{amdahl1967}
+\abntrefinfo{AMDAHL}{AMDAHL}{1967}
+{AMDAHL, G.~M. Validity of the single processor approach to achieving large
+  scale computing capabilities. In:  \emph{AFIPS Conference Proceedings}.
+  [S.l.: s.n.], 1967. v.~30, p. 483--485.}
+
+\bibitem[{ANTHROPIC} 2026]{claudecode2026}
+\abntrefinfo{{ANTHROPIC}}{{ANTHROPIC}}{2026}
+{{ANTHROPIC}. \emph{{Claude Code}: assistente de IA para desenvolvimento de
+  software}. San Francisco: Anthropic, 2026.
+Disponível em: \url{https://claude.com/claude-code}. Acesso em: 3 jun. 2026.}
+
+\bibitem[BOVET e CESATI 2005]{bovet2005}
+\abntrefinfo{BOVET e CESATI}{BOVET; CESATI}{2005}
+{BOVET, D.~P.; CESATI, M. \emph{Understanding the Linux Kernel}. 3. ed.. ed.
+  Sebastopol: O'Reilly, 2005.}
+
+\bibitem[{GOOGLE LLC} 2026]{gemini2026}
+\abntrefinfo{{GOOGLE LLC}}{{GOOGLE LLC}}{2026}
+{{GOOGLE LLC}. \emph{{Gemini}: assistente de IA generativa (modo {Canvas})}.
+  Mountain View: Google, 2026.
+Disponível em: \url{https://gemini.google.com}. Acesso em: 3 jun. 2026.}
+
+\bibitem[HAMMING 1950]{hamming1950}
+\abntrefinfo{HAMMING}{HAMMING}{1950}
+{HAMMING, R.~W. Error detecting and error correcting codes.
+\emph{Bell System Technical Journal}, v.~29, n.~2, p. 147--160, abr. 1950.}
+
+\bibitem[{INTEL CORPORATION} 2009]{intel2009qpi}
+\abntrefinfo{{INTEL CORPORATION}}{{INTEL CORPORATION}}{2009}
+{{INTEL CORPORATION}. \emph{An Introduction to the
+  {Intel\textsuperscript{\textregistered}} {QuickPath} {Interconnect}}. Santa
+  Clara: Intel, 2009. White Paper, doc. 320412-001US.}
+
+\bibitem[{JEDEC SOLID STATE TECHNOLOGY ASSOCIATION} 2024]{jedec2024ddr5}
+\abntrefinfo{{JEDEC SOLID STATE TECHNOLOGY ASSOCIATION}}{{JEDEC SOLID STATE
+  TECHNOLOGY ASSOCIATION}}{2024}
+{{JEDEC SOLID STATE TECHNOLOGY ASSOCIATION}. \emph{{DDR5} {SDRAM} {Standard}
+  --- {JESD79-5C}}. Arlington: JEDEC, 2024.}
+
+\bibitem[KOIDE 2026]{koide2026}
+\abntrefinfo{KOIDE}{KOIDE}{2026}
+{KOIDE, R. \emph{Fundamentos de Estruturas de Computadores: material das aulas
+  5--12}. Curitiba: Universidade Positivo, 2026.
+Semestre letivo 2026.1.}
+
+\bibitem[{MICROSOFT CORPORATION} 2026]{vscode2026}
+\abntrefinfo{{MICROSOFT CORPORATION}}{{MICROSOFT CORPORATION}}{2026}
+{{MICROSOFT CORPORATION}. \emph{{Visual Studio Code}: editor de código fonte}.
+  Redmond: Microsoft, 2026.
+Disponível em: \url{https://code.visualstudio.com}. Acesso em: 3 jun. 2026.}
+
+\bibitem[{NVIDIA CORPORATION} 2023]{nvidia2023grace}
+\abntrefinfo{{NVIDIA CORPORATION}}{{NVIDIA CORPORATION}}{2023}
+{{NVIDIA CORPORATION}. \emph{{NVIDIA} {Grace} {Hopper} {Superchip}
+  {Architecture} {Whitepaper}}. Santa Clara: NVIDIA, 2023.
+Disponível em:
+  \url{https://resources.nvidia.com/en-us-grace-cpu/grace-hopper-superchip}.
+  Acesso em: 3 jun. 2026.}
+
+\bibitem[PATTERSON, GIBSON e KATZ 1988]{patterson1988}
+\abntrefinfo{PATTERSON, GIBSON e KATZ}{PATTERSON; GIBSON; KATZ}{1988}
+{PATTERSON, D.~A.; GIBSON, G.; KATZ, R.~H. A case for redundant arrays of
+  inexpensive disks ({RAID}). In:  \emph{Proceedings of the 1988 ACM SIGMOD
+  International Conference on Management of Data}. New York: ACM, 1988. p.
+  109--116.}
+
+\bibitem[PATTERSON e HENNESSY 2017]{patterson2017}
+\abntrefinfo{PATTERSON e HENNESSY}{PATTERSON; HENNESSY}{2017}
+{PATTERSON, D.~A.; HENNESSY, J.~L. \emph{Organização e projeto de
+  computadores: a interface hardware/software}. 5. ed.. ed. Rio de Janeiro:
+  Elsevier, 2017.}
+
+\bibitem[POPEK e GOLDBERG 1974]{popek1974}
+\abntrefinfo{POPEK e GOLDBERG}{POPEK; GOLDBERG}{1974}
+{POPEK, G.~J.; GOLDBERG, R.~P. Formal requirements for virtualizable third
+  generation architectures.
+\emph{Communications of the ACM}, v.~17, n.~7, p. 412--421, jul. 1974.}
+
+\bibitem[RUSSINOVICH, SOLOMON e IONESCU 2017]{russinovich2017}
+\abntrefinfo{RUSSINOVICH, SOLOMON e IONESCU}{RUSSINOVICH; SOLOMON;
+  IONESCU}{2017}
+{RUSSINOVICH, M.~E.; SOLOMON, D.~A.; IONESCU, A. \emph{Windows Internals, Part
+  1}. 7. ed.. ed. Redmond: Microsoft Press, 2017.}
+
+\bibitem[SCHROEDER, PINHEIRO e WEBER 2009]{schroeder2009}
+\abntrefinfo{SCHROEDER, PINHEIRO e WEBER}{SCHROEDER; PINHEIRO; WEBER}{2009}
+{SCHROEDER, B.; PINHEIRO, E.; WEBER, W.-D. {DRAM} errors in the wild: a
+  large-scale field study.
+\emph{ACM SIGMETRICS Performance Evaluation Review}, v.~37, n.~1, p. 193--204,
+  2009.}
+
+\bibitem[SILBERSCHATZ, GALVIN e GAGNE 2015]{silberschatz2015}
+\abntrefinfo{SILBERSCHATZ, GALVIN e GAGNE}{SILBERSCHATZ; GALVIN; GAGNE}{2015}
+{SILBERSCHATZ, A.; GALVIN, P.~B.; GAGNE, G. \emph{Fundamentos de sistemas
+  operacionais}. 9. ed.. ed. Rio de Janeiro: LTC, 2015.}
+
+\bibitem[STALLINGS 2017]{stallings2017}
+\abntrefinfo{STALLINGS}{STALLINGS}{2017}
+{STALLINGS, W. \emph{Arquitetura e organização de computadores}. 10. ed.. ed.
+  São Paulo: Pearson, 2017.}
+
+\end{thebibliography}

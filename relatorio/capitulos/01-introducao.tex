@@ -1,0 +1,88 @@
+\chapter{Introdução}
+\label{cap:introducao}
+
+A disciplina de \textbf{Fundamentos de Estruturas de Computadores}, ministrada pelo
+Prof.\ Rubem Koide na Universidade Positivo, percorre um arco que vai dos
+conjuntos numéricos e portas lógicas (aulas 2--4) até processadores
+\textsc{cisc}/\textsc{risc} e sistemas operacionais (aulas 10--12),
+passando pela arquitetura interna do computador e seus componentes
+físicos (aulas 6--9). Em paralelo a essa progressão teórica, o curso
+demanda dos alunos um projeto que materialize, em forma de artefato
+didático, um recorte significativo desse conteúdo.
+
+Este trabalho apresenta o desenvolvimento de um
+\textbf{infográfico interativo sobre arquitetura de servidores},
+escrito em \textsf{HTML5}, \textsf{CSS3} e \textsf{JavaScript ES6+}
+sem qualquer dependência externa, executável diretamente em navegador
+moderno. O recorte ``servidores'' foi escolhido por concentrar, num
+único objeto de estudo, todos os subsistemas que a disciplina aborda:
+do barramento e da hierarquia de memória até o escalonador de processos
+e a virtualização --- portanto, exibe a teoria das aulas em ação.
+
+\section{Justificativa}
+
+A primeira versão do projeto, entregue em abril de 2026, recebeu como
+crítica do orientador a \textit{baixa profundidade de conteúdo}: o
+artefato apresentava analogias e curiosidades, mas pouca substância
+técnica que se conectasse de fato com o material das aulas. Este
+relatório descreve a \textbf{segunda iteração}, na qual o infográfico
+foi reestruturado para incorporar:
+
+\begin{itemize}
+    \item tabelas comparativas com números reais de largura de banda,
+          latência e custo (PCIe, UPI, DDR5, NVMe);
+    \item fórmulas explícitas (Lei de Amdahl, cálculo de paridade
+          em RAID 5, síndrome de Hamming \textsc{secded});
+    \item \textit{specs} concretas de processadores citados em
+          aula (Intel Core i7-5960X, Xeon Scalable, EPYC);
+    \item simuladores executáveis (acesso à cache hit/miss,
+          calculadora de IOPS, escalonador rubro-negro CFS); e
+    \item bibliografia formal \textsc{abnt} \textsc{nbr 6023}
+          com 17 referências, acessíveis diretamente da página
+          via citações clicáveis.
+\end{itemize}
+
+\section{Objetivos}
+
+\subsection{Objetivo geral}
+
+Desenvolver um \textbf{infográfico interativo} que explique, de modo
+visual e exploratório, os principais subsistemas que diferenciam um
+servidor de um computador pessoal, conectando explicitamente cada
+conceito ao conteúdo teórico das aulas 6--12 da disciplina.
+
+\subsection{Objetivos específicos}
+
+\begin{enumerate}
+    \item Comparar Desktop \textit{vs.}\ Servidor em quatro dimensões
+          --- alimentação, interconexão CPU--CPU, barramentos de E/S
+          e gerenciamento remoto --- usando dados quantitativos.
+    \item Demonstrar interativamente o comportamento de quatro
+          níveis \textsc{raid} (0, 1, 5, 10) sob falha de disco e
+          permitir o cálculo de capacidade útil e \textsc{iops} sob
+          variação de parâmetros.
+    \item Visualizar o código de Hamming \textsc{secded} usado
+          em memória \textsc{ecc}, expondo a posição dos bits de
+          paridade e o cálculo do síndrome.
+    \item Apresentar a hierarquia de memória com latências em escala
+          humana e simular a probabilidade de \textit{hit} em cada
+          nível de cache.
+    \item Explicar virtualização de Tipo~1 \textit{vs.}~Tipo~2,
+          anéis de proteção, contêineres \textit{vs.}\ máquinas
+          virtuais e o escalonador CFS do Linux.
+    \item Integrar todas as camadas anteriores numa visão única do
+          \textit{stack} completo de um servidor moderno.
+\end{enumerate}
+
+\section{Estrutura do trabalho}
+
+O Capítulo~\ref{cap:referencial} estabelece o referencial teórico,
+agrupado pelos seis subsistemas tratados no infográfico. O
+Capítulo~\ref{cap:metodologia} descreve materiais, métodos e o
+ambiente de desenvolvimento, incluindo as ferramentas de IA assistiva
+empregadas. O Capítulo~\ref{cap:desenvolvimento} apresenta o
+infográfico módulo a módulo, com tabelas, figuras e descrição das
+simulações implementadas. O Capítulo~\ref{cap:conclusao} sintetiza os
+resultados, limitações e trabalhos futuros. O Anexo~A traz o
+\emph{link} do código-fonte completo no GitHub e trechos críticos do
+HTML/JavaScript desenvolvido.

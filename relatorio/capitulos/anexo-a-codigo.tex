@@ -1,0 +1,168 @@
+\chapter{Código-fonte do infográfico}
+\label{anx:codigo}
+
+\section{Repositório completo}
+
+O código-fonte completo do infográfico, com histórico de \emph{commits}
+e \texttt{README} de instruções, encontra-se em:
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{\centering\vspace{6pt}
+\large \url{https://github.com/glkwolff/Projeto-Estruturas-de-computadores}
+\vspace{6pt}}}
+\end{center}
+
+A reprodução integral neste anexo é impraticável: o arquivo
+\texttt{projeto.html} ultrapassa 2\,500 linhas e o critério de
+entrega prevê justamente que, em código longo, se descreva o link
+no relatório. As listagens a seguir trazem apenas trechos críticos
+ilustrativos.
+
+\section{Estrutura do arquivo único}
+
+\begin{lstlisting}[language=HTML,caption=Esqueleto geral do projeto.html]
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Arquitetura de Servidores - Infográfico Interativo</title>
+  <style>
+    /* ~600 linhas de CSS:
+       custom properties, layout flex/grid, tabelas, animações */
+  </style>
+</head>
+<body>
+  <header> ... </header>
+  <div class="container">
+    <nav>  <!-- 7 botões de navegação --> </nav>
+    <main>
+      <section id="mod1"  class="module active"> <!-- Módulo 1 --> </section>
+      <section id="mod2"  class="module">        <!-- Módulo 2 --> </section>
+      <section id="mod3"  class="module">        <!-- Módulo 3 --> </section>
+      <section id="mod4"  class="module">        <!-- Módulo 4 --> </section>
+      <section id="mod5"  class="module">        <!-- Módulo 5 --> </section>
+      <section id="mod6"  class="module">        <!-- Módulo 6 --> </section>
+      <section id="modRef" class="module">       <!-- Referências --> </section>
+    </main>
+  </div>
+  <footer> ... </footer>
+  <script>
+    /* ~600 linhas de JavaScript:
+       navegação, sub-abas, simulações por módulo */
+  </script>
+</body>
+</html>
+\end{lstlisting}
+
+\section{Função de navegação por sub-abas}
+
+\begin{lstlisting}[language=JavaScript,caption=Implementação das sub-abas dentro de cada módulo]
+function showPanel(modId, panelId, element) {
+    const root = document.getElementById(modId);
+    if (!root) return;
+    root.querySelectorAll('.mod-panel').forEach(p =>
+        p.classList.remove('active'));
+    root.querySelectorAll('.mod-tab').forEach(t =>
+        t.classList.remove('active'));
+    const panel = document.getElementById(panelId);
+    if (panel) panel.classList.add('active');
+    if (element) element.classList.add('active');
+}
+\end{lstlisting}
+
+\section{Cálculo do simulador RAID}
+
+\begin{lstlisting}[language=JavaScript,caption=Calculadora de IOPS e capacidade útil]
+function calcRaid() {
+    const level = parseInt(document.getElementById('rc-level').value);
+    let   n     = parseInt(document.getElementById('rc-disks').value);
+    const cap   = parseFloat(document.getElementById('rc-cap').value);
+    const iops  = parseInt(document.getElementById('rc-iops').value);
+
+    const mins = { 0: 2, 1: 2, 5: 3, 6: 4, 10: 4 };
+    if (n < mins[level]) n = mins[level];
+    if (level === 10 && n % 2 !== 0) n -= 1;
+
+    let useful, tolerable, penalty;
+    switch (level) {
+        case 0:  useful = n * cap;       tolerable = 0;     penalty = 1; break;
+        case 1:  useful = cap;           tolerable = n-1;   penalty = 2; break;
+        case 5:  useful = (n-1) * cap;   tolerable = 1;     penalty = 4; break;
+        case 6:  useful = (n-2) * cap;   tolerable = 2;     penalty = 6; break;
+        case 10: useful = (n/2) * cap;   tolerable = n/2;   penalty = 2; break;
+    }
+    const iopsR = n * iops;
+    const iopsW = Math.round((n * iops) / penalty);
+    /* ... atualização da DOM omitida ... */
+}
+\end{lstlisting}
+
+\section{Aplicação da Lei de Amdahl}
+
+\begin{lstlisting}[language=JavaScript,caption=Simulador interativo da Lei de Amdahl]
+function updateAmdahl() {
+    const P = parseFloat(document.getElementById('am-p').value);
+    const N = parseInt  (document.getElementById('am-n').value);
+
+    const speedup = 1 / ((1 - P) + (P / N));
+    const ceiling = P === 1 ? Infinity : 1 / (1 - P);
+    const util    = ceiling === Infinity ? '—'
+                  : ((speedup / ceiling) * 100).toFixed(0) + '%';
+
+    document.getElementById('am-out-speedup').innerText = speedup.toFixed(2) + 'x';
+    document.getElementById('am-out-cap').innerText     = ceiling === Infinity
+                                                        ? 'inf'
+                                                        : ceiling.toFixed(2) + 'x';
+    document.getElementById('am-out-util').innerText    = util;
+}
+\end{lstlisting}
+
+\section{Simulador de \textit{cache hit/miss}}
+
+\begin{lstlisting}[language=JavaScript,caption=Animação de travessia na hierarquia de memória]
+function simulateCacheAccess() {
+    const r = Math.random();
+    let hitAt, cycles;
+    if      (r < 0.92)  { hitAt = 'l1';  cycles = 4;   }
+    else if (r < 0.98)  { hitAt = 'l2';  cycles = 12;  }
+    else if (r < 0.995) { hitAt = 'l3';  cycles = 38;  }
+    else                { hitAt = 'ram'; cycles = 250; }
+
+    const order = ['l1', 'l2', 'l3', 'ram'];
+    const hitIndex = order.indexOf(hitAt);
+    order.forEach((lvl, i) => {
+        setTimeout(() => {
+            const el = document.querySelector(
+                `#cache-trace .cache-level[data-cl="${lvl}"]`);
+            if (i <  hitIndex) el.classList.add('miss');
+            if (i === hitIndex) el.classList.add('hit');
+        }, i * 250);
+    });
+}
+\end{lstlisting}
+
+\section{Navegação para referência citada}
+
+\begin{lstlisting}[language=JavaScript,caption=Função que vincula cita inline ao item bibliográfico]
+function goToRef(n) {
+    showModule('modRef', null);
+    setTimeout(() => {
+        const target = document.getElementById('ref-' + n);
+        if (!target) return;
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        target.classList.add('highlight');
+        setTimeout(() => target.classList.remove('highlight'), 2500);
+    }, 200);
+}
+\end{lstlisting}
+
+\section{Como executar localmente}
+
+\begin{enumerate}
+    \item Clonar o repositório: \\
+          \texttt{git clone https://github.com/glkwolff/Projeto-Estruturas-de-computadores}
+    \item Abrir o arquivo \texttt{projeto.html} em qualquer navegador
+          moderno (Chrome 130+, Firefox 130+, Edge 130+).
+    \item Nenhuma instalação, servidor local ou conexão de internet é
+          necessária.
+\end{enumerate}

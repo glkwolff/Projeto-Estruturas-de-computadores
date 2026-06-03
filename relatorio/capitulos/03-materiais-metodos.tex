@@ -1,0 +1,200 @@
+\chapter{Materiais e Métodos}
+\label{cap:metodologia}
+
+Este capítulo descreve o ambiente físico, as ferramentas de software,
+a abordagem metodológica e a divisão de responsabilidades adotadas
+durante o desenvolvimento do infográfico.
+
+\section{Hardware utilizado no desenvolvimento}
+\label{sec:hardware}
+
+O artefato foi desenvolvido em um \textbf{notebook Acer Aspire A315-42}
+com configuração de uso típico de aluno de graduação, conforme
+detalhado na Tabela~\ref{tab:hw}.
+
+\begin{table}[h!]
+\centering
+\caption{Especificações do equipamento de desenvolvimento}
+\label{tab:hw}
+\begin{tabular}{lp{8.5cm}}
+\toprule
+\textbf{Componente} & \textbf{Especificação} \\
+\midrule
+Processador & AMD Ryzen 5 3500U, 4 \emph{cores} físicos / 8
+              \emph{threads}, 2,1\,\textsc{ghz} base \\
+Arquitetura  & x86\_64, AMD Zen+, fabricação 12\,\textsc{nm} \\
+Memória RAM  & 9,6\,\textsc{gib} \textsc{ddr4} 2400\,\textsc{mhz}
+               (não-\textsc{ecc}, conforme classe consumidor) \\
+Armazenamento & SSD \textsc{nvme} M.2, 512\,\textsc{gb} \\
+Sistema operacional & EndeavourOS (base Arch Linux),
+                      \emph{kernel} 7.0.9-zen1 \\
+Navegador alvo & Chromium 134+, Mozilla Firefox 130+ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Por se tratar de aplicação web client-side, o infográfico foi
+testado também em equipamentos diversos dos demais integrantes da
+equipe, com sistemas operacionais Windows~11 e macOS~14, confirmando
+compatibilidade transversal nos navegadores baseados em Chromium e
+no Mozilla Firefox.
+
+\section{Ferramentas e ambiente de desenvolvimento}
+\label{sec:ferramentas}
+
+\subsection{Editor de código}
+
+O desenvolvimento foi conduzido no \textbf{Visual Studio Code}
+\cite{vscode2026}, distribuído pela Microsoft sob licença
+\textsc{mit}. As extensões utilizadas restringiram-se ao conjunto
+mínimo necessário: \textit{Prettier} para formatação consistente,
+\textit{Live Server} para auto-reload durante o desenvolvimento e
+\textit{GitLens} para visualização do histórico de commits.
+
+\subsection{Assistentes de IA generativa}
+
+A produção utilizou duas ferramentas de IA, declaradas conforme a
+boa prática acadêmica atual de transparência sobre uso de modelos
+generativos:
+
+\begin{description}
+    \item[Google Gemini --- modo Canvas~\cite{gemini2026}.] Empregado
+          na fase inicial de prototipagem, especialmente na geração
+          de andaime visual em HTML/CSS para os módulos
+          interativos (estrutura inicial do simulador \textsc{raid} e
+          das barras de recursos da virtualização).
+    \item[Anthropic Claude Code~\cite{claudecode2026}.] Empregado na
+          segunda iteração para aprofundamento técnico do conteúdo,
+          refatoração da disposição em sub-abas, escrita das tabelas
+          comparativas, redação deste relatório e elaboração do
+          roteiro de defesa. A interação se deu via terminal sobre
+          o diretório do projeto, com revisão humana de cada commit.
+\end{description}
+
+Ambas as ferramentas atuaram como copiloto: o discernimento técnico,
+a verificação dos números citados e a aderência ao material da
+disciplina foram conduzidos pelos integrantes da equipe.
+
+\subsection{Versionamento e hospedagem}
+
+O código-fonte está versionado em \textsf{Git} e hospedado no
+GitHub no repositório
+\url{https://github.com/glkwolff/Projeto-Estruturas-de-computadores}.
+
+\subsection{Stack tecnológico do artefato}
+
+O infográfico final é \emph{auto-contido}: um único arquivo
+\texttt{projeto.html} (\textasciitilde 2.500 linhas) contendo
+estrutura, estilos e lógica. Não há \emph{build step}, transpilação
+ou dependência de pacotes externos. A Tabela~\ref{tab:stack} resume.
+
+\begin{table}[h!]
+\centering
+\caption{Tecnologias usadas no artefato final}
+\label{tab:stack}
+\begin{tabular}{lp{8cm}}
+\toprule
+\textbf{Tecnologia} & \textbf{Uso} \\
+\midrule
+HTML5            & Estrutura semântica em \texttt{section}/
+                   \texttt{article}, \texttt{table} \\
+CSS3             & \emph{Custom properties}, \texttt{grid},
+                   \texttt{flex}, \texttt{clip-path}, transições,
+                   \emph{media queries} \\
+JavaScript ES6+  & Manipulação de DOM, lógica de estado em
+                   variáveis-módulo, \texttt{setTimeout} para
+                   animações, \texttt{const}/\texttt{let} \\
+SVG inline       & (Não utilizado --- toda visualização é
+                   feita por divs estilizadas, para reduzir
+                   dependência) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A escolha de \emph{vanilla} JavaScript --- sem frameworks como React
+ou Vue --- foi deliberada: o objetivo pedagógico é exibir conceitos
+de arquitetura, não exercitar engenharia de \emph{front-end}.
+Manter o projeto em arquivo único também simplifica entrega,
+avaliação e execução: basta abrir o HTML no navegador.
+
+\section{Metodologia de desenvolvimento}
+\label{sec:metodologia-dev}
+
+O projeto seguiu duas iterações sucessivas:
+
+\begin{enumerate}
+    \item \textbf{Iteração 1 (abril/2026)}. Versão inicial entregue
+          como parcial, focada em estabelecer o esqueleto visual e os
+          cinco módulos básicos com analogias e curiosidades. Avaliada
+          como insuficientemente profunda pelo orientador.
+    \item \textbf{Iteração 2 (junho/2026)}. Refatoração com foco em
+          \emph{profundidade conteudística}: incorporação de tabelas
+          quantitativas, fórmulas explícitas, simuladores adicionais
+          (calculadora \textsc{raid}, simulador de cache hit/miss,
+          escalonador rubro-negro), reorganização de cada módulo em
+          sub-abas para reduzir densidade visual e adição de um
+          sexto módulo (\textit{stack} completo) integrador.
+\end{enumerate}
+
+A metodologia em cada módulo seguiu o ciclo:
+
+\begin{enumerate}
+    \item leitura do material das aulas correspondente
+          (aulas 6 a 12);
+    \item mapeamento dos conceitos para subseções navegáveis;
+    \item definição de uma interação central ---
+          ``o que o aluno pode \emph{fazer} aqui?'' ---
+          em vez de ler texto passivo;
+    \item implementação progressiva, testando hot-reload no
+          navegador;
+    \item revisão pela equipe e ajuste fino.
+\end{enumerate}
+
+\section{Divisão de responsabilidades na equipe}
+\label{sec:equipe}
+
+A equipe é composta por cinco integrantes, com divisão temática
+para garantir profundidade individual em pelo menos um módulo
+(condição da nota de defesa, que é individual). A
+Tabela~\ref{tab:equipe} resume.
+
+\begin{table}[h!]
+\centering
+\caption{Distribuição de responsabilidades por integrante}
+\label{tab:equipe}
+\begin{tabular}{ll}
+\toprule
+\textbf{Integrante} & \textbf{Módulo principal de apresentação} \\
+\midrule
+Gabriel Wolff       & Módulo 1 --- Desktop \textit{vs.}\ Servidor \\
+Vitor Camillo       & Módulo 2 --- RAID + Lei de Amdahl \\
+João Victor Alvarez & Módulo 3 --- Memória \textsc{ecc} + Hamming \\
+Lucas Ashikaga      & Módulo 4 --- Hierarquia \& \textsc{numa} \\
+Wellington Fonseca  & Módulo 5 --- Virtualização \\
+Equipe (coletivo)   & Módulo 6 --- \emph{Stack} completo (síntese) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A divisão temática não impediu colaboração em todos os módulos: cada
+integrante revisou e contribuiu para os demais, mas tem domínio
+aprofundado do tema que apresentará na defesa.
+
+\section{Critérios de avaliação e entrega}
+
+Conforme orientação do professor, a avaliação é composta de duas
+notas independentes:
+
+\begin{itemize}
+    \item \textbf{Apresentação de defesa} (individual, 2,5 pontos):
+          duração máxima de 15 minutos, com cada integrante
+          apresentando seu módulo principal.
+    \item \textbf{Relatório escrito} (coletivo, 2,5 pontos): este
+          documento, com estrutura \textsc{abnt}.
+\end{itemize}
+
+A entrega final compreende um arquivo \texttt{.zip} contendo o
+relatório em PDF, a apresentação, o arquivo \texttt{projeto.html} do
+infográfico e o \emph{link} para o repositório GitHub (uma vez que
+o código-fonte completo ultrapassa as 2\,500 linhas, conforme
+preconizado pelo critério de entrega).

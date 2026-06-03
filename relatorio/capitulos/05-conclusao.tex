@@ -1,0 +1,112 @@
+\chapter{Conclusão}
+\label{cap:conclusao}
+
+O presente trabalho desenvolveu um infográfico interativo sobre
+arquitetura de servidores, materializando, em forma de artefato
+didático executável em navegador, o conteúdo das aulas 6 a 12 da
+disciplina de Fundamentos de Estruturas de Computadores.
+
+O processo passou por duas iterações. A primeira versão estabeleceu
+o esqueleto visual e a interatividade básica, mas foi avaliada pelo
+orientador como insuficiente em profundidade técnica. A segunda
+iteração --- a que este relatório descreve --- refatorou cada
+módulo para incorporar tabelas comparativas com números reais
+(barramentos, latências, capacidades), fórmulas explícitas (Amdahl,
+paridade XOR, síndrome de Hamming), \emph{specs} de processadores
+reais (Intel Core i7-5960X, Xeon Scalable, EPYC, NVIDIA Grace
+Hopper), bibliografia formal \textsc{abnt} \textsc{nbr 6023}
+acessível diretamente do infográfico via citações clicáveis, e um
+sexto módulo integrador (\emph{stack} completo) que sintetiza os
+cinco anteriores numa única visão.
+
+\section{Aderência aos objetivos}
+
+Confrontados com os objetivos específicos enunciados na
+Seção~1.2, observamos:
+
+\begin{itemize}
+    \item \textbf{Comparativo Desktop \textit{vs.}\ Servidor}: atendido
+          com a sub-aba ``Visão Geral'' e complementado com três
+          aprofundamentos (Interconexão CPU, Barramentos de E/S,
+          IA \& HPC) ausentes na primeira versão.
+    \item \textbf{Simulação de RAID e cálculo quantitativo}: atendido
+          com o simulador original mais uma calculadora de \textsc{iops}
+          e capacidade útil e a aplicação numérica da Lei de Amdahl
+          ao exemplo do servidor \textsc{www}.
+    \item \textbf{Visualização do código de Hamming}: atendido com a
+          sub-aba ``Como funciona'', que expõe os 12 bits da palavra
+          Hamming(12,8) e a tabela de cobertura dos bits de paridade.
+    \item \textbf{Hierarquia com latências em escala humana}: atendido
+          com tabela conversora (ciclo de CPU $\to$ 1 segundo) e
+          simulador de \textit{cache hit/miss} animado.
+    \item \textbf{Virtualização Tipo 1 \textit{vs.}\ Tipo 2}:
+          atendido com taxonomia, anéis de proteção x86 (Ring 0 a
+          Ring~$-1$) e comparação dedicada VM \textit{vs.}\ contêiner.
+    \item \textbf{Integração final}: atendido com o Módulo 6
+          (\emph{stack} completo), inexistente na primeira versão.
+\end{itemize}
+
+\section{Limitações}
+
+Algumas escolhas conscientes restringem o alcance do artefato:
+
+\begin{enumerate}
+    \item Por se tratar de aplicação \emph{client-side} sem
+          \emph{back-end}, nenhum dos simuladores executa medições
+          reais de hardware; todos os números (\textsc{iops},
+          latência, \emph{speedup}) são calculados via fórmulas
+          determinísticas com parâmetros tabulares ou via amostragem
+          de uma distribuição empírica.
+    \item A análise da Lei de Amdahl considera apenas o cenário
+          ideal de paralelização homogênea entre discos, ignorando
+          contenção de barramento, \emph{cache pollution} e custo
+          do controlador \textsc{raid}.
+    \item A visualização do escalonador \textsc{cfs} é estática
+          (árvore exemplificativa); não há simulador de inserção e
+          remoção de \emph{tasks} ao longo do tempo.
+    \item O suporte mobile é funcional (\emph{media queries} em três
+          \emph{breakpoints}), mas tabelas extensas precisam de
+          rolagem horizontal em telas estreitas.
+\end{enumerate}
+
+\section{Trabalhos futuros}
+
+\begin{itemize}
+    \item \textbf{Animar a coerência \textsc{mesi/mesif}}: implementar
+          um simulador onde dois \emph{cores} disputam uma linha de
+          cache e o usuário acompanha as transições de estado.
+    \item \textbf{Visualização do \emph{page walk}}: animar a
+          tradução de um endereço virtual nos 4 níveis da
+          paginação x86-64, com e sem \textit{TLB hit}.
+    \item \textbf{Integração com benchmarks reais}: incorporar
+          dados de \texttt{fio}, \texttt{stress-ng} e
+          \texttt{lmbench} para ancorar os valores teóricos em
+          medições reproduzíveis.
+    \item \textbf{Tradução para o inglês}: o infográfico tem
+          potencial além do escopo da disciplina --- com tradução,
+          poderia servir como recurso aberto (CC-BY) para outras
+          turmas de Arquitetura de Computadores.
+    \item \textbf{Acessibilidade}: auditar para conformidade
+          \textsc{wcag} 2.1 \textsc{aa}, garantindo navegação por
+          teclado e leitor de tela em todos os simuladores.
+\end{itemize}
+
+\section{Considerações finais}
+
+O salto de profundidade entre as duas iterações --- de 1\,060 para
+2\,554 linhas de código, de 3 para 17 referências bibliográficas,
+de zero para 11 tabelas quantitativas e de 5 para 8 simuladores
+interativos --- ilustra que a profundidade técnica de um artefato
+didático é fundamentalmente uma decisão \emph{de conteúdo}, não de
+arquitetura de software. Manter o projeto em um único arquivo HTML
+sem dependências facilitou justamente esse aprofundamento: toda a
+energia da segunda iteração pôde ser direcionada para a leitura
+crítica do material das aulas e para a tradução dos conceitos em
+visualizações executáveis, sem ser desperdiçada em configuração de
+\emph{build tools} ou gerenciamento de pacotes.
+
+O resultado é um artefato que, esperamos, faça jus à
+crítica original do orientador e demonstre, de forma navegável e
+auto-contida, por que um servidor é mais do que ``um computador
+maior'' --- e quais subsistemas precisam estar bem compreendidos
+para projetá-lo, operá-lo ou estudá-lo.

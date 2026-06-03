@@ -2084,6 +2084,18 @@
         let vmCount = 0;
 
 
+        /* ====== DEEP-LINK INICIAL ======
+         * Permite abrir o infográfico já apontando para um módulo,
+         * via URL: projeto.html#mod3, projeto.html#mod5, etc.
+         * Útil para compartilhamento e para capturas automáticas.
+         */
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && document.getElementById(hash)) {
+                showModule(hash, null);
+            }
+        });
+
         /* ====== NAVEGAÇÃO ====== */
         function showModule(modId, element) {
             document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));

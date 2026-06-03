@@ -1,0 +1,278 @@
+\chapter{Referencial Teórico}
+\label{cap:referencial}
+
+Este capítulo apresenta o referencial conceitual sobre o qual o
+infográfico se apoia. As subseções a seguir espelham a estrutura
+modular do artefato e estão ancoradas tanto nos livros-texto da
+disciplina quanto em artigos seminais e material didático do
+Prof.\ Koide~\cite{koide2026}.
+
+\section{Desktop \textit{versus} Servidor}
+\label{sec:ref-desktop-servidor}
+
+Embora compartilhem o modelo de von Neumann~\cite{stallings2017},
+desktop e servidor divergem em praticamente todos os subsistemas
+físicos. Servidores exigem altíssima disponibilidade --- tipicamente
+\textsc{sla} de 99,99\,\% (4,38 minutos de \textit{downtime} mensais)
+ou 99,999\,\% (\textit{five-nines}, 26 segundos mensais) --- e
+operação ininterrupta 24/7. Para isso adotam:
+
+\begin{itemize}
+    \item \textbf{Fontes redundantes \textit{hot-plug}} (configuração
+          N+1 ou 2N), onde a queima de uma unidade não interrompe a
+          operação;
+    \item \textbf{Arquitetura multi-socket} (2, 4 ou 8 processadores
+          numa mesma placa), com interconexão coerente ponto-a-ponto
+          --- \textsc{qpi}/\textsc{upi} na Intel~\cite{intel2009qpi},
+          HyperTransport/Infinity Fabric na AMD;
+    \item \textbf{Memória \textsc{ecc} registrada} (\textsc{rdimm} ou
+          \textsc{lrdimm}), capaz de detectar e corrigir erros de bit
+          em tempo real;
+    \item \textbf{Form factor padronizado em rack} EIA-310 (unidade
+          básica \textsc{1u} $=$ 44,45\,mm), permitindo densidade e
+          padronização em \textit{datacenters};
+    \item \textbf{Gerenciamento \textit{out-of-band}} por
+          microcontroladores dedicados como iDRAC (Dell), iLO (HPE)
+          ou \textsc{ipmi} genérico, com endereço IP próprio e
+          independente do sistema operacional principal;
+    \item \textbf{Redes de alto desempenho} (10\,\textsc{gbe},
+          25\,\textsc{gbe}, 100\,\textsc{gbe} ou \textsc{InfiniBand})
+          com \textit{bonding} \textsc{lacp} para tolerância a
+          falhas e agregação de banda.
+\end{itemize}
+
+O surgimento de cargas de trabalho de inteligência artificial
+generativa redesenhou o conceito de ``servidor'' nos últimos cinco
+anos. A planta passou a ser dominada por aceleradores
+--- \textsc{gpu}s, \textsc{tpu}s, \textsc{npu}s --- com interconexões
+dedicadas (\textsc{nv}Link, \textsc{cxl}) que ultrapassam o
+\textsc{pci}e em ordens de grandeza~\cite{nvidia2023grace}.
+
+\section{RAID --- Redundant Array of Independent Disks}
+\label{sec:ref-raid}
+
+A proposta original de Patterson, Gibson e Katz~\cite{patterson1988}
+em 1988 introduziu a ideia de agrupar múltiplos discos baratos para
+obter, ao mesmo tempo, desempenho e tolerância a falhas
+\textit{barata}. Os principais níveis adotados na indústria são:
+
+\begin{description}
+    \item[RAID 0 (Striping)] divide blocos de dados sequencialmente
+          entre $N$ discos; capacidade útil $N \cdot D$, leitura e
+          escrita paralelas, \emph{zero} tolerância a falhas.
+    \item[RAID 1 (Mirroring)] mantém cópia idêntica em dois discos;
+          capacidade útil $D$, sobrevive à perda de $N-1$ unidades
+          de um grupo espelhado.
+    \item[RAID 5 (Paridade distribuída)] espalha um bloco de paridade
+          $P = A \oplus B \oplus C$ entre os discos; capacidade útil
+          $(N-1) \cdot D$, sobrevive à perda de \emph{um} disco,
+          impõe penalidade de escrita 4$\times$ (\textit{read-modify-write}).
+    \item[RAID 6] usa dois blocos de paridade independentes (P e Q);
+          tolera \emph{dois} discos quebrados, com penalidade 6$\times$.
+    \item[RAID 10] combina espelhamento + \textit{striping}; alta
+          performance e tolerância, custa metade da capacidade bruta.
+\end{description}
+
+\subsection{Aplicação da Lei de Amdahl}
+
+A Lei de Amdahl~\cite{amdahl1967} delimita o ganho máximo de qualquer
+otimização paralela. Sendo $P$ a fração paralelizável do trabalho e
+$N$ o número de unidades de execução:
+
+\begin{equation}
+\mathrm{Speedup}(N) = \frac{1}{(1-P) + \dfrac{P}{N}}
+\label{eq:amdahl}
+\end{equation}
+
+Quando $N \to \infty$, $\mathrm{Speedup} \to 1/(1-P)$. No exemplo do
+servidor \textsc{www} discutido pelo Prof.\ Koide na Aula~9
+(disco 10\,000\,\textsc{rpm}, \textit{seek} médio de 8\,\textsc{ms},
+páginas de 8\,\textsc{kb}), aproximadamente 99,3\,\% do tempo de
+resposta é latência rotacional --- portanto serial --- e apenas 0,7\,\%
+é transferência paralelizável. Substituindo na Equação~\ref{eq:amdahl}
+com $P = 0{,}007$, o \textit{speedup} máximo teórico é
+$1/(1-0{,}007) \approx 1{,}007\times$. Conclusão pedagógica: paralelizar
+discos para esse perfil não ajuda; o vetor de otimização é
+\emph{trocar a parte serial} --- substituir o \textsc{hdd} por
+\textsc{ssd}.
+
+\section{Memória ECC e o código de Hamming}
+\label{sec:ref-ecc}
+
+Em servidor 24/7, \textit{soft errors} de memória são
+estatisticamente certos. Partículas subatômicas (nêutrons cósmicos
+secundários e partículas $\alpha$ provenientes de contaminação de
+solda) podem inverter um bit de \textsc{dram} sem aviso. O estudo
+de campo de Schroeder, Pinheiro e Weber~\cite{schroeder2009},
+realizado durante 2,5 anos na frota do Google, registrou taxas de
+25\,000 a 70\,000 erros corrigíveis por \textsc{dimm} ao ano e
+mostrou que aproximadamente 8\,\% dos \textsc{dimm}s exibem ao menos
+um erro por ano --- contrariando a hipótese anterior de erros raros
+ou esporádicos.
+
+A correção em tempo real é feita por um código corretor proposto
+originalmente por Hamming~\cite{hamming1950} em 1950. A variante
+\textsc{secded} (\emph{Single Error Correction, Double Error
+Detection}), padrão em \textsc{dimm} \textsc{ecc} registrado, anexa
+quatro bits de paridade nas posições $2^k$ ($k=0,1,2,3$) e um bit
+adicional global. Cada bit de paridade cobre um subconjunto de
+posições determinado por seu bit correspondente em binário; na
+leitura, o controlador recalcula as paridades e obtém um \emph{síndrome}
+cuja representação decimal é exatamente a posição do bit corrompido.
+O hardware inverte o bit indicado e entrega o dado correto à CPU sem
+qualquer participação do sistema operacional.
+
+A norma JEDEC \textsc{jesd79-5}~\cite{jedec2024ddr5} tornou
+obrigatória a presença de \textsc{ecc} \textit{on-die} na
+\textsc{ddr5}, mas é importante notar: trata-se de proteção
+\emph{interna} à célula, não cobrindo o \textit{datapath}
+\textsc{dimm}~$\to$~CPU. Somente \textsc{rdimm}/\textsc{lrdimm} com
+\textsc{ecc} de fato protegem todo o canal.
+
+\section{Hierarquia de memória, cache e NUMA}
+\label{sec:ref-hierarquia}
+
+Patterson e Hennessy~\cite{patterson2017} formalizam o princípio:
+nenhuma tecnologia de memória é simultaneamente rápida, grande e
+barata. A solução é dispor camadas em pirâmide:
+registradores (sub-nanossegundo) $\to$ cache L1/L2/L3
+(nanossegundos) $\to$ \textsc{ram} (dezenas de nanossegundos) $\to$
+\textsc{ssd} (microssegundos) $\to$ \textsc{hdd} (milissegundos).
+A eficiência da pirâmide depende de duas formas de localidade:
+\textbf{temporal} (dados acessados recentemente serão acessados
+de novo) e \textbf{espacial} (vizinhos de um dado acessado serão
+acessados em breve).
+
+\subsection{Organização da cache}
+
+Caches modernos são \textit{set-associative}: o endereço seleciona um
+\textit{set} e a linha pode ocupar qualquer um dos $k$ \textit{ways}.
+Um Intel Core i7-5960X, processador de referência citado no
+material de aula~\cite{koide2026}, organiza-se assim:
+
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+Nível & Tamanho & Associatividade & Linha & Latência \\
+\midrule
+L1 (dados/instruções) & 32 KB     & 8-way  & 64 B & 4 ciclos \\
+L2                    & 256 KB    & 8-way  & 64 B & 12 ciclos \\
+L3 (\emph{LLC})       & 20 MB     & 20-way & 64 B & 38 ciclos \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A \textbf{linha de cache de 64 bytes} é a unidade indivisível: ler
+um byte traz consigo 63 vizinhos. L1 é privada de cada \emph{core},
+L3 é compartilhada por todos os \emph{cores} do mesmo \emph{socket}.
+
+\subsection{NUMA --- Non-Uniform Memory Access}
+
+Em servidor multi-socket, cada CPU possui seus pentes próprios de
+RAM. O acesso ao banco local é rápido ($\approx 80$\,\textsc{ns}),
+mas o acesso à RAM do socket vizinho passa pelo link
+\textsc{upi}/Infinity Fabric e custa cerca de 140\,\textsc{ns}~\cite{stallings2017}.
+Essa não-uniformidade obriga o escalonador a manter cada
+\emph{thread} próxima da memória que ela toca --- conceito de
+\textit{NUMA affinity} suportado por \texttt{numactl} (Linux) e
+funções equivalentes da \textsc{api} Windows.
+
+\subsection{Coerência: MESI, MESIF, MOESI}
+
+Quando múltiplos \emph{cores} têm cópias da mesma linha de cache, é
+preciso garantir consistência. O protocolo \textsc{mesi} define
+quatro estados por linha: \emph{Modified, Exclusive, Shared, Invalid}.
+A Intel acrescenta \emph{Forward} (\textsc{mesif}) e a AMD acrescenta
+\emph{Owned} (\textsc{moesi}). Toda escrita em linha
+\emph{Shared} dispara invalidações nos outros \emph{cores}; essa
+operação cruza o link de coerência e custa centenas de
+ciclos --- o conhecido \textit{false sharing}.
+
+\subsection{Paginação, TLB e \textit{huge pages}}
+
+A \textsc{mmu} traduz endereços virtuais para físicos via tabelas de
+página percorridas em 4 níveis na arquitetura x86-64. A \textsc{tlb}
+(\emph{Translation Lookaside Buffer}) cacheia as traduções
+recentes; quando há \textit{miss}, o \textit{page walk} custa até
+quatro acessos à \textsc{ram}~\cite{silberschatz2015}. Para reduzir
+pressão na \textsc{tlb}, sistemas modernos suportam páginas de
+2\,\textsc{mb} (\textit{huge pages}) e 1\,\textsc{gb}
+(\textit{gigantic pages}), cada entrada cobrindo 512$\times$ ou
+262\,144$\times$ mais memória.
+
+\section{Virtualização e hipervisores}
+\label{sec:ref-virtualizacao}
+
+Popek e Goldberg~\cite{popek1974} estabeleceram, em 1974, três
+condições para que uma arquitetura seja virtualizável:
+\textbf{equivalência} (a VM deve se comportar como hardware nativo),
+\textbf{eficiência} (a maior parte das instruções deve executar sem
+intervenção do hipervisor) e \textbf{controle de recursos}
+(o hipervisor mantém posse exclusiva dos recursos físicos). Esses
+critérios não eram naturalmente satisfeitos pela arquitetura
+x86 original; somente em 2005 (Intel \textsc{vt-x}) e 2006 (AMD-V) as
+extensões de hardware introduziram o estado \textsc{vmx} (informalmente
+chamado de Ring~$-1$) que coloca o hipervisor abaixo do
+Ring~0~\cite{russinovich2017}.
+
+\subsection{Tipo 1 \textit{vs.}\ Tipo 2}
+
+\begin{itemize}
+    \item \textbf{Tipo 1 (\textit{bare metal})}: o hipervisor é o
+          próprio sistema operacional raiz, instalado diretamente
+          sobre o hardware. Exemplos: VMware ESXi, KVM (kernel
+          Linux + \textsc{qemu}), Hyper-V Server, Proxmox VE, Citrix
+          XenServer. Performance próxima da nativa.
+    \item \textbf{Tipo 2 (\textit{hosted})}: o hipervisor é um
+          programa rodando sobre um sistema operacional convencional.
+          Exemplos: VirtualBox (citado pelo Prof.\ Koide na Aula~12),
+          VMware Workstation, Parallels Desktop. Performance reduzida
+          pelo \textit{overhead} do \textsc{so} hospedeiro.
+\end{itemize}
+
+O Windows Subsystem for Linux 2 (\textsc{wsl}~2) ilustra o caso
+limítrofe: é um \emph{kernel} Linux verdadeiro rodando numa VM
+\textit{utility} leve gerenciada pelo Hyper-V, com \textit{boot}
+quase instantâneo e integração transparente com o filesystem do
+Windows via 9P.
+
+\subsection{Contêineres: virtualização ao nível do SO}
+
+Diferentemente da VM, o contêiner compartilha o \emph{kernel} do
+\textit{host} --- isolamento é obtido por \textit{namespaces}
+(PID, mount, network, IPC, UTS, user) e \textit{cgroups} do
+Linux~\cite{bovet2005}. O resultado: \textit{boot} em $\approx
+100$\,\textsc{ms}, \textit{footprint} de \textsc{mb}s, densidade
+acima de 1\,000 contêineres por \emph{host}.
+Orquestradores como Kubernetes escalam essa unidade para clusters de
+milhares de nós.
+
+\subsection{Escalonadores}
+
+O \emph{Completely Fair Scheduler} (\textsc{cfs}) do Linux mantém
+todas as \texttt{task\_struct} numa árvore rubro-negra ordenada por
+\texttt{vruntime} --- tempo virtual de execução ponderado pela
+prioridade \emph{nice}. A cada decisão, escolhe-se a tarefa mais à
+esquerda; complexidade $\mathcal{O}(\log n)$~\cite{bovet2005}. O
+Windows usa escalonador \emph{multilevel feedback queue} baseado em
+quantum e prioridades 0--31, com a maior parte da política
+implementada no \texttt{ntoskrnl.exe}~\cite{russinovich2017}.
+
+\section{Síntese: \textit{stack} completo do servidor}
+\label{sec:ref-stack}
+
+Os cinco subsistemas anteriores não são compartimentos isolados.
+Numa requisição HTTP simples a um \textit{e-commerce}, todos eles
+participam: o \textit{load balancer} entrega o pacote pela rede
+(camada~\ref{sec:ref-desktop-servidor}); o \textit{ingress
+controller} no Kubernetes despacha para um \emph{pod}
+(virtualização, \ref{sec:ref-virtualizacao}); o processo executa em
+v\textsc{cpu}s mapeados em \emph{cores} físicos com afinidade
+\textsc{numa} (\ref{sec:ref-hierarquia}); buffers são alocados em
+\textsc{ram} \textsc{ecc} (\ref{sec:ref-ecc}); páginas são lidas de
+um \textsc{ssd} integrado a \textsc{raid}~10 (\ref{sec:ref-raid}); e
+a resposta retorna percorrendo a mesma cadeia em sentido inverso.
+
+A última seção do infográfico, descrita no
+Capítulo~\ref{cap:desenvolvimento}, materializa essa visão
+integradora.
