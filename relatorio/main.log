@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.6.3)  3 JUN 2026 17:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Arch Linux) (preloaded format=pdflatex 2026.6.3)  3 JUN 2026 19:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1175,7 +1175,7 @@ LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
 fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-m
 athsy.enc}] [9]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-77.
+85.
  (/usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1184,23 +1184,23 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <14.4> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 191.
- [10]) [11]
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 199.
+ [10] [11])
+[12]
 \openout2 = `capitulos/03-materiais-metodos.aux'.
 
-
-(./capitulos/03-materiais-metodos.tex
+ (./capitulos/03-materiais-metodos.tex
 Cap\'{\i }tulo 3.
-[12
+[13
 
 
 
 
-] [13]
+] [14]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[14]) [15]
+[15]) [16]
 \openout2 = `capitulos/04-desenvolvimento.aux'.
 
  (./capitulos/04-desenvolvimento.tex
@@ -1213,12 +1213,12 @@ File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 25.
-<figuras/mod1.png, id=322, 1405.25pt x 1606.0pt>
+<figuras/mod1.png, id=329, 1405.25pt x 1606.0pt>
 File: figuras/mod1.png Graphic file (type png)
 <use figuras/mod1.png>
 Package pdftex.def Info: figuras/mod1.png  used on input line 56.
 (pdftex.def)             Requested size: 432.24861pt x 494.00749pt.
- [16
+ [17
 
 
 
@@ -1231,93 +1231,89 @@ mr/m/n/12 (-20) e 3.0/4.0/5.0, \T1/lmr/m/sc/12 (-20) nvme\T1/lmr/m/n/12 (-20) ,
  gbe
  []
 
-[17 <./figuras/mod1.png (PNG copy)>]
-<figuras/mod2.png, id=361, 1405.25pt x 1606.0pt>
+[18 <./figuras/mod1.png (PNG copy)>]
+<figuras/mod2.png, id=369, 1405.25pt x 1606.0pt>
 File: figuras/mod2.png Graphic file (type png)
 <use figuras/mod2.png>
-Package pdftex.def Info: figuras/mod2.png  used on input line 112.
+Package pdftex.def Info: figuras/mod2.png  used on input line 114.
 (pdftex.def)             Requested size: 432.24861pt x 494.00749pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[18] [19 <./figuras/mod2.png (PNG copy)>]
+[19] [20 <./figuras/mod2.png (PNG copy)>]
 
 LaTeX Font Warning: Font shape `T1/lmss/m/sc' in size <17.28> not available
-(Font)              Font shape `T1/lmr/m/sc' tried instead on input line 184.
+(Font)              Font shape `T1/lmr/m/sc' tried instead on input line 186.
 
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/17.28'.
 (microtype)             Ignoring protrusion settings for this character.
-<figuras/mod3.png, id=385, 1405.25pt x 1606.0pt>
+<figuras/mod3.png, id=388, 1405.25pt x 1606.0pt>
 File: figuras/mod3.png Graphic file (type png)
 <use figuras/mod3.png>
-Package pdftex.def Info: figuras/mod3.png  used on input line 189.
+Package pdftex.def Info: figuras/mod3.png  used on input line 191.
 (pdftex.def)             Requested size: 432.24861pt x 494.00749pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Overfull \hbox (3.46332pt too wide) in paragraph at lines 207--210
+Overfull \hbox (3.46332pt too wide) in paragraph at lines 215--218
 []\T1/lmr/m/n/12 (-20) tabela com-pa-rando pa-ri-dade sim-ples, \T1/lmr/m/sc/12
  (-20) sec-ded\T1/lmr/m/n/12 (-20) , Chip-kill/\T1/lmr/m/sc/12 (-20) sddc
  []
 
-[20]
-<figuras/mod4.png, id=407, 1405.25pt x 1606.0pt>
+[21]
+<figuras/mod4.png, id=414, 1405.25pt x 1606.0pt>
 File: figuras/mod4.png Graphic file (type png)
 <use figuras/mod4.png>
-Package pdftex.def Info: figuras/mod4.png  used on input line 226.
+Package pdftex.def Info: figuras/mod4.png  used on input line 234.
 (pdftex.def)             Requested size: 432.24861pt x 494.00749pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[21 <./figuras/mod3.png (PNG copy)>] [22 <./figuras/mod4.png (PNG copy)>]
-<figuras/mod5.png, id=420, 1405.25pt x 1606.0pt>
+ [22 <./figuras/mod3.png (PNG copy)>] [23 <./figuras/mod4.png (PNG copy)>]
+<figuras/mod5.png, id=427, 1405.25pt x 1606.0pt>
 File: figuras/mod5.png Graphic file (type png)
 <use figuras/mod5.png>
-Package pdftex.def Info: figuras/mod5.png  used on input line 283.
+Package pdftex.def Info: figuras/mod5.png  used on input line 291.
 (pdftex.def)             Requested size: 432.24861pt x 494.00749pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<figuras/mod6.png, id=421, 1405.25pt x 1606.0pt>
+<figuras/mod6.png, id=428, 1405.25pt x 1606.0pt>
 File: figuras/mod6.png Graphic file (type png)
 <use figuras/mod6.png>
-Package pdftex.def Info: figuras/mod6.png  used on input line 314.
+Package pdftex.def Info: figuras/mod6.png  used on input line 322.
 (pdftex.def)             Requested size: 432.24861pt x 494.00749pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[23] [24 <./figuras/mod5.png (PNG copy)>] [25 <./figuras/mod6.png (PNG copy)>])
-[26] [27]
+[24] [25 <./figuras/mod5.png (PNG copy)>] [26 <./figuras/mod6.png (PNG copy)>]
+[27]) [28]
 \openout2 = `capitulos/05-conclusao.aux'.
 
  (./capitulos/05-conclusao.tex
 Cap\'{\i }tulo 5.
-[28
+[29
 
 
 
 
-] [29]) [30] (./main.bbl (./main.brf)
+] [30]) [31] (./main.bbl (./main.brf)
 \tf@brf=\write4
 \openout4 = `main.brf'.
 
 
 bibitemlist
-[31
+[32
 
 
 
-]) [32]
+]) [33]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 185.
 
-[33
+[34
 
 
 ]
@@ -1325,16 +1321,16 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
  (./capitulos/anexo-a-codigo.tex
 ANEXO A.
-[34
+[35
 
 
-] [35] [36]
+] [36] [37]
 Overfull \hbox (18.97491pt too wide) in paragraph at lines 162--164
 \T1/lmtt/m/n/12 git clone https://github.com/glkwolff/Projeto-Estruturas-de-com
 putadores 
  []
 
-[37]) [38]
+[38]) [39]
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
@@ -1351,14 +1347,14 @@ L3 programming layer <2020/03/25>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `main.brf' has not changed.
-(rerunfilecheck)             Checksum: B872EC6917B5B8187E97A3F87E98AF1C;1248.
+(rerunfilecheck)             Checksum: CEAE09F722379BA5EF2B79BEDC83C712;1310.
  ) 
 Here is how much of TeX's memory you used:
- 25010 strings out of 469495
- 404687 string characters out of 5470099
- 1590999 words of memory out of 5000000
- 52614 multiletter control sequences out of 15000+600000
- 748328 words of font info for 262 fonts, out of 8000000 for 9000
+ 25034 strings out of 469495
+ 405077 string characters out of 5470099
+ 1591383 words of memory out of 5000000
+ 52629 multiletter control sequences out of 15000+600000
+ 748562 words of font info for 265 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  110i,13n,117p,1001b,2359s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-dis
@@ -1377,10 +1373,10 @@ o17.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/tex
 mf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf-dist/fonts/type1/pub
 lic/lm/lmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr
 /share/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on main.pdf (39 pages, 1759761 bytes).
+Output written on main.pdf (40 pages, 1762751 bytes).
 PDF statistics:
- 1052 PDF objects out of 1200 (max. 8388607)
- 948 compressed objects within 10 object streams
- 340 named destinations out of 1000 (max. 500000)
+ 1064 PDF objects out of 1200 (max. 8388607)
+ 959 compressed objects within 10 object streams
+ 343 named destinations out of 1000 (max. 500000)
  70191 words of extra memory for PDF output out of 74296 (max. 10000000)
 

@@ -1071,12 +1071,12 @@
                         </tbody>
                     </table>
 
-                    <p style="margin-top: 1rem;">O QPI tem 4 camadas (espelhando OSI): <strong>Física</strong> (sinalização diferencial, 20 lanes), <strong>Ligação</strong> (flits de 80 bits + CRC), <strong>Roteamento</strong> (entrega multi-socket) e <strong>Protocolo</strong> (MESIF — Modified/Exclusive/Shared/Invalid/Forward)<a class="cite" onclick="goToRef(17)" title="KOIDE, Aula 6">[17]</a>.</p>
+                    <p style="margin-top: 1rem;">O QPI é especificado em <strong>5 camadas</strong>: <strong>Física</strong> (sinalização diferencial, 20 lanes), <strong>Ligação</strong> (flits de 80 bits + CRC), <strong>Roteamento</strong> (entrega multi-socket), <strong>Transporte</strong> (opcional, ausente em ligações ponto-a-ponto simples) e <strong>Protocolo</strong> (MESIF — Modified/Exclusive/Shared/Invalid/Forward)<a class="cite" onclick="goToRef(13)" title="Intel QPI White Paper, 2009">[13]</a><a class="cite" onclick="goToRef(17)" title="KOIDE, Aula 6">[17]</a>.</p>
                 </div>
 
                 <!-- PAINEL C: BARRAMENTOS -->
                 <div class="mod-panel" id="p1c">
-                    <p>A diferença "desktop vs servidor" também aparece em quantidade e velocidade dos barramentos: um Xeon expõe ~80 lanes PCIe; um Core i7 desktop, ~20<a class="cite" onclick="goToRef(7)" title="MORIMOTO, 2013">[7]</a>.</p>
+                    <p>A diferença "desktop vs servidor" também aparece em quantidade e velocidade dos barramentos: um Xeon expõe ~80 lanes PCIe; um Core i7 desktop, ~20<a class="cite" onclick="goToRef(7)" title="MORIMOTO, 2010">[7]</a>.</p>
 
                     <table class="data-table">
                         <thead>
@@ -1114,8 +1114,12 @@
                             <div class="specs">ASIC dedicado, 459 TFLOPs BF16. 8.960 TPUs por pod via ICI 4,8 Tbps.</div>
                         </div>
                         <div class="ai-card">
-                            <h4>Frontier — exaescala</h4>
-                            <div class="specs">1,194 ExaFLOPs. 9.408 nós EPYC + 4× MI250X cada. HPE Cray EX, Oak Ridge.</div>
+                            <h4>El Capitan — nº 1 TOP500</h4>
+                            <div class="specs">1,809 ExaFLOPs (TOP500, nov/2025). HPE Cray EX255a, AMD EPYC + Instinct MI300A. LLNL.</div>
+                        </div>
+                        <div class="ai-card">
+                            <h4>Frontier — nº 2 TOP500</h4>
+                            <div class="specs">1,353 ExaFLOPs (TOP500, nov/2025). 9.408 nós EPYC + 4× MI250X cada. HPE Cray EX235a, Oak Ridge.</div>
                         </div>
                     </div>
                 </div>
@@ -1219,7 +1223,7 @@
 
                 <!-- PAINEL C: CALCULADORA -->
                 <div class="mod-panel" id="p2c">
-                    <p>Configure os parâmetros do array e veja capacidade útil, tolerância a falhas e IOPS estimados<a class="cite" onclick="goToRef(7)" title="MORIMOTO, 2013">[7]</a>.</p>
+                    <p>Configure os parâmetros do array e veja capacidade útil, tolerância a falhas e IOPS estimados<a class="cite" onclick="goToRef(7)" title="MORIMOTO, 2010">[7]</a>.</p>
 
                     <div class="calc-grid">
                         <div class="calc-inputs">
@@ -1267,7 +1271,7 @@
 
                 <!-- PAINEL D: AMDAHL -->
                 <div class="mod-panel" id="p2d">
-                    <p>A Lei de Amdahl<a class="cite" onclick="goToRef(10)" title="AMDAHL, 1967">[10]</a> impõe um limite teórico ao ganho de paralelizar discos. Se uma fração <em>P</em> do tempo é paralelizável e <em>N</em> é o nº de discos:</p>
+                    <p>O argumento de Amdahl<a class="cite" onclick="goToRef(10)" title="AMDAHL, 1967 — argumento qualitativo">[10]</a> impõe um limite teórico ao ganho de paralelizar discos: o ganho é limitado pela fração serial. A formulação moderna em equação, derivada posteriormente do argumento original, é: se uma fração <em>P</em> do tempo é paralelizável e <em>N</em> é o nº de discos,</p>
 
                     <div class="formula">
                         Speedup(N) = 1 / [ (1 − P) + P/N ]
@@ -1369,9 +1373,9 @@
 
                 <!-- PAINEL B: HAMMING -->
                 <div class="mod-panel" id="p3b">
-                    <p>A maioria das memórias ECC implementa <strong>SECDED</strong> (<em>Single Error Correction, Double Error Detection</em>), variação do código de Hamming<a class="cite" onclick="goToRef(9)" title="HAMMING, 1950">[9]</a>. Para 8 bits de dado adicionam-se <strong>4 bits de paridade</strong> nas posições de potência de 2, mais 1 bit extra para detecção dupla.</p>
+                    <p>A maioria das memórias ECC implementa <strong>SECDED</strong> (<em>Single Error Correction, Double Error Detection</em>), variação do código de Hamming<a class="cite" onclick="goToRef(9)" title="HAMMING, 1950">[9]</a>. Para 8 bits de dado adicionam-se <strong>4 bits de paridade</strong> nas posições de potência de 2 — formando o código Hamming(12,8) com correção de erro único (SEC). Acrescentando um <strong>bit de paridade global</strong>, obtém-se o código estendido <strong>(13,8)</strong>, que implementa SECDED.</p>
 
-                    <h3 style="color: var(--accent-orange); margin-top: 1.5rem;">Layout dos 12 bits (Hamming(12,8))</h3>
+                    <h3 style="color: var(--accent-orange); margin-top: 1.5rem;">Layout dos 12 bits (Hamming(12,8) — SEC)</h3>
                     <div class="hamming-row">
                         <div><div class="hbit parity">P1</div><div class="hbit-label">pos 1</div></div>
                         <div><div class="hbit parity">P2</div><div class="hbit-label">pos 2</div></div>
@@ -1408,7 +1412,7 @@
                             Ex.: síndromes = (0,1,0,1) ⇒ posição binária 0101 = 5 ⇒ <strong>D2 está corrompido</strong>
                             <small>O hardware inverte o bit da posição 5 e entrega o dado correto à CPU.</small>
                         </div>
-                        <p>Com o bit extra global, detecta-se ainda <strong>2 erros simultâneos</strong> (DED) — embora não consiga corrigir, ao menos a falha é sinalizada (MCE — Machine Check Exception) em vez de causar corrupção silenciosa.</p>
+                        <p>É esse <strong>bit de paridade global extra</strong> que estende o código para Hamming(13,8) e permite detectar <strong>2 erros simultâneos</strong> (DED) — embora não consiga corrigir, ao menos a falha é sinalizada (MCE — Machine Check Exception) em vez de causar corrupção silenciosa.</p>
                     </div>
                 </div>
 
@@ -1421,11 +1425,11 @@
                             <tr><th>Métrica</th><th>Valor observado</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Erros corrigíveis (CE) por DIMM/ano</td><td class="num">~25.000 a 70.000</td></tr>
-                            <tr><td>% de DIMMs com ≥ 1 erro corrigível por ano</td><td class="num">~8%</td></tr>
-                            <tr><td>% de DIMMs com erro <em>incorrigível</em> (UE) por ano</td><td class="num">~1,3%</td></tr>
-                            <tr><td>Probabilidade UE → reboot/crash sem ECC</td><td class="num">≈ 100%</td></tr>
-                            <tr><td>Erro permanente (hard) vs transitório (soft)</td><td>~70% dos casos vinha de defeito de hardware, não raio cósmico</td></tr>
+                            <tr><td>Taxa de erro (FIT por Mbit)</td><td class="num">~25.000 a 70.000</td></tr>
+                            <tr><td>(i.e., erros por bilhão de horas-dispositivo por Mbit)</td><td>—</td></tr>
+                            <tr><td>% de DIMMs com ≥ 1 erro corrigível por ano</td><td class="num">&gt; 8%</td></tr>
+                            <tr><td>Probabilidade de erro incorrigível → reboot/crash sem ECC</td><td class="num">≈ 100%</td></tr>
+                            <tr><td>Conclusão sobre a origem</td><td>Predominantemente <em>hard errors</em> (defeito de hardware), não <em>soft errors</em></td></tr>
                         </tbody>
                     </table>
 
@@ -1434,14 +1438,14 @@
                         <ul style="margin-left: 1.5rem; line-height: 1.7;">
                             <li><strong>Raios cósmicos secundários:</strong> nêutrons atravessam a atmosfera e ionizam o silício. Mais frequentes em altitude (servidores em Denver têm taxa &gt; nível do mar).</li>
                             <li><strong>Contaminação alfa:</strong> traços de urânio/tório na solda emitem partículas α que invertem bits adjacentes.</li>
-                            <li><strong>Rowhammer:</strong> ataque deliberado — acessos repetidos a uma linha de DRAM induzem bit-flips em linhas vizinhas (CVE-2015-0565).</li>
+                            <li><strong>Rowhammer:</strong> acessos repetidos a uma linha de DRAM induzem bit-flips em linhas vizinhas (KIM et al., ISCA 2014). O Project Zero (SEABORN; DULLIEN, 2015) demonstrou as primeiras explorações práticas em x86: escape do <em>sandbox</em> NaCl do Chrome (CVE-2015-0565, mitigado proibindo a instrução <code>CLFLUSH</code>) e escalada de privilégios em <em>kernel</em> Linux x86-64 via alteração de PTEs (sem CVE específico).</li>
                             <li><strong>Desgaste:</strong> envelhecimento de células, especialmente em DDR4/DDR5 com densidades crescentes.</li>
                         </ul>
                     </div>
 
                     <div class="curiosity">
                         <h4>O caso "supereleitor" da Bélgica</h4>
-                        <p>Eleições municipais de Schaerbeek, 2003: o candidato Maria Vindevoghel recebeu <strong>4.096 votos extras</strong>. Investigação concluiu: um único bit flipou no bit de posição 13 (2¹² = 4096) do contador, provavelmente por raio cósmico. O sistema não tinha ECC. É um dos casos publicamente confirmados de soft error com impacto real.</p>
+                        <p>Eleições federais belgas em Schaerbeek, 18 de maio de 2003: a candidata Maria Vindevoghel recebeu <strong>4.096 votos extras</strong>. O relatório oficial, descartado defeito de software, atribuiu o erro à inversão espontânea de 1 bit na posição 13 (2¹² = 4.096) do contador. A causa específica — raio cósmico ou outro <em>single-event upset</em> — é a hipótese mais provável, mas <strong>nunca foi comprovada definitivamente</strong>. O sistema não tinha ECC.</p>
                     </div>
                 </div>
 
@@ -1458,7 +1462,7 @@
                             <tr><td>Paridade simples</td><td>—</td><td>1 bit</td><td class="num">12,5%</td><td>Servidores antigos</td></tr>
                             <tr><td>ECC SECDED (Hamming)</td><td>1 bit</td><td>2 bits</td><td class="num">12,5%</td><td>Servidor mainstream</td></tr>
                             <tr><td>Chipkill / SDDC</td><td>Chip DRAM inteiro</td><td>2 chips</td><td class="num">~25%</td><td>Mainframe, HPC</td></tr>
-                            <tr><td>DDR5 On-Die ECC</td><td>1 bit interno</td><td>—</td><td class="num">0% (built-in)</td><td>DDR5 desktop/server (obrigatório)<a class="cite" onclick="goToRef(16)" title="JEDEC JESD79-5C">[16]</a></td></tr>
+                            <tr><td>DDR5 On-Die ECC</td><td>1 bit interno</td><td>—</td><td class="num">0% (built-in)</td><td>DDR5 desktop/server (obrigatório)<a class="cite" onclick="goToRef(16)" title="JEDEC JESD79-5D">[16]</a></td></tr>
                             <tr><td>DDR5 ECC + On-Die</td><td>Camada dupla</td><td>Dupla</td><td class="num">~12,5%</td><td>Servidores DDR5 modernos</td></tr>
                         </tbody>
                     </table>
@@ -1715,7 +1719,7 @@
 
                 <!-- PAINEL C: VM vs CONTÊINER -->
                 <div class="mod-panel" id="p5c">
-                    <p>Contêineres usam recursos do <em>próprio kernel</em> Linux (<strong>namespaces</strong> isolam processo/rede/PID; <strong>cgroups</strong> limitam CPU/RAM/IO). Não há kernel virtualizado, então um contêiner é tão leve quanto um processo<a class="cite" onclick="goToRef(6)" title="BOVET; CESATI, 2005">[6]</a>.</p>
+                    <p>Contêineres usam recursos do <em>próprio kernel</em> Linux (<strong>namespaces</strong> isolam processo/rede/PID; <strong>cgroups</strong> limitam CPU/RAM/IO). Não há kernel virtualizado, então um contêiner é tão leve quanto um processo<a class="cite" onclick="goToRef(6)" title="LOVE, 2010">[6]</a>.</p>
 
                     <table class="data-table">
                         <thead>
@@ -1747,7 +1751,7 @@
 
                 <!-- PAINEL D: KERNELS E ESCALONADOR -->
                 <div class="mod-panel" id="p5d">
-                    <p>O kernel é o coração do servidor. Duas filosofias dominam o mercado<a class="cite" onclick="goToRef(5)" title="RUSSINOVICH, 2017">[5]</a><a class="cite" onclick="goToRef(6)" title="BOVET; CESATI, 2005">[6]</a>:</p>
+                    <p>O kernel é o coração do servidor. Duas filosofias dominam o mercado<a class="cite" onclick="goToRef(5)" title="RUSSINOVICH, 2017">[5]</a><a class="cite" onclick="goToRef(6)" title="LOVE, 2010">[6]</a>:</p>
 
                     <table class="data-table">
                         <thead>
@@ -1766,7 +1770,7 @@
 
                     <div class="subsection">
                         <h3>🌳 CFS — o escalonador do Linux</h3>
-                        <p>O CFS mantém todas as tarefas em uma <strong>árvore rubro-negra</strong> ordenada por <code>vruntime</code> (tempo virtual acumulado pesado pela prioridade <em>nice</em>). A cada decisão de scheduling, escolhe a tarefa <em>mais à esquerda</em> da árvore — quem rodou menos<a class="cite" onclick="goToRef(6)" title="BOVET; CESATI, 2005">[6]</a>.</p>
+                        <p>O CFS mantém todas as tarefas em uma <strong>árvore rubro-negra</strong> ordenada por <code>vruntime</code> (tempo virtual acumulado pesado pela prioridade <em>nice</em>). A cada decisão de scheduling, escolhe a tarefa <em>mais à esquerda</em> da árvore — quem rodou menos<a class="cite" onclick="goToRef(6)" title="LOVE, 2010">[6]</a>.</p>
 
                         <div class="rb-tree">
                             <div class="rb-row"><div class="rb-node black current">12 ms ⭐</div></div>
@@ -1895,21 +1899,21 @@
                     <li class="ref-item" id="ref-5">
                         <div class="ref-number">[5]</div>
                         <div class="ref-body">
-                            RUSSINOVICH, Mark E.; SOLOMON, David A.; IONESCU, Alex. <strong>Windows Internals, Part 1</strong>. 7. ed. Redmond: Microsoft Press, 2017.
+                            YOSIFOVICH, Pavel; IONESCU, Alex; RUSSINOVICH, Mark E.; SOLOMON, David A. <strong>Windows Internals, Part 1</strong>. 7. ed. Redmond: Microsoft Press, 2017.
                             <span class="ref-type">Livro</span>
                         </div>
                     </li>
                     <li class="ref-item" id="ref-6">
                         <div class="ref-number">[6]</div>
                         <div class="ref-body">
-                            BOVET, Daniel P.; CESATI, Marco. <strong>Understanding the Linux Kernel</strong>. 3. ed. Sebastopol: O'Reilly, 2005.
+                            LOVE, Robert. <strong>Linux Kernel Development</strong>. 3. ed. Upper Saddle River: Addison-Wesley, 2010.
                             <span class="ref-type">Livro</span>
                         </div>
                     </li>
                     <li class="ref-item" id="ref-7">
                         <div class="ref-number">[7]</div>
                         <div class="ref-body">
-                            MORIMOTO, Carlos E. <strong>Hardware II: o guia definitivo</strong>. Florianópolis: Sul Editores, 2013.
+                            MORIMOTO, Carlos E. <strong>Hardware II: o guia definitivo</strong>. Porto Alegre: Sul Editores, 2010.
                             <span class="ref-type">Livro</span>
                         </div>
                     </li>
@@ -1972,7 +1976,7 @@
                     <li class="ref-item" id="ref-16">
                         <div class="ref-number">[16]</div>
                         <div class="ref-body">
-                            JEDEC SOLID STATE TECHNOLOGY ASSOCIATION. <strong>DDR5 SDRAM Standard — JESD79-5C</strong>. Arlington: JEDEC, 2024.
+                            JEDEC SOLID STATE TECHNOLOGY ASSOCIATION. <strong>DDR5 SDRAM Standard — JESD79-5D</strong>. Arlington: JEDEC, nov. 2025.
                             <span class="ref-type">Norma</span>
                         </div>
                     </li>

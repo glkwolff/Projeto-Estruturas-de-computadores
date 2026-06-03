@@ -75,9 +75,12 @@ obter, ao mesmo tempo, desempenho e tolerância a falhas
 
 \subsection{Aplicação da Lei de Amdahl}
 
-A Lei de Amdahl~\cite{amdahl1967} delimita o ganho máximo de qualquer
-otimização paralela. Sendo $P$ a fração paralelizável do trabalho e
-$N$ o número de unidades de execução:
+O argumento de Amdahl~\cite{amdahl1967} delimita o ganho máximo de
+qualquer otimização paralela: o ganho total é limitado pela parcela
+serial do trabalho. A formulação moderna em equação, derivada
+posteriormente do argumento qualitativo original de 1967, expressa-se
+como --- sendo $P$ a fração paralelizável do trabalho e $N$ o número
+de unidades de execução:
 
 \begin{equation}
 \mathrm{Speedup}(N) = \frac{1}{(1-P) + \dfrac{P}{N}}
@@ -105,24 +108,29 @@ secundários e partículas $\alpha$ provenientes de contaminação de
 solda) podem inverter um bit de \textsc{dram} sem aviso. O estudo
 de campo de Schroeder, Pinheiro e Weber~\cite{schroeder2009},
 realizado durante 2,5 anos na frota do Google, registrou taxas de
-25\,000 a 70\,000 erros corrigíveis por \textsc{dimm} ao ano e
-mostrou que aproximadamente 8\,\% dos \textsc{dimm}s exibem ao menos
-um erro por ano --- contrariando a hipótese anterior de erros raros
-ou esporádicos.
+\textbf{25\,000 a 70\,000 FIT por Mbit} (erros por bilhão de
+horas-dispositivo por Mbit) e mostrou que \textbf{mais de 8\,\% dos
+\textsc{dimm}s} exibem ao menos um erro corrigível por ano ---
+contrariando a hipótese anterior de erros raros. O estudo concluiu
+ainda que os erros são predominantemente \textit{hard errors}
+(defeitos de hardware), e não \textit{soft errors} transitórios.
 
 A correção em tempo real é feita por um código corretor proposto
-originalmente por Hamming~\cite{hamming1950} em 1950. A variante
-\textsc{secded} (\emph{Single Error Correction, Double Error
-Detection}), padrão em \textsc{dimm} \textsc{ecc} registrado, anexa
-quatro bits de paridade nas posições $2^k$ ($k=0,1,2,3$) e um bit
-adicional global. Cada bit de paridade cobre um subconjunto de
-posições determinado por seu bit correspondente em binário; na
-leitura, o controlador recalcula as paridades e obtém um \emph{síndrome}
-cuja representação decimal é exatamente a posição do bit corrompido.
-O hardware inverte o bit indicado e entrega o dado correto à CPU sem
-qualquer participação do sistema operacional.
+originalmente por Hamming~\cite{hamming1950} em 1950. Para 8 bits de
+dado, o código clássico Hamming(12,8) anexa quatro bits de paridade
+nas posições $2^k$ ($k=0,1,2,3$) e oferece \emph{single error
+correction} (SEC). A variante \textsc{secded} (\emph{Single Error
+Correction, Double Error Detection}) --- padrão em \textsc{dimm}
+\textsc{ecc} registrado --- estende o código para (13,8) adicionando
+um \emph{bit de paridade global}, capaz de detectar (mas não corrigir)
+ocorrências de dois erros simultâneos. Cada bit de paridade cobre um
+subconjunto de posições determinado por seu bit correspondente em
+binário; na leitura, o controlador recalcula as paridades e obtém um
+\emph{síndrome} cuja representação decimal é exatamente a posição do
+bit corrompido. O hardware inverte o bit indicado e entrega o dado
+correto à CPU sem qualquer participação do sistema operacional.
 
-A norma JEDEC \textsc{jesd79-5}~\cite{jedec2024ddr5} tornou
+A norma JEDEC \textsc{jesd79-5}~\cite{jedec2025ddr5} tornou
 obrigatória a presença de \textsc{ecc} \textit{on-die} na
 \textsc{ddr5}, mas é importante notar: trata-se de proteção
 \emph{interna} à célula, não cobrindo o \textit{datapath}
@@ -239,9 +247,9 @@ Windows via 9P.
 \subsection{Contêineres: virtualização ao nível do SO}
 
 Diferentemente da VM, o contêiner compartilha o \emph{kernel} do
-\textit{host} --- isolamento é obtido por \textit{namespaces}
-(PID, mount, network, IPC, UTS, user) e \textit{cgroups} do
-Linux~\cite{bovet2005}. O resultado: \textit{boot} em $\approx
+\textit{host} --- isolamento é obtido por \textit{namespaces}~\cite{man7namespaces}
+(PID, mount, network, IPC, UTS, user) e \textit{cgroups}~\cite{kernelcgroups}
+do Linux. O resultado: \textit{boot} em $\approx
 100$\,\textsc{ms}, \textit{footprint} de \textsc{mb}s, densidade
 acima de 1\,000 contêineres por \emph{host}.
 Orquestradores como Kubernetes escalam essa unidade para clusters de
@@ -249,11 +257,12 @@ milhares de nós.
 
 \subsection{Escalonadores}
 
-O \emph{Completely Fair Scheduler} (\textsc{cfs}) do Linux mantém
-todas as \texttt{task\_struct} numa árvore rubro-negra ordenada por
-\texttt{vruntime} --- tempo virtual de execução ponderado pela
-prioridade \emph{nice}. A cada decisão, escolhe-se a tarefa mais à
-esquerda; complexidade $\mathcal{O}(\log n)$~\cite{bovet2005}. O
+O \emph{Completely Fair Scheduler} (\textsc{cfs}) do Linux, introduzido
+no \emph{kernel} 2.6.23 (2007), mantém todas as \texttt{task\_struct}
+numa árvore rubro-negra ordenada por \texttt{vruntime} --- tempo
+virtual de execução ponderado pela prioridade \emph{nice}. A cada
+decisão, escolhe-se a tarefa mais à esquerda; complexidade
+$\mathcal{O}(\log n)$~\cite{love2010}. O
 Windows usa escalonador \emph{multilevel feedback queue} baseado em
 quantum e prioridades 0--31, com a maior parte da política
 implementada no \texttt{ntoskrnl.exe}~\cite{russinovich2017}.

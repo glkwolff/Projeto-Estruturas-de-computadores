@@ -39,7 +39,7 @@
 }
 
 @book{russinovich2017,
-    author    = {RUSSINOVICH, Mark E. and SOLOMON, David A. and IONESCU, Alex},
+    author    = {YOSIFOVICH, Pavel and IONESCU, Alex and RUSSINOVICH, Mark E. and SOLOMON, David A.},
     title     = {Windows Internals, Part 1},
     edition   = {7. ed.},
     address   = {Redmond},
@@ -56,12 +56,31 @@
     year      = {2005}
 }
 
-@book{morimoto2013,
+@book{love2010,
+    author    = {LOVE, Robert},
+    title     = {Linux Kernel Development},
+    edition   = {3. ed.},
+    address   = {Upper Saddle River},
+    publisher = {Addison-Wesley},
+    year      = {2010}
+}
+
+@inproceedings{kim2014rowhammer,
+    author    = {KIM, Yoongu and DALY, Ross and KIM, Jeremie and FALLIN, Chris and LEE, Ji Hye and LEE, Donghyuk and WILKERSON, Chris and LAI, Konrad and MUTLU, Onur},
+    title     = {Flipping bits in memory without accessing them: an experimental study of {DRAM} disturbance errors},
+    booktitle = {41st Annual International Symposium on Computer Architecture (ISCA '14), Minneapolis, 2014. Proceedings},
+    address   = {Piscataway},
+    publisher = {IEEE Computer Society},
+    pages     = {361--372},
+    year      = {2014}
+}
+
+@book{morimoto2010,
     author    = {MORIMOTO, Carlos E.},
     title     = {Hardware II: o guia definitivo},
-    address   = {Florianópolis},
+    address   = {Porto Alegre},
     publisher = {Sul Editores},
-    year      = {2013}
+    year      = {2010}
 }
 
 @book{torres2013,
@@ -129,7 +148,7 @@
     address      = {Santa Clara},
     publisher    = {NVIDIA},
     year         = {2023},
-    note         = {Disponível em: \url{https://resources.nvidia.com/en-us-grace-cpu/grace-hopper-superchip}. Acesso em: 3 jun. 2026.}
+    note         = {Disponível em: \url{https://resources.nvidia.com/en-us-data-center-overview/nvidia-grace-hopper-superchip-architecture-whitepaper}. Acesso em: 3 jun. 2026.}
 }
 
 @article{popek1974,
@@ -143,12 +162,35 @@
     year      = {1974}
 }
 
-@misc{jedec2024ddr5,
+@misc{jedec2025ddr5,
     author       = {{JEDEC SOLID STATE TECHNOLOGY ASSOCIATION}},
-    title        = {{DDR5} {SDRAM} {Standard} --- {JESD79-5C}},
+    title        = {{DDR5} {SDRAM} {Standard} --- {JESD79-5D}},
     address      = {Arlington},
     publisher    = {JEDEC},
-    year         = {2024}
+    month        = {nov.},
+    year         = {2025}
+}
+
+@misc{man7namespaces,
+    author       = {{THE LINUX KERNEL ORGANIZATION}},
+    title        = {namespaces(7) --- {Linux} manual page},
+    year         = {2024},
+    note         = {Disponível em: \url{https://man7.org/linux/man-pages/man7/namespaces.7.html}. Acesso em: 3 jun. 2026.}
+}
+
+@misc{kernelcgroups,
+    author       = {{THE LINUX KERNEL ORGANIZATION}},
+    title        = {Control Group v2},
+    year         = {2024},
+    note         = {Disponível em: \url{https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html}. Acesso em: 3 jun. 2026.}
+}
+
+@misc{seaborn2015,
+    author       = {SEABORN, Mark and DULLIEN, Thomas},
+    title        = {Exploiting the {DRAM} rowhammer bug to gain kernel privileges},
+    howpublished = {Google Project Zero Blog},
+    year         = {2015},
+    note         = {Disponível em: \url{https://googleprojectzero.blogspot.com/2015/03/exploiting-dram-rowhammer-bug-to-gain.html}. Acesso em: 3 jun. 2026.}
 }
 
 @misc{koide2026,
@@ -171,7 +213,7 @@
 
 @misc{gemini2026,
     author       = {{GOOGLE LLC}},
-    title        = {{Gemini}: assistente de IA generativa (modo {Canvas})},
+    title        = {{Gemini} (Canvas): assistente de IA generativa},
     address      = {Mountain View},
     publisher    = {Google},
     year         = {2026},

@@ -76,8 +76,10 @@ O módulo apresenta quatro sub-abas:
           \textit{throughput} em \textsc{gb/s}.
     \item[IA \& HPC] cards com servidores de inteligência
           artificial: \textsc{nvidia} Grace Hopper GH200, AMD
-          Instinct MI300X, Google TPU v5p e o supercomputador
-          \emph{Frontier} (exaescala).
+          Instinct MI300X, Google TPU v5p e os supercomputadores
+          \emph{El Capitan} (LLNL, nº\,1 do TOP500 desde nov/2024 com
+          1,809\,\textsc{efl}\textsc{op/s}) e \emph{Frontier} (Oak
+          Ridge, nº\,2 com 1,353\,\textsc{efl}\textsc{op/s}).
 \end{description}
 
 \subsection{Tabela comparativa de interconexões}
@@ -96,7 +98,7 @@ Intel~\cite{intel2009qpi} e do material das aulas~\cite{koide2026}.
 \textbf{Coerência} \\
 \midrule
 FSB             & Intel até 2008   & 10,6 GB/s  & Snooping \\
-QPI             & Intel 2008--2017 & 25,6 GB/s  & MESIF (4 camadas) \\
+QPI             & Intel 2008--2017 & 25,6 GB/s  & MESIF (5 camadas) \\
 UPI             & Intel Skylake+   & 41,6 GB/s  & MESIF + diretório \\
 Infinity Fabric & AMD              & 204 GB/s   & MOESI \\
 NVLink 4.0      & NVIDIA           & 900 GB/s   & GPU coherency \\
@@ -197,13 +199,19 @@ Quatro sub-abas:
     \item[Simulador] herda a animação original de raio cósmico,
           comparando lado-a-lado RAM comum e RAM \textsc{ecc}.
     \item[Como funciona (Hamming)] mostra os 12 bits da palavra
-          Hamming(12,8): quatro paridades $P_1, P_2, P_4, P_8$ nas
-          posições $2^k$, oito bits de dado, e uma tabela com as
-          posições cobertas por cada paridade.
+          Hamming(12,8) com correção de erro único (SEC): quatro
+          paridades $P_1, P_2, P_4, P_8$ nas posições $2^k$, oito
+          bits de dado, e a extensão para (13,8) (\textsc{secded})
+          via bit de paridade global.
     \item[Soft errors no mundo real] expõe os números do estudo de
-          Schroeder \textit{et al.}~\cite{schroeder2009} e cita o
-          caso da eleição de Schaerbeek (Bélgica, 2003) com
-          \emph{bit flip} no contador.
+          Schroeder \textit{et al.}~\cite{schroeder2009} ---
+          25\,000 a 70\,000 \textsc{fit} por \textsc{mb}it,
+          mais de 8\,\% dos \textsc{dimm}s afetados por ano --- e
+          cita o caso da eleição federal belga em Schaerbeek
+          (2003), em que a candidata Maria Vindevoghel recebeu
+          4\,096 votos extras por inversão de um único bit na
+          posição 13 do contador, atribuída a um \emph{single-event
+          upset} (hipótese provável, nunca comprovada definitivamente).
     \item[Modalidades de proteção] tabela comparando paridade
           simples, \textsc{secded}, Chipkill/\textsc{sddc} e
           \textsc{ddr5} \emph{on-die} \textsc{ecc}.

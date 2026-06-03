@@ -14,68 +14,68 @@
 \contentsline {section}{\numberline {2.1}Desktop \textit {versus} Servidor}{7}{section.2.1}%
 \contentsline {section}{\numberline {2.2}RAID --- Redundant Array of Independent Disks}{8}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Aplicação da Lei de Amdahl}{8}{subsection.2.2.1}%
-\contentsline {section}{\numberline {2.3}Memória ECC e o código de Hamming}{8}{section.2.3}%
+\contentsline {section}{\numberline {2.3}Memória ECC e o código de Hamming}{9}{section.2.3}%
 \contentsline {section}{\numberline {2.4}Hierarquia de memória, cache e NUMA}{9}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Organização da cache}{9}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.1}Organização da cache}{10}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}NUMA --- Non-Uniform Memory Access}{10}{subsection.2.4.2}%
 \contentsline {subsection}{\numberline {2.4.3}Coerência: MESI, MESIF, MOESI}{10}{subsection.2.4.3}%
 \contentsline {subsection}{\numberline {2.4.4}Paginação, TLB e \textit {huge pages}}{10}{subsection.2.4.4}%
-\contentsline {section}{\numberline {2.5}Virtualização e hipervisores}{10}{section.2.5}%
+\contentsline {section}{\numberline {2.5}Virtualização e hipervisores}{11}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}Tipo 1 \textit {vs.}\ Tipo 2}{11}{subsection.2.5.1}%
 \contentsline {subsection}{\numberline {2.5.2}Contêineres: virtualização ao nível do SO}{11}{subsection.2.5.2}%
 \contentsline {subsection}{\numberline {2.5.3}Escalonadores}{11}{subsection.2.5.3}%
-\contentsline {section}{\numberline {2.6}Síntese: \textit {stack} completo do servidor}{11}{section.2.6}%
+\contentsline {section}{\numberline {2.6}Síntese: \textit {stack} completo do servidor}{12}{section.2.6}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {3}\MakeTextUppercase []{Materiais e Métodos}}{12}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Hardware utilizado no desenvolvimento}{12}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Ferramentas e ambiente de desenvolvimento}{12}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Editor de código}{12}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Assistentes de IA generativa}{13}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Versionamento e hospedagem}{13}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Stack tecnológico do artefato}{13}{subsection.3.2.4}%
-\contentsline {section}{\numberline {3.3}Metodologia de desenvolvimento}{14}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Divisão de responsabilidades na equipe}{14}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Critérios de avaliação e entrega}{15}{section.3.5}%
+\contentsline {chapter}{\chapternumberline {3}\MakeTextUppercase []{Materiais e Métodos}}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Hardware utilizado no desenvolvimento}{13}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Ferramentas e ambiente de desenvolvimento}{13}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Editor de código}{13}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Assistentes de IA generativa}{14}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Versionamento e hospedagem}{14}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Stack tecnológico do artefato}{14}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}Metodologia de desenvolvimento}{15}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Divisão de responsabilidades na equipe}{15}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Critérios de avaliação e entrega}{16}{section.3.5}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase []{Desenvolvimento e Resultados}}{16}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Arquitetura geral do infográfico}{16}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Módulo 1 --- Desktop \textit {vs.}\ Servidor}{17}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Tabela comparativa de interconexões}{18}{subsection.4.2.1}%
-\contentsline {section}{\numberline {4.3}Módulo 2 --- RAID Interativo}{18}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Lógica do simulador de falhas}{18}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Calculadora de IOPS}{20}{subsection.4.3.2}%
-\contentsline {section}{\numberline {4.4}Módulo 3 --- Memória ECC e Hamming \textsc {secded}}{20}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Cálculo do síndrome}{21}{subsection.4.4.1}%
-\contentsline {section}{\numberline {4.5}Módulo 4 --- Hierarquia, Cache e NUMA}{21}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Simulador de acesso à cache}{23}{subsection.4.5.1}%
-\contentsline {section}{\numberline {4.6}Módulo 5 --- Virtualização}{23}{section.4.6}%
-\contentsline {section}{\numberline {4.7}Módulo 6 --- \emph {Stack} Completo}{23}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Modelo de dados das camadas}{24}{subsection.4.7.1}%
-\contentsline {section}{\numberline {4.8}Módulo de Referências}{26}{section.4.8}%
-\contentsline {section}{\numberline {4.9}Resultado consolidado}{26}{section.4.9}%
+\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase []{Desenvolvimento e Resultados}}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Arquitetura geral do infográfico}{17}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Módulo 1 --- Desktop \textit {vs.}\ Servidor}{18}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Tabela comparativa de interconexões}{19}{subsection.4.2.1}%
+\contentsline {section}{\numberline {4.3}Módulo 2 --- RAID Interativo}{19}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Lógica do simulador de falhas}{20}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Calculadora de IOPS}{21}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Módulo 3 --- Memória ECC e Hamming \textsc {secded}}{21}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Cálculo do síndrome}{22}{subsection.4.4.1}%
+\contentsline {section}{\numberline {4.5}Módulo 4 --- Hierarquia, Cache e NUMA}{23}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Simulador de acesso à cache}{24}{subsection.4.5.1}%
+\contentsline {section}{\numberline {4.6}Módulo 5 --- Virtualização}{24}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Módulo 6 --- \emph {Stack} Completo}{25}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Modelo de dados das camadas}{26}{subsection.4.7.1}%
+\contentsline {section}{\numberline {4.8}Módulo de Referências}{27}{section.4.8}%
+\contentsline {section}{\numberline {4.9}Resultado consolidado}{27}{section.4.9}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase []{Conclusão}}{28}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Aderência aos objetivos}{28}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Limitações}{29}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Trabalhos futuros}{29}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Considerações finais}{29}{section.5.4}%
+\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase []{Conclusão}}{29}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Aderência aos objetivos}{29}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Limitações}{30}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Trabalhos futuros}{30}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Considerações finais}{30}{section.5.4}%
 \vspace {\cftbeforechapterskip }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
-\contentsline {chapter}{\MakeTextUppercase []{Refer\^encias}}{31}{section*.18}%
+\contentsline {chapter}{\MakeTextUppercase []{Refer\^encias}}{32}{section*.18}%
 \cftinsert {AAA}
 \renewcommand *{\cftappendixname }{ANEXO \space }
 \setlength {\cftpartindent }{\cftlastnumwidth } \setlength {\cftpartnumwidth }{2em}
 \cftinsert {A}
-\contentsline {part}{\uppercase {Anexos}}{33}{section*.19}%
+\contentsline {part}{\uppercase {Anexos}}{34}{section*.19}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
 \cftinsert {A}
-\contentsline {appendix}{\chapternumberline {A}\MakeTextUppercase []{Código-fonte do infográfico}}{34}{appendix.anexochapback.1}%
-\contentsline {section}{\numberline {A.1}Repositório completo}{34}{section.anexochapback.1.1}%
-\contentsline {section}{\numberline {A.2}Estrutura do arquivo único}{34}{section.anexochapback.1.2}%
-\contentsline {section}{\numberline {A.3}Função de navegação por sub-abas}{35}{section.anexochapback.1.3}%
-\contentsline {section}{\numberline {A.4}Cálculo do simulador RAID}{35}{section.anexochapback.1.4}%
-\contentsline {section}{\numberline {A.5}Aplicação da Lei de Amdahl}{36}{section.anexochapback.1.5}%
-\contentsline {section}{\numberline {A.6}Simulador de \textit {cache hit/miss}}{37}{section.anexochapback.1.6}%
-\contentsline {section}{\numberline {A.7}Navegação para referência citada}{37}{section.anexochapback.1.7}%
-\contentsline {section}{\numberline {A.8}Como executar localmente}{37}{section.anexochapback.1.8}%
+\contentsline {appendix}{\chapternumberline {A}\MakeTextUppercase []{Código-fonte do infográfico}}{35}{appendix.anexochapback.1}%
+\contentsline {section}{\numberline {A.1}Repositório completo}{35}{section.anexochapback.1.1}%
+\contentsline {section}{\numberline {A.2}Estrutura do arquivo único}{35}{section.anexochapback.1.2}%
+\contentsline {section}{\numberline {A.3}Função de navegação por sub-abas}{36}{section.anexochapback.1.3}%
+\contentsline {section}{\numberline {A.4}Cálculo do simulador RAID}{36}{section.anexochapback.1.4}%
+\contentsline {section}{\numberline {A.5}Aplicação da Lei de Amdahl}{37}{section.anexochapback.1.5}%
+\contentsline {section}{\numberline {A.6}Simulador de \textit {cache hit/miss}}{38}{section.anexochapback.1.6}%
+\contentsline {section}{\numberline {A.7}Navegação para referência citada}{38}{section.anexochapback.1.7}%
+\contentsline {section}{\numberline {A.8}Como executar localmente}{38}{section.anexochapback.1.8}%

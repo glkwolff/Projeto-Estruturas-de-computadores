@@ -17,15 +17,10 @@
   software}. San Francisco: Anthropic, 2026.
 Disponível em: \url{https://claude.com/claude-code}. Acesso em: 3 jun. 2026.}
 
-\bibitem[BOVET e CESATI 2005]{bovet2005}
-\abntrefinfo{BOVET e CESATI}{BOVET; CESATI}{2005}
-{BOVET, D.~P.; CESATI, M. \emph{Understanding the Linux Kernel}. 3. ed.. ed.
-  Sebastopol: O'Reilly, 2005.}
-
 \bibitem[{GOOGLE LLC} 2026]{gemini2026}
 \abntrefinfo{{GOOGLE LLC}}{{GOOGLE LLC}}{2026}
-{{GOOGLE LLC}. \emph{{Gemini}: assistente de IA generativa (modo {Canvas})}.
-  Mountain View: Google, 2026.
+{{GOOGLE LLC}. \emph{{Gemini} (Canvas): assistente de IA generativa}. Mountain
+  View: Google, 2026.
 Disponível em: \url{https://gemini.google.com}. Acesso em: 3 jun. 2026.}
 
 \bibitem[HAMMING 1950]{hamming1950}
@@ -39,17 +34,22 @@ Disponível em: \url{https://gemini.google.com}. Acesso em: 3 jun. 2026.}
   {Intel\textsuperscript{\textregistered}} {QuickPath} {Interconnect}}. Santa
   Clara: Intel, 2009. White Paper, doc. 320412-001US.}
 
-\bibitem[{JEDEC SOLID STATE TECHNOLOGY ASSOCIATION} 2024]{jedec2024ddr5}
+\bibitem[{JEDEC SOLID STATE TECHNOLOGY ASSOCIATION} 2025]{jedec2025ddr5}
 \abntrefinfo{{JEDEC SOLID STATE TECHNOLOGY ASSOCIATION}}{{JEDEC SOLID STATE
-  TECHNOLOGY ASSOCIATION}}{2024}
+  TECHNOLOGY ASSOCIATION}}{2025}
 {{JEDEC SOLID STATE TECHNOLOGY ASSOCIATION}. \emph{{DDR5} {SDRAM} {Standard}
-  --- {JESD79-5C}}. Arlington: JEDEC, 2024.}
+  --- {JESD79-5D}}. Arlington: JEDEC, 2025.}
 
 \bibitem[KOIDE 2026]{koide2026}
 \abntrefinfo{KOIDE}{KOIDE}{2026}
 {KOIDE, R. \emph{Fundamentos de Estruturas de Computadores: material das aulas
   5--12}. Curitiba: Universidade Positivo, 2026.
 Semestre letivo 2026.1.}
+
+\bibitem[LOVE 2010]{love2010}
+\abntrefinfo{LOVE}{LOVE}{2010}
+{LOVE, R. \emph{Linux Kernel Development}. 3. ed.. ed. Upper Saddle River:
+  Addison-Wesley, 2010.}
 
 \bibitem[{MICROSOFT CORPORATION} 2026]{vscode2026}
 \abntrefinfo{{MICROSOFT CORPORATION}}{{MICROSOFT CORPORATION}}{2026}
@@ -62,7 +62,7 @@ Disponível em: \url{https://code.visualstudio.com}. Acesso em: 3 jun. 2026.}
 {{NVIDIA CORPORATION}. \emph{{NVIDIA} {Grace} {Hopper} {Superchip}
   {Architecture} {Whitepaper}}. Santa Clara: NVIDIA, 2023.
 Disponível em:
-  \url{https://resources.nvidia.com/en-us-grace-cpu/grace-hopper-superchip}.
+  \url{https://resources.nvidia.com/en-us-data-center-overview/nvidia-grace-hopper-superchip-architecture-whitepaper}.
   Acesso em: 3 jun. 2026.}
 
 \bibitem[PATTERSON, GIBSON e KATZ 1988]{patterson1988}
@@ -84,12 +84,6 @@ Disponível em:
   generation architectures.
 \emph{Communications of the ACM}, v.~17, n.~7, p. 412--421, jul. 1974.}
 
-\bibitem[RUSSINOVICH, SOLOMON e IONESCU 2017]{russinovich2017}
-\abntrefinfo{RUSSINOVICH, SOLOMON e IONESCU}{RUSSINOVICH; SOLOMON;
-  IONESCU}{2017}
-{RUSSINOVICH, M.~E.; SOLOMON, D.~A.; IONESCU, A. \emph{Windows Internals, Part
-  1}. 7. ed.. ed. Redmond: Microsoft Press, 2017.}
-
 \bibitem[SCHROEDER, PINHEIRO e WEBER 2009]{schroeder2009}
 \abntrefinfo{SCHROEDER, PINHEIRO e WEBER}{SCHROEDER; PINHEIRO; WEBER}{2009}
 {SCHROEDER, B.; PINHEIRO, E.; WEBER, W.-D. {DRAM} errors in the wild: a
@@ -106,5 +100,26 @@ Disponível em:
 \abntrefinfo{STALLINGS}{STALLINGS}{2017}
 {STALLINGS, W. \emph{Arquitetura e organização de computadores}. 10. ed.. ed.
   São Paulo: Pearson, 2017.}
+
+\bibitem[{THE LINUX KERNEL ORGANIZATION} 2024]{kernelcgroups}
+\abntrefinfo{{THE LINUX KERNEL ORGANIZATION}}{{THE LINUX KERNEL
+  ORGANIZATION}}{2024a}
+{{THE LINUX KERNEL ORGANIZATION}. \emph{Control Group v2}. 2024.
+Disponível em:
+  \url{https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html}.
+  Acesso em: 3 jun. 2026.}
+
+\bibitem[{THE LINUX KERNEL ORGANIZATION} 2024]{man7namespaces}
+\abntrefinfo{{THE LINUX KERNEL ORGANIZATION}}{{THE LINUX KERNEL
+  ORGANIZATION}}{2024b}
+{{THE LINUX KERNEL ORGANIZATION}. \emph{namespaces(7) --- {Linux} manual page}.
+  2024.
+Disponível em: \url{https://man7.org/linux/man-pages/man7/namespaces.7.html}.
+  Acesso em: 3 jun. 2026.}
+
+\bibitem[YOSIFOVICH et al. 2017]{russinovich2017}
+\abntrefinfo{YOSIFOVICH et al.}{YOSIFOVICH et al.}{2017}
+{YOSIFOVICH, P. et al. \emph{Windows Internals, Part 1}. 7. ed.. ed. Redmond:
+  Microsoft Press, 2017.}
 
 \end{thebibliography}
